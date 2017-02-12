@@ -6,28 +6,29 @@ import "./index.css";
 import App from "./components/App";
 
 // React Router
-import {
-  BrowserRouter as Router,
-  Route
-} from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // Redux
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
+import reduxThunk from "redux-thunk";
 
 // Import Root Reducer
 import rootReducer from "./store/reducers";
 
 // Create the store
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware()));
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(reduxThunk))
+);
 
 const rootEl = document.getElementById("root");
 
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-        <Route path="/" component={App} />
+      <Route path="/" component={App} />
     </Router>
   </Provider>,
   rootEl
