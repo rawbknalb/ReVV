@@ -6,7 +6,8 @@ import { Route } from "react-router";
 
 // Components
 import Header from "./layout/Header";
-import Signin from "./auth/Signin";
+import SignIn from "./auth/SignIn";
+import SignUp from "./auth/SignUp";
 import Home from "./Home";
 
 class App extends Component {
@@ -16,7 +17,8 @@ class App extends Component {
       <div className="App">
         <Header />
         <Route exact path={match.url} component={Home} />
-        <Route path="/signin" component={Signin} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/signup" component={SignUp} />        
       </div>
     );
   }
