@@ -9,21 +9,22 @@ import { Route, Redirect } from "react-router";
 import Header from "./layout/Header";
 import SignIn from "./auth/SignIn";
 import SignUp from "./auth/SignUp";
+import SignOut from "./auth/SignOut";
 import Home from "./Home";
 
 class App extends Component {
-  // redirectWhenAuthd() {
-  //   if (this.props.isAuthenticated) {
-  //     return Home;
-  //   }
-  //   return SignIn;
-  // }
-
-  redirectWhenAuthd() {
+  redirectWhenAuthd = () => {
     if (this.props.auth.isAuthenticated) {
-      return <Redirect push to="/home" />;
-    }
+      return <Redirect push to="/dashboard" />;
+    } 
     return <SignIn />
+  }
+
+  redirectWhenUnAthd = () => {
+    if (!this.props.auth.isAuthenticated) {
+      return <Redirect push to="/" />
+    } 
+    return <SignOut />
   }
 
   render() {
@@ -34,15 +35,16 @@ class App extends Component {
         <Route exact path={match.url} component={Home} />
         <Route path="/signin" render={() => this.redirectWhenAuthd()} />
         <Route path="/signup" component={SignUp} />
+        <Route path="/signout" component={SignOut} />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     auth: state.auth
   };
 };
 
-export default connect(mapStateToProps, null)(App);
+export default connect(mapStateToProps)(App);
