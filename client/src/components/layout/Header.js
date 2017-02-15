@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { signOutUser } from "../../store/actions";
 
 // React Router
 import { Link } from "react-router-dom";
@@ -10,7 +11,7 @@ class Header extends Component {
       // show a link to Sign out
       return (
         <li className="nav-item">
-          <Link to="/signout">Sign Out</Link>
+          <Link onClick={() => this.props.signOutUser()} to="/signout">Sign Out</Link>
         </li>
       );
     } else {
@@ -33,11 +34,7 @@ class Header extends Component {
   render() {
     return (
       <nav className="navbar navbar-light">
-        <ul className="nav navbar-nav">
-          <li className="nav-item">
-            <Link className="nav-link" to="/">Home</Link>
-          </li>
-        </ul>
+        <Link className="navbar-brand" to="/">ETFect</Link>
         <ul className="nav navbar-nav navbar-right">
           {this.renderAuthNavItems()}
         </ul>
@@ -50,4 +47,4 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { signOutUser })(Header);

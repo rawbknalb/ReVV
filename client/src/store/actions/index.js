@@ -27,14 +27,21 @@ export const signInUser = ({ email, password }) => dispatch => {
 
 export const signUpUser = ({ email, password }) => dispatch => {
   // Submit email and password to the server
-  axios.post(`${API_URL}/signup`, { email, password });
-  // If request is good:
-  // - Update state to indicate user is authenticated
-  dispatch({ type: SIGNUP_USER });
-  // - Save the JWT Token
-  localStorage.removeItem("token");
-  // If request is bad:
-  // - Show an error to the user
+  axios
+    .post(`${API_URL}/signup`, { email, password })
+    .then(res => {
+      // If request is good:
+      // - Update state to indicate user is authenticated
+      dispatch({ type: SIGNUP_USER });
+      // - Save the JWT Token
+      localStorage.setItem("token", res.data.token);
+    })
+    .catch(
+      // If request is bad:
+      // - Show an error to the user 
+      dispatch(authError("Sign up was not successfull!"))     
+    )
+
 };
 
 export const signOutUser = () => {
