@@ -9,6 +9,7 @@ import { Route, Redirect } from "react-router";
 import Header from "./layout/Header";
 import SignIn from "./auth/SignIn";
 import SignUp from "./auth/SignUp";
+import Dashboard from"./Dashboard";
 import Home from "./Home";
 
 class App extends Component {
@@ -35,12 +36,15 @@ class App extends Component {
   render() {
     const { match } = this.props;
     return (
-      <div className="App">
+      <div>
         <Header />
-        <Route exact path={match.url} component={Home} />
-        <Route path="/signin" render={() => this.redirectAfterAuth()} />
-        <Route path="/signup" render={() => this.redirectWhenAuthd(<SignUp />)} />
-        <Route path="/signout" component={() => this.redirectWhenUnAthd()} />
+        <div className="App">
+          <Route exact path={match.url} component={Home} />
+          <Route path="/signin" render={() => this.redirectAfterAuth()} />
+          <Route path="/signup" render={() => this.redirectWhenAuthd(<SignUp />)} />
+          <Route path="/signout" render={() => this.redirectWhenUnAthd()} />
+          <Route path="/dashboard" component={Dashboard} />
+        </div>
       </div>
     );
   }

@@ -33,9 +33,9 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-light">
+      <nav className="navbar navbar-toggleable navbar-inverse bg-primary">
         <Link className="navbar-brand" to="/">ETFect</Link>
-        <ul className="nav navbar-nav navbar-right">
+        <ul className="nav navbar-nav navbar-toggler-right">
           {this.renderAuthNavItems()}
         </ul>
       </nav>
