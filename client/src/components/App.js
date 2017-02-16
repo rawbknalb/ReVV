@@ -12,11 +12,18 @@ import SignUp from "./auth/SignUp";
 import Home from "./Home";
 
 class App extends Component {
-  redirectWhenAuthd = () => {
+  redirectAfterAuth = () => {
     if (this.props.auth.isAuthenticated) {
       return <Redirect push to="/dashboard" />;
     } else
       return <SignIn />;
+  };
+
+  redirectWhenAuthd = component => {
+    if (this.props.auth.isAuthenticated) {
+      return <Redirect push to="/dashboard" />;
+    } else
+      return component;
   };
 
   redirectWhenUnAthd = () => {
@@ -31,8 +38,8 @@ class App extends Component {
       <div className="App">
         <Header />
         <Route exact path={match.url} component={Home} />
-        <Route path="/signin" render={() => this.redirectWhenAuthd()} />
-        <Route path="/signup" component={SignUp} />
+        <Route path="/signin" render={() => this.redirectAfterAuth()} />
+        <Route path="/signup" render={() => this.redirectWhenAuthd(<SignUp />)} />
         <Route path="/signout" component={() => this.redirectWhenUnAthd()} />
       </div>
     );
