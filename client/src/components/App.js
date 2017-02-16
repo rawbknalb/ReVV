@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+//import { AUTH_USER } from "../store/actions/types";
 import "../App.css";
 
 // React Router
@@ -9,10 +10,17 @@ import { Route, Redirect } from "react-router";
 import Header from "./layout/Header";
 import SignIn from "./auth/SignIn";
 import SignUp from "./auth/SignUp";
-import Dashboard from"./Dashboard";
+import Dashboard from "./Dashboard";
 import Home from "./Home";
 
 class App extends Component {
+  // componentWillMount = () => {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     this.props.dispatch({ type: AUTH_USER });
+  //   }
+  // };
+
   redirectAfterAuth = () => {
     if (this.props.auth.isAuthenticated) {
       return <Redirect push to="/dashboard" />;
@@ -41,7 +49,10 @@ class App extends Component {
         <div className="App">
           <Route exact path={match.url} component={Home} />
           <Route path="/signin" render={() => this.redirectAfterAuth()} />
-          <Route path="/signup" render={() => this.redirectWhenAuthd(<SignUp />)} />
+          <Route
+            path="/signup"
+            render={() => this.redirectWhenAuthd(<SignUp />)}
+          />
           <Route path="/signout" render={() => this.redirectWhenUnAthd()} />
           <Route path="/dashboard" component={Dashboard} />
         </div>

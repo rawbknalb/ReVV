@@ -22,6 +22,11 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(reduxThunk))
 );
 
+const token = localStorage.getItem("token");
+if (token) {
+  store.dispatch({ type: "AUTH_USER" });
+}
+
 const rootEl = document.getElementById("root");
 
 ReactDOM.render(

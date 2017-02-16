@@ -11,7 +11,13 @@ class Header extends Component {
       // show a link to Sign out
       return (
         <li className="nav-item">
-          <Link onClick={() => this.props.signOutUser()} to="/signout">Sign Out</Link>
+          <Link
+            className="nav-link"
+            onClick={() => this.props.signOutUser()}
+            to="/signout"
+          >
+            Sign Out
+          </Link>
         </li>
       );
     } else {
