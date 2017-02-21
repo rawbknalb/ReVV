@@ -5,6 +5,7 @@ import "../App.css";
 
 // React Router
 import { Route, Redirect } from "react-router";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 // Components
 import Header from "./layout/Header";
@@ -14,32 +15,19 @@ import Dashboard from "./Dashboard";
 import Home from "./Home";
 
 class App extends Component {
-  // componentWillMount = () => {
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     this.props.dispatch({ type: AUTH_USER });
-  //   }
-  // };
+  constructor(props) {
+    super(props);
+    this.isAuthenticated = this.props.auth.isAuthenticated;
+  }
 
-  redirectAfterAuth = () => {
-    if (this.props.auth.isAuthenticated) {
-      return <Redirect push to="/dashboard" />;
-    } else
-      return <SignIn />;
-  };
+  redirectAfterAuth = () =>
+    // If user is authenticated and calls /sign
+    this.isAuthenticated ? <Redirect push to="/dashboard" /> : <SignIn />;
 
-  redirectWhenAuthd = component => {
-    if (this.props.auth.isAuthenticated) {
-      return <Redirect push to="/dashboard" />;
-    } else
-      return component;
-  };
+  redirectWhenAuthd = component =>
+    this.isAuthenticated ? <Redirect push to="/dashboard" /> : component;
 
-  redirectWhenUnAthd = () => {
-    if (!this.props.auth.isAuthenticated) {
-      return <Redirect push to="/" />;
-    }
-  };
+  redirectWhenUnAthd = () => !this.isAuthenticated && <Redirect push to="/" />;
 
   render() {
     const { match } = this.props;
@@ -54,7 +42,11 @@ class App extends Component {
             render={() => this.redirectWhenAuthd(<SignUp />)}
           />
           <Route path="/signout" render={() => this.redirectWhenUnAthd()} />
-          <Route path="/dashboard" component={Dashboard} />
+          <ProtectedRoute
+            path="/dashboard"
+            isAuthenticated={this.isAuthenticated}
+            component={<Dashboard />}
+          />
         </div>
       </div>
     );
