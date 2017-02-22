@@ -1,4 +1,4 @@
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR } from "../../actions/types";
+import { AUTH_USER, UNAUTH_USER, AUTH_ERROR } from "../actions/auth/types";
 
 const initialState = { isAuthenticated: false };
 

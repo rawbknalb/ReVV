@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { signOutUser } from "../../store/actions";
+import { signOutUser } from "../../store/actions/auth/index";
 
 // React Router
 import { Link } from "react-router-dom";

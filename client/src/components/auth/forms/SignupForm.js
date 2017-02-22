@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { validate } from "./Validation";
 import { connect } from "react-redux";
-import { signUpUser } from "../../../store/actions";
+import { signUpUser } from "../../../store/actions/auth/";
 import "../../../App.css";
 
 export const renderField = (
