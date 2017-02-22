@@ -1,11 +1,13 @@
 import React from "react";
 import { Route, Redirect } from "react-router";
 
-const ProtectedRoute = (props) => (
+const ProtectedRoute = ({ component, ...rest }) => (
   <Route
-    path={props.path}
+    {...rest}
     render={props =>
-      props.isAuthenticated ? props.component : <Redirect push to="/signin" />}
+      props.isAuthenticated
+        ? React.createElement(component, props)
+        : <Redirect push to="/dashboard" />}
   />
 );
 

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-//import { AUTH_USER } from "../store/actions/types";
 import "../App.css";
 
 // React Router
@@ -15,19 +14,15 @@ import Dashboard from "./Dashboard";
 import Home from "./Home";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.isAuthenticated = this.props.auth.isAuthenticated;
-  }
-
-  redirectAfterAuth = () =>
-    // If user is authenticated and calls /sign
-    this.isAuthenticated ? <Redirect push to="/dashboard" /> : <SignIn />;
+  // redirectAfterAuth = () =>
+  // If user is authenticated and calls /sign
+  // this.isAuthenticated ? <Redirect push to="/dashboard" /> : <SignIn />;
 
   redirectWhenAuthd = component =>
-    this.isAuthenticated ? <Redirect push to="/dashboard" /> : component;
+    this.props.isAuthenticated ? <Redirect push to="/dashboard" /> : component;
 
-  redirectWhenUnAthd = () => !this.isAuthenticated && <Redirect push to="/" />;
+  redirectWhenUnAthd = () =>
+    !this.props.isAuthenticated && <Redirect push to="/" />;
 
   render() {
     const { match } = this.props;
@@ -36,7 +31,10 @@ class App extends Component {
         <Header />
         <div className="App">
           <Route exact path={match.url} component={Home} />
-          <Route path="/signin" render={() => this.redirectAfterAuth()} />
+          <Route
+            path="/signin"
+            render={() => this.redirectWhenAuthd(<SignIn />)}
+          />
           <Route
             path="/signup"
             render={() => this.redirectWhenAuthd(<SignUp />)}
@@ -44,8 +42,8 @@ class App extends Component {
           <Route path="/signout" render={() => this.redirectWhenUnAthd()} />
           <ProtectedRoute
             path="/dashboard"
-            isAuthenticated={this.isAuthenticated}
-            component={<Dashboard />}
+            component={Dashboard}
+            isAuthenticated={this.props.isAuthenticated}
           />
         </div>
       </div>
@@ -55,7 +53,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth
+    isAuthenticated: state.auth.isAuthenticated
   };
 };
 
