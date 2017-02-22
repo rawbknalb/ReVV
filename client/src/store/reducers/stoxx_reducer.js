@@ -5,9 +5,9 @@ const initialState = {};
 const stoxx_reducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_PRICE:
-      return { ...state };
+      return { ...state, [action.payload.isin]: action.payload.data };
     case FETCH_ERROR:
-      return { ...state, errorMessage: action.payload };
+      return { ...state };
     default:
       return state;
   }
