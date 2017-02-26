@@ -10,7 +10,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import Header from "./layout/Header";
 import SignIn from "./auth/SignIn";
 import SignUp from "./auth/SignUp";
-import Dashboard from "./Dashboard";
+import Dashboard from "./etf/Dashboard";
 import Home from "./Home";
 
 class App extends Component {

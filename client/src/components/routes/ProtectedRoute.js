@@ -7,7 +7,7 @@ const ProtectedRoute = ({ component, ...rest }) => (
     render={props =>
       props.isAuthenticated
         ? React.createElement(component, props)
-        : <Redirect push to="/dashboard" />}
+        : <Redirect push to="/signin" />}
   />
 );
 
