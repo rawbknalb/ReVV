@@ -8,7 +8,7 @@ import ETF from "./ETF";
 const renderETF = etf_data => {
   const etf_data_array = _.valuesIn(etf_data);
   return etf_data_array.map(etf => {
-    return <ETF etf={etf} key={etf.id}/>;
+    return <ETF etf={etf} key={etf.id} />;
   });
 };
 

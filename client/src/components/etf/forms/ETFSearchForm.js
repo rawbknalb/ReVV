@@ -55,7 +55,7 @@ class ETFSearch_Form extends Component {
 }
 
 const ETFSearchForm = reduxForm({
-  form: "stoxx",
+  form: "stoxx"
 })(ETFSearch_Form);
 
 export default connect(null, { fetchPrice })(ETFSearchForm);
