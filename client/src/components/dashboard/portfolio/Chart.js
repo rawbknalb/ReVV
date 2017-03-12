@@ -5,8 +5,9 @@ const ROB_FOLIO_1 = {
   name: "RobFolio 1",
   allocation: [
     {
-      type: "bonds",
+      type: "Bonds",
       weight: 80,
+      color: "#FEDC3D",
       funds: [
         {
           isin: "LU0444605645",
@@ -16,8 +17,9 @@ const ROB_FOLIO_1 = {
       ]
     },
     {
-      type: "stocks",
+      type: "Stocks",
       weight: 20,
+      color: "#01ABAA",
       funds: [
         {
           isin: "LU0392494562",
@@ -27,8 +29,7 @@ const ROB_FOLIO_1 = {
         {
           isin: "LU0635178014",
           name: "ComStage MSCI Emerging Markets TRN UCITS ETF",
-          weight: 50
-        }
+          weight: 50        }
       ]
     }
   ]
