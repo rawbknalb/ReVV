@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
+import { getAllocation } from "../../store/actions/assetAllocation";
 
 import Portfolio from "./portfolio/Portfolio";
 
 const header = {
-  color: 'white',
+  color: "white",
   fontWeight: "100",
   fontSize: "56px"
 };
@@ -17,12 +18,18 @@ const panelStyle = {
   width: "100%"
 };
 
-const Dashboard = props => (
-  <div>
-    <div style={header}>Asset Allocation</div>
-    <Portfolio style={panelStyle}/>
-  </div>
-);
+class Dashboard extends Component {
+  componentWillMount() {}
+
+  render() {
+    return (
+      <div>
+        <div style={header}>Asset Allocation</div>
+        <Portfolio style={panelStyle} />
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = state => {
   return {
@@ -30,4 +37,8 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Dashboard);
+const mapDispatchToProps = dispatch => {
+  return;
+};
+
+export default connect(mapStateToProps, { getAllocation })(Dashboard);

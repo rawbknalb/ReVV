@@ -11,7 +11,7 @@ const cors = require("cors");
 const app = express();
 
 // :: DB Setup ::
-mongoose.connect("mongodb://localhost:auth/auth");
+mongoose.connect("mongodb://localhost:auth/Allocator");
 // :: App Setup ::
 // express middleware
 app.use(morgan("combined"));

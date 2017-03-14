@@ -1,5 +1,6 @@
 import axios from "axios";
 import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, SIGNUP_USER } from "./types";
+import { getAllocation } from "../assetAllocation";
 const API_URL = "http://localhost:3090";
 
 export const authError = errorMessage => ({
@@ -13,7 +14,7 @@ export const signInUser = ({ email, password }) => dispatch => {
     .post(`${API_URL}/signin`, { email, password })
     .then(res => {
       // If request is good:
-      // - Update state to indicate user is authenticated
+      // 1. Update state to indicate user is authenticated
       dispatch({ type: AUTH_USER });
       // - Save the JWT Token
       localStorage.setItem("token", res.data.token);
