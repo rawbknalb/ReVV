@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getAllocation } from "../../store/actions/assetAllocation";
+import { fetchAssetAllocation } from "../../store/actions/assetAllocation";
 
 import Portfolio from "./portfolio/Portfolio";
 
@@ -19,7 +19,11 @@ const panelStyle = {
 };
 
 class Dashboard extends Component {
-  componentWillMount() {}
+  componentDidMount() {
+    console.log(localStorage.getItem("token"));
+
+    this.props.fetchAssetAllocation();
+  }
 
   render() {
     return (
@@ -41,4 +45,4 @@ const mapDispatchToProps = dispatch => {
   return;
 };
 
-export default connect(mapStateToProps, { getAllocation })(Dashboard);
+export default connect(mapStateToProps, { fetchAssetAllocation })(Dashboard);
