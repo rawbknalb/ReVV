@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchAssetAllocation } from "../../store/actions/assetAllocation";
+import { fetchUser } from "../../store/actions/user";
 
 import Portfolio from "./portfolio/Portfolio";
 
@@ -19,30 +19,26 @@ const panelStyle = {
 };
 
 class Dashboard extends Component {
-  componentDidMount() {
-    console.log(localStorage.getItem("token"));
-
-    this.props.fetchAssetAllocation();
+  componentWillMount() {
+    this.props.fetchUser();
   }
-
+  
   render() {
+    console.log(this.props);
     return (
       <div>
         <div style={header}>Asset Allocation</div>
-        <Portfolio style={panelStyle} />
+        <Portfolio
+          style={panelStyle}
+          assetAllocation={this.props.assetAllocation}
+        />
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    etf_data: state.etf_data
-  };
-};
+const mapStateToProps = state => ({
+  assetAllocation: state.user
+});
 
-const mapDispatchToProps = dispatch => {
-  return;
-};
-
-export default connect(mapStateToProps, { fetchAssetAllocation })(Dashboard);
+export default connect(mapStateToProps, { fetchUser })(Dashboard);

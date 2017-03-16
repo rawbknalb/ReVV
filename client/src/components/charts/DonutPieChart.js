@@ -2,19 +2,20 @@ import React, { Component } from "react";
 import Chart from "./Chart";
 import Highcharts from "highcharts";
 
-class DonutChart extends Component {
+class DonutPieChart extends Component {
   render() {
+    console.log(this.props.data)
     const { allocation } = this.props.data;
+
     // Create Array of Objects which contain only assetClass data
     const assetClasses = allocation.map(assetClass => {
       const { color, type, weight } = assetClass;
       return { color, name: type, y: weight };
     });
-
-    console.log(assetClasses);
+    
     const prepAllocationForChart = assetClass => {
       // 1. Delete isin key from each fund
-      // 2. Prepare y-Value for Chart (each fund-weight is fraction 
+      // 2. Prepare y-Value for Chart (each fund-weight is fraction
       //    of assetClass-weight)
       // 3. Delete weight key from each fund (data is now in y-Value)
       assetClass.funds.forEach((fund, index, fundsArray) => {
@@ -39,8 +40,6 @@ class DonutChart extends Component {
       },
       []
     );
-
-    console.log(funds);
 
     const series = [
       {
@@ -87,4 +86,4 @@ class DonutChart extends Component {
   }
 }
 
-export default DonutChart;
+export default DonutPieChart;

@@ -9,9 +9,7 @@ const requireAuth = passport.authenticate("jwt", { session: false });
 const requireSignin = passport.authenticate("local", { session: false });
 
 module.exports = function(app) {
-  app.get("/user/asset-allocation", requireAuth, function(req, res) {
-    res.send({ data: res.data});
-  });
+  app.get("/user", requireAuth, UserData.fetchAssetAllocation);
   app.post("/signin", requireSignin, Authentication.signin);
   app.post("/signup", Authentication.signup);
 };

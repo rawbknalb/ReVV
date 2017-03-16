@@ -11,7 +11,7 @@ const auth_reducer = (state = initialState, action) => {
   switch (action.type) {
     case AUTH_USER:
     case SIGNUP_USER:
-      return { ...state, isAuthenticated: true, errorMessage: "", user: action.payload };
+      return { ...state, isAuthenticated: true, errorMessage: "" };
     case UNAUTH_USER:
       return { ...state, isAuthenticated: false, errorMessage: "" };
     case AUTH_ERROR:

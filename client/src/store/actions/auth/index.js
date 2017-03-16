@@ -14,9 +14,9 @@ export const signInUser = ({ email, password }) => dispatch => {
     .then(res => {
       // If request is good:
       // 1. Update state to indicate user is authenticated
+      localStorage.setItem("token", res.data.token);
       dispatch({ type: AUTH_USER, payload: res.data.user });
       // - Save the JWT Token
-      localStorage.setItem("token", res.data.token);
     })
     .catch(() => {
       // If request is bad:

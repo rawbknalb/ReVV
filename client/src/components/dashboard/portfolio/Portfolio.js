@@ -1,14 +1,16 @@
 import React from "react";
-import Chart from "./Chart";
 import Slider from "./Slider";
+import PortfolioChart from "../../charts/DonutPieChart";
 
-const Portfolio = props => (
+const Portfolio = props => {
+  console.log(props)
+  return (
   <div>
-    <div style={props.style}>
-      <Chart />
-    </div>
+    <div style={props.style} />
+    <PortfolioChart data={props.assetAllocation} />
+
     <Slider />
   </div>
-);
+)};
 
 export default Portfolio;

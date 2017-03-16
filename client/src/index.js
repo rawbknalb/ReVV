@@ -24,7 +24,7 @@ const store = createStore(
 
 const token = localStorage.getItem("token");
 if (token) {
-  store.dispatch({ type: "AUTH_USER" });
+  store.dispatch({ type: "AUTH_USER"});
 }
 
 const rootEl = document.getElementById("root");
