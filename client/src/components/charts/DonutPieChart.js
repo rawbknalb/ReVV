@@ -4,7 +4,6 @@ import Highcharts from "highcharts";
 
 class DonutPieChart extends Component {
   render() {
-    console.log(this.props.data)
     const { allocation } = this.props.data;
 
     // Create Array of Objects which contain only assetClass data
@@ -12,12 +11,14 @@ class DonutPieChart extends Component {
       const { color, type, weight } = assetClass;
       return { color, name: type, y: weight };
     });
-    
+
+    /* 
+    1. Delete isin key from each fund
+    2. Prepare y-Value for Chart (each fund-weight is fraction
+       of assetClass-weight)
+    3. Delete weight key from each fund (data is now in y-Value) 
+    */
     const prepAllocationForChart = assetClass => {
-      // 1. Delete isin key from each fund
-      // 2. Prepare y-Value for Chart (each fund-weight is fraction
-      //    of assetClass-weight)
-      // 3. Delete weight key from each fund (data is now in y-Value)
       assetClass.funds.forEach((fund, index, fundsArray) => {
         // Set Color: Based on Color of Asset Class node
         const brightness = 0.2 - index / fundsArray.length / 5;
@@ -45,9 +46,9 @@ class DonutPieChart extends Component {
       {
         name: this.props.data.name,
         data: assetClasses,
-        size: "50%",
+        size: "55%",
         dataLabels: {
-          distance: -30
+          distance: -40
         }
       },
       {
