@@ -1,8 +1,8 @@
 import React from "react";
 
-const Header = fund => (
-  <div class="card-header" role="tab" id="headingOne">
-    <h5 class="mb-0">
+const Header = props => (
+  <div className="card-header" role="tab" id="headingOne">
+    <h5 className="mb-0">
       <a
         data-toggle="collapse"
         data-parent="#accordion"
@@ -49,24 +49,34 @@ const Context = assetClass => {
   );
 };
 
-const RenderAccordionList = ({ assetAllocation }) => {
-  const assetClasses = assetAllocation.map(assetClass => {
+// const RenderAccordionList = props => {
+//   console.log(props)
+//   const assetClasses = assetAllocation.classes.map(assetClass => {
+//     const { type, weight } = assetClass;
+//     return { type, weight };
+//   });
+
+// };
+
+const Details = props => {
+  const assetClasses = props.data.classes.map(assetClass => {
     const { type, weight } = assetClass;
     return { type, weight };
   });
 
-  return assetAllocation.map(assetClass => (
-    <div class="card">
-      <Header fund={assetClass} />
-      <Context fund={assetClass} />
-    </div>
-  ));
-};
+  const renderList = asset => (
+      <div className="card" key={asset.type}>
+        <Header assetClass={assetClasses} />
+      </div>
+  )
 
-const Details = ({ ...data}) => (
-  <div id={name} role="tablist" aria-multiselectable="true">
-    <RenderAccordionList assetAllocation={classes} />
-  </div>
-);
+  console.log(props);
+  console.log(assetClasses);
+  return (
+    <div id={props.name} role="tablist" aria-multiselectable="true">
+      {assetClasses.map(asset => renderList(asset))}
+    </div>
+  );
+};
 
 export default Details;

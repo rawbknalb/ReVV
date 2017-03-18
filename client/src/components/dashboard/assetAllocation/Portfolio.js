@@ -10,18 +10,18 @@ const Panel = styled.section`
 `;
 
 const Portfolio = props => {
-  console.log(props.assetAllocation)
+  const { assetAllocation } = props;
   return (
     <Grid fluid>
       <Row>
         <Col xs={12} md={12} lg={6}>
           <Panel>
-            <PortfolioChart data={props.assetAllocation} />
+            <PortfolioChart data={assetAllocation} />
           </Panel>
         </Col>
         <Col xs={12} md={12} lg={6}>
           <Panel>
-            <Details data={props.assetAllocation}/>
+            <Details data={assetAllocation} />
           </Panel>
         </Col>
       </Row>
