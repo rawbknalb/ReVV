@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "../App.css";
 
+// Style
+import "../global-styles";
+
 // React Router
 import { Route, Redirect } from "react-router";
 import ProtectedRoute from "./routes/ProtectedRoute";
