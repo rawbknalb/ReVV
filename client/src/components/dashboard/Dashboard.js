@@ -27,6 +27,7 @@ class Dashboard extends Component {
 
   render() {
     if (this.props.assetAllocation) {
+      console.log(this.props.assetAllocation)
       return (
         <div style={panelStyle}>
           <div style={header}>Asset Allocation</div>

@@ -3,10 +3,11 @@ import Slider from "./Slider";
 import PortfolioChart from "../../charts/DonutPieChart";
 
 const Portfolio = props => {
+  const { assetAllocation } = props;
   return (
     <div>
       <div style={props.style} />
-      <PortfolioChart data={props.assetAllocation} />
+      <PortfolioChart data={assetAllocation} />
       <Slider />
     </div>
   );

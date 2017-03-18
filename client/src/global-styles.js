@@ -1,5 +1,4 @@
-
-import { injectGlobal } from 'styled-components'
+import { injectGlobal } from "styled-components";
 
 injectGlobal`
   body {
@@ -37,4 +36,4 @@ injectGlobal`
   h1, h2, h3, h4, h5, h6 {
     color: #001A33;
   }
-`
+`;

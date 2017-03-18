@@ -9,7 +9,7 @@ const portfolioSchema = new Schema({
     unique: true,
     required: true
   },
-  allocation: [AssetClass]
+  classes: [AssetClass]
 });
 
 // Export the model
