@@ -25,7 +25,6 @@ const DonutPieChart = props => {
         .brighten(brightness)
         .get();
       //delete fund["isin"];
-
       fund.y = fund.weight * assetClass.weight / 100;
       //delete fund["weight"];
     });

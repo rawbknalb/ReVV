@@ -4,6 +4,7 @@ import { Grid, Col, Row } from "react-styled-flexboxgrid";
 
 import Details from "./Details";
 import AllocationChart from "../../charts/DonutPieChart";
+import PortfolioHistoryChart from "../../charts/LineChart";
 
 const Panel = styled.section`
   margin-bottom: 1rem;
@@ -21,6 +22,8 @@ const PanelHeadline = styled.h5`
   padding-bottom: 26px
 `;
 
+const Tabs = props => <div>{props.children}</div>
+
 const Portfolio = props => {
   const { assetAllocation } = props;
   return (
@@ -29,6 +32,9 @@ const Portfolio = props => {
         <Col xs={12} md={12} lg={9}>
           <Panel>
             <PanelHeadline>Chart</PanelHeadline>
+            <Tabs>
+              <PortfolioHistoryChart></PortfolioHistoryChart>
+            </Tabs>
           </Panel>
         </Col>
         <Col xs={12} md={12} lg={3}>
@@ -39,7 +45,7 @@ const Portfolio = props => {
         </Col>
       </Row>
       <Row>
-        <Col xs={12} md={12} lg={9}>
+        <Col xs={12} md={12} lg={5}>
           Test
         </Col>
       </Row>
