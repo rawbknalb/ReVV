@@ -1,6 +1,7 @@
 import { injectGlobal } from "styled-components";
 
 injectGlobal`
+
   body {
     box-sizing: border-box;
     padding: 0;
@@ -9,8 +10,7 @@ injectGlobal`
     font-weight: 400;
     background: #EEE;
     line-height: 1.4rem;
-    font-family: HelveticaNeue-Light,'Helvetica Neue Light','Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif;
-    background-color: black;
+    font-family: "Source Sans Pro", sans-serif;
     background-repeat: no-repeat;
     background-size: 100%;
     background-image:
@@ -27,11 +27,9 @@ injectGlobal`
         rgba(71, 30, 235, 0.3) 70%
       );
   }
-  h1 {
-    font-size: 5em;
-    margin: 0.67em 0;
-  }
+  
   h1, h2, h3, h4, h5, h6 {
-    color: #001A33;
+    color: white;
+    font-weight: 300;
   }
 `;

@@ -1,24 +1,25 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 import { connect } from "react-redux";
 import { fetchUser } from "../../store/actions/user";
 
-import Portfolio from "./assetAllocation/Portfolio";
+import logo from "../../logo.svg";
 
-const header = {
-  color: "white",
-  fontWeight: "100",
-  fontSize: "56px",
-  padding: "20px",
-  textAlign: "center"
-};
+import PortfolioCharts from "./assetAllocation/Portfolio";
 
-const panelStyle = {
-  boxShadow: "5px 5px 20px rgba(0,0,0,0.25)",
-  backgroundColor: "rgba(255, 255, 255, 0.08)",
-  marginBottom: "20px",
-  borderRadius: "15px",
-  width: "100%"
-};
+const PortfolioInfo = styled.h5`
+  color: ${props => props.primary ? '#80e6fb' : 'white'};
+  font-weight: 300;
+  text-align: ${props => props.left ? 'left' : 'center'};
+`;
+
+const Logo = styled.img`
+  margin: auto;
+  display: block;
+  width: 155px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+`;
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -29,9 +30,15 @@ class Dashboard extends Component {
     if (this.props.assetAllocation) {
       console.log(this.props.assetAllocation)
       return (
-        <div style={panelStyle}>
-          <div style={header}>Asset Allocation</div>
-          <Portfolio assetAllocation={this.props.assetAllocation} />
+        <div>
+          <Logo src={logo} alt="VisualVest" />
+          <PortfolioInfo>Unser vorläufiges Angebot: placeholder</PortfolioInfo>
+          <PortfolioInfo>
+            Das dynamische ETF-VestFolio mit Chancen in Aktien- 
+            und Rohstoffmärkten zu erhöhtem Risiko
+          </PortfolioInfo>
+          <br/>
+          <PortfolioCharts assetAllocation={this.props.assetAllocation} />
         </div>
       );
     } else {
