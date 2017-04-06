@@ -25,7 +25,7 @@ const Context = assetClass => {
     []
   );
 
-  const fundsList = funds.map(fund => {
+  const renderFundsList = funds.map(fund => {
     return (
       <ul>
         <li>
@@ -43,7 +43,7 @@ const Context = assetClass => {
       aria-labelledby="headingOne"
     >
       <div class="card-block">
-        {this.fundslist()}
+        {this.renderFundsList()}
       </div>
     </div>
   );

@@ -21,7 +21,7 @@ const panelStyle = {
 };
 
 class Dashboard extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchUser();
   }
 

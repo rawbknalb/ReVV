@@ -16,12 +16,12 @@ const Portfolio = props => {
       <Row>
         <Col xs={12} md={12} lg={6}>
           <Panel>
-            <PortfolioChart data={assetAllocation} />
+            <Details data={assetAllocation} />
           </Panel>
         </Col>
         <Col xs={12} md={12} lg={6}>
           <Panel>
-            <Details data={assetAllocation} />
+            <PortfolioChart data={assetAllocation} />
           </Panel>
         </Col>
       </Row>
