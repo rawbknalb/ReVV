@@ -39,10 +39,12 @@ class Dashboard extends Component {
           {/* Wrap in Charts Component ????? */}
           <Grid>
             <Row>
-              <Col xs={12} md={12} lg={9}>
+              <Col xs={12} md={12} lg={1}>
+                <MotionMenu />
+              </Col>
+              <Col xs={12} md={12} lg={8}>
                 <Panel>
-                  <MotionMenu />
-                  <PanelHeadline>Chart</PanelHeadline>
+                  <PanelHeadline>Performance</PanelHeadline>
                   <PortfolioHistoryChart />
                 </Panel>
               </Col>
