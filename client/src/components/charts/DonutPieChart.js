@@ -30,15 +30,12 @@ const DonutPieChart = props => {
     });
   };
 
-  const funds = classes.reduce(
-    (funds, assetClass) => {
-      // prepare each fund in each assetClass before pushing
-      prepAllocationForChart(assetClass);
-      funds.push(...assetClass.funds);
-      return funds;
-    },
-    []
-  );
+  const funds = classes.reduce((funds, assetClass) => {
+    // prepare each fund in each assetClass before pushing
+    prepAllocationForChart(assetClass);
+    funds.push(...assetClass.funds);
+    return funds;
+  }, []);
 
   const series = [
     {

@@ -1,14 +1,11 @@
 import React from "react";
 import Chart from "./Chart";
-import Highcharts from "highcharts";
 
 import dummyHist from "./dummyHist";
 
 const LineChart = props => {
   const values = dummyHist.history.map(value => value.percentage);
   const dates = dummyHist.history.map(date => date.date);
-  console.log(values);
-  console.log(dates);
 
   const series = [
     {
