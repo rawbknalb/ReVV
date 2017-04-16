@@ -11,6 +11,7 @@ const cors = require("cors");
 const app = express();
 
 // :: DB Setup ::
+mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost:auth/Allocator");
 // :: App Setup ::
 // express middleware

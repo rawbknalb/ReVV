@@ -14,8 +14,7 @@ exports.signin = function(req, res, next) {
   // Just need to give them a token
   res.send({
     token: tokenForUser(req.user),
-    user: req.user._id,
-    assetAllocation: req.user.assetAllocation
+    user: req.user._id
   });
 };
 

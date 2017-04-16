@@ -1,40 +1,46 @@
 {
-  "name": "RobFolio 3",
-  "classes": [{
-      "type": "Bonds",
-      "weight": 10,
-      "color": "#FEDC3D",
-      "funds": [{
-        "isin": "LU0444605645",
-        "name": "ComStage iBoxx EUR Liquid Sovereigns Diversified Overall TR UCITS ETF",
-        "weight": 100
-      }]
-    },
-    {
-      "type": "Stocks",
-      "weight": 50,
-      "color": "#01ABAA",
-      "funds": [{
-          "isin": "LU0392494562",
-          "name": "ComStage MSCI World TRN UCITS ETF",
-          "weight": 70
-        },
-        {
-          "isin": "LU0635178014",
-          "name": "ComStage MSCI Emerging Markets TRN UCITS ETF",
-          "weight": 30
-        }
-      ]
-    },
-    {
-      "type": "Commodities",
-      "weight": 30,
-      "color": "#F45B5B",
-      "funds": [{
-        "isin": "DE000A0H0728",
-        "name": "iShares Diversified Commodity Swap UCITS ETF (DE)",
-        "weight": 100
-      }]
-    }
-  ]
+  "_id": ObjectId("58f3a80751fb7615dcb584d9"),
+  "email": "1@1.com",
+  "password": "$2a$10$VVD0jZFeD5yZ4N5B5lHrX.42rvpzvpqFJQ6Nns7hP.GwHXrXRZpnm",
+  "assetAllocation": {
+    "name": "RobFolio 3",
+    "classes": [{
+        "type": "Bonds",
+        "weight": 10,
+        "color": "#FEDC3D",
+        "funds": [{
+          "isin": "LU0444605645",
+          "name": "ComStage iBoxx EUR Liquid Sovereigns Diversified Overall TR UCITS ETF",
+          "weight": 100
+        }]
+      },
+      {
+        "type": "Stocks",
+        "weight": 50,
+        "color": "#01ABAA",
+        "funds": [{
+            "isin": "LU0392494562",
+            "name": "ComStage MSCI World TRN UCITS ETF",
+            "weight": 70
+          },
+          {
+            "isin": "LU0635178014",
+            "name": "ComStage MSCI Emerging Markets TRN UCITS ETF",
+            "weight": 30
+          }
+        ]
+      },
+      {
+        "type": "Commodities",
+        "weight": 30,
+        "color": "#F45B5B",
+        "funds": [{
+          "isin": "DE000A0H0728",
+          "name": "iShares Diversified Commodity Swap UCITS ETF (DE)",
+          "weight": 100
+        }]
+      }
+    ]
+  },
+  "__v": 0
 }

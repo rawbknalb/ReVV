@@ -5,26 +5,38 @@ const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const LocalStrategy = require("passport-local");
 
-// :: Create local strategy ::
+// :: Create local strategy a.k.a. Signin strategy ::
 const localOptions = { usernameField: "email" };
-const localLogin = new LocalStrategy(localOptions, function(email, password, done) {
+const localLogin = new LocalStrategy(localOptions, function(
+  email,
+  password,
+  done
+) {
   // Verify this email and password, call done with the user
   // if it is the correct email and password
   // otherwise, call done with false
   User.findOne({ email: email.toLowerCase() }, function(err, user) {
-    if (err) { return done(err); }
-    if (!user) { return done(null, false); }
+    if (err) {
+      return done(err);
+    }
+    if (!user) {
+      return done(null, false);
+    }
     // compare passwords - is 'password' = user.password?
     user.comparePassword(password, function(err, isMatch) {
-      if (err) { return done(err, false); }
-      if (!isMatch) { return done(null, false); }
+      if (err) {
+        return done(err, false);
+      }
+      if (!isMatch) {
+        return done(null, false);
+      }
       // done returns user data as req.user
       return done(null, user);
     });
   });
 });
 
-// :: Setup options for JWT Strategy ::
+// :: Setup options for JWT Strategy a.k.a. ReqAuth Strategy::
 const jwtOptions = {
   // extract the jwt from a header called authorization
   // when ever a request comes in and we want passport

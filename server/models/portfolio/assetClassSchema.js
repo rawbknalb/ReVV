@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Fund = require("./fund");
+const Fund = require("./fundSchema");
 const Schema = mongoose.Schema;
 
 // Define user model
