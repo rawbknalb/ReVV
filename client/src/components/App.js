@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "../App.css";
 
 // Style
 import "../global-styles";
@@ -32,7 +31,7 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <div className="App">
+        <div>
           <Route exact path={match.url} component={Home} />
           <Route
             path="/signin"

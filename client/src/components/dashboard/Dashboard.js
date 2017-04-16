@@ -39,16 +39,20 @@ class Dashboard extends Component {
           {/* Wrap in Charts Component ????? */}
           <Grid>
             <Row>
-              <Col xs={12} md={12} lg={1}>
-                <MotionMenu />
+              <Col xs>
+                <Row center="xs">
+                  <MotionMenu />
+                </Row>
               </Col>
+            </Row>
+            <Row>
               <Col xs={12} md={12} lg={8}>
                 <Panel>
                   <PanelHeadline>Performance</PanelHeadline>
                   <PortfolioHistoryChart />
                 </Panel>
               </Col>
-              <Col xs={12} md={12} lg={3}>
+              <Col xs={false} md={12} lg={4}>
                 <Panel>
                   <PanelHeadline>Anlageaufteilung</PanelHeadline>
                   <AllocationDonutPieChart data={this.props.assetAllocation} />

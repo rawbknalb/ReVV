@@ -4,9 +4,9 @@ import MotionMenu from "react-motion-menu";
 
 const MenuButton = styled.div`
   text-align: center;
-  height: 50px;
-  line-height: 50px;
-  width: 50px;
+  height: 30px;
+  line-height: 30px;
+  width: 30px;
   border: solid 1px #fff;
   color: #fff;
   border-radius: 5px;
@@ -14,27 +14,26 @@ const MenuButton = styled.div`
 `;
 
 const Center = styled.div`
-  text-align: center;
+  padding-bottom: 40px;
 `;
 
 const Menu = () => (
   <Center>
     <MotionMenu
-      type="vertical"
-      margin={108}
+      type="horizontal"
+      margin={50}
       y={0}
       bumpy
       x={0}
       openSpeed={120}
-      wing={false}
-      reverse={false}
+      wing
       onOpen={() => console.log("onOpen")}
       onClose={() => console.log("onClose")}
     >
       <MenuButton><i className="fa fa-bars fa-inverse" /></MenuButton>
       <MenuButton><i className="fa fa-line-chart fa-inverse" /></MenuButton>
       <MenuButton><i className="fa fa-pie-chart fa-inverse" /></MenuButton>
-      <MenuButton><i className="fa fa-globe fa-inverse" /></MenuButton>
+      <MenuButton><i className="fa  fa-area-chart fa-inverse" /></MenuButton>
       <MenuButton><i className="fa fa-globe fa-inverse" /></MenuButton>
 
     </MotionMenu>
