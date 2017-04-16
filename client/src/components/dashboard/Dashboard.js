@@ -7,6 +7,7 @@ import { Grid, Col, Row } from "react-styled-flexboxgrid";
 import { Panel, PanelHeadline } from "../style/Panel";
 import { VVLogo } from "../style/Logo";
 import { PortfolioHeadlineInfo } from "../style/PortfolioHeadline";
+import { Hero } from "../style/Hero";
 
 import MotionMenu from "./MotionMenu";
 

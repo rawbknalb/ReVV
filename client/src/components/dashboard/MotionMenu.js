@@ -4,9 +4,9 @@ import MotionMenu from "react-motion-menu";
 
 const MenuButton = styled.div`
   text-align: center;
-  height: 30px;
-  line-height: 30px;
-  width: 30px;
+  height: 40px;
+  line-height: 40px;
+  width: 40px;
   border: solid 1px #fff;
   color: #fff;
   border-radius: 5px;
@@ -21,7 +21,7 @@ const Menu = () => (
   <Center>
     <MotionMenu
       type="horizontal"
-      margin={50}
+      margin={60}
       y={0}
       bumpy
       x={0}
