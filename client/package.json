@@ -11,6 +11,7 @@
     "highcharts": "^5.0.7",
     "prettier": "^1.1.0",
     "rc-slider": "^7.0.1",
+    "rc-tabs": "^7.3.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-motion-menu": "^0.4.2",
