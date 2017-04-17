@@ -6,7 +6,7 @@ const Logo = styled.img`
   margin: auto;
   display: block;
   width: 300px;
-  padding: 70px 0 200px;
+  padding: 70px 0 20%;
   z-index: auto;
   position: relative;
 `;

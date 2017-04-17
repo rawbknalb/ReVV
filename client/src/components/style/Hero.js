@@ -5,7 +5,6 @@ import styled from "styled-components";
 export const HeroHeader = styled.header`
   position: relative;
   height: auto;
-
   overflow: hidden;
 `;
 
