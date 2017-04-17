@@ -14,13 +14,14 @@ const MenuButton = styled.div`
 `;
 
 const Center = styled.div`
-  padding-bottom: 40px;
+  padding-bottom: 150px;
+  padding-top: 50px;
 `;
 
 const Menu = () => (
   <Center>
     <MotionMenu
-      type="horizontal"
+      type="circle"
       margin={60}
       y={0}
       bumpy

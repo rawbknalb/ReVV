@@ -5,7 +5,6 @@ import { fetchUser } from "../../store/actions/user";
 // Import Style
 import { Grid, Col, Row } from "react-styled-flexboxgrid";
 import { Panel, PanelHeadline } from "../style/Panel";
-import { VVLogo } from "../style/Logo";
 import { PortfolioHeadlineInfo } from "../style/PortfolioHeadline";
 
 import Tabs, { TabPane } from "rc-tabs";
@@ -35,7 +34,6 @@ class Dashboard extends Component {
       return (
         <div>
           {/* ToDo: Wrap in Header Component */}
-          <VVLogo />
           <PortfolioHeadlineInfo>
             Unser vorläufiges Angebot: {this.props.assetAllocation.name}
           </PortfolioHeadlineInfo>

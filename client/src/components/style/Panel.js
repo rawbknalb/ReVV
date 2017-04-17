@@ -7,6 +7,7 @@ export const Panel = styled.section`
   border-radius: 0px;
   width: 100%;
   color: white;
+  z-index: auto;
 `;
 
 export const PanelHeadline = styled.h5`
@@ -14,4 +15,6 @@ export const PanelHeadline = styled.h5`
   text-align: center;  
   padding-top: 26px;
   padding-bottom: 26px
+  z-index: auto;
+
 `;

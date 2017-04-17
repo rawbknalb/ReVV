@@ -5,7 +5,6 @@ injectGlobal`
   body {
     padding: 0;
     margin: 0;
-    font-size: 18px;
     font-weight: 400;
     line-height: 1.4rem;
     font-family: "Source Sans Pro", sans-serif;

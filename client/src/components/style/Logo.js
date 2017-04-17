@@ -5,9 +5,10 @@ import logo from "../../style/logo.svg";
 const Logo = styled.img`
   margin: auto;
   display: block;
-  width: 155px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  width: 300px;
+  padding: 70px 0 200px;
+  z-index: auto;
+  position: relative;
 `;
 
 export const VVLogo = () => <div><Logo src={logo} alt="VisualVest" /></div>;

@@ -10,6 +10,8 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 
 // Components
 import Header from "./layout/Header";
+import Hero from "./style/Hero";
+import { VVLogo } from "./style/Logo";
 import SignIn from "./auth/SignIn";
 import SignUp from "./auth/SignUp";
 import Dashboard from "./dashboard/Dashboard";
@@ -21,7 +23,9 @@ class App extends Component {
   // this.isAuthenticated ? <Redirect push to="/dashboard" /> : <SignIn />;
 
   redirectWhenAuthd = component =>
-    this.props.isAuthenticated ? <Redirect push to="/dashboard" /> : component;
+    (this.props.isAuthenticated
+      ? <Redirect push to="/dashboard" />
+      : component);
 
   redirectWhenUnAthd = () =>
     !this.props.isAuthenticated && <Redirect push to="/" />;
@@ -31,6 +35,7 @@ class App extends Component {
     return (
       <div>
         <Header />
+        <Hero />
         <div>
           <Route exact path={match.url} component={Home} />
           <Route
