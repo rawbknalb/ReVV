@@ -1,6 +1,11 @@
 import React from "react";
-import { VVLogo } from "./Logo";
+import { VVLogo } from "../style/Logo";
 import styled from "styled-components";
+import Header from "./Header";
+
+const styledHeader = styled(Header)`
+  position: relative;
+`;
 
 export const HeroHeader = styled.header`
   position: relative;
@@ -34,6 +39,7 @@ export const HeaderDiv = styled.div`
 const Hero = () => (
   <HeroHeader>
     <HeaderDiv />
+    <Header />
     <VVLogo />
   </HeroHeader>
 );

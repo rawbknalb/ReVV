@@ -40,7 +40,7 @@ class Header extends Component {
   render() {
     return (
       <nav className="navbar navbar-toggleable navbar-inverse bg-secondary">
-        <Link className="navbar-brand" to="/">ETFect</Link>
+        <Link className="navbar-brand" to="/">VisualVest</Link>
         <ul className="nav navbar-nav navbar-toggler-right">
           {this.renderAuthNavItems()}
         </ul>

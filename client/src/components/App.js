@@ -10,12 +10,13 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 
 // Components
 import Header from "./layout/Header";
-import Hero from "./style/Hero";
+import Hero from "./layout/Hero";
 import { VVLogo } from "./style/Logo";
 import SignIn from "./auth/SignIn";
 import SignUp from "./auth/SignUp";
 import Dashboard from "./dashboard/Dashboard";
 import Home from "./Home";
+import Wertentwicklung from "./Wertentwicklung";
 
 class App extends Component {
   // redirectAfterAuth = () =>
@@ -34,10 +35,10 @@ class App extends Component {
     const { match } = this.props;
     return (
       <div>
-        <Header />
         <Hero />
         <div>
           <Route exact path={match.url} component={Home} />
+          <Route exact path="/wertentwicklung" component={Wertentwicklung} />
           <Route
             path="/signin"
             render={() => this.redirectWhenAuthd(<SignIn />)}

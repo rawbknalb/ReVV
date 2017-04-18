@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 export const Panel = styled.section`
   position: relative;
+  margin: 5px;
   margin-bottom: 1rem;
-  /* box-shadow: 5px 5px 20px rgba(0,0,0,0.25);*/
+  box-shadow: 5px 5px 20px rgba(0,0,0,0.25);
   background-color: rgba(255, 255, 255, 0.08);
-  border-radius: 0px;
+  border-radius: 10px;
   width: 100%;
   color: white;
 `;
