@@ -21,6 +21,8 @@ import AllocationDonutPieChart from "../charts/DonutPieChart";
 
 import RiskSlider from "./RiskSlider";
 
+import Wertentwicklung from "../Wertentwicklung";
+
 class Dashboard extends Component {
   componentDidMount() {
     this.props.fetchUser();
@@ -87,6 +89,7 @@ class Dashboard extends Component {
             <Row>
               <Col xs={12} md={12} lg={7}> <RiskSlider /> </Col>
             </Row>
+            <Wertentwicklung />
           </Grid>
         </div>
       );

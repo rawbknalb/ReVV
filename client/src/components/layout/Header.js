@@ -23,16 +23,12 @@ class Header extends Component {
     } else {
       // show a link to Sign in and Sign up
       return [
-        (
-          <li className="nav-item" key="sign_in">
-            <Link className="nav-link" to="/signin">Sign In</Link>
-          </li>
-        ),
-        (
-          <li className="nav-item" key="sign_up">
-            <Link className="nav-link" to="/signup">Sign Up</Link>
-          </li>
-        )
+        <li className="nav-item" key="sign_in">
+          <Link className="nav-link" to="/signin">Sign In</Link>
+        </li>,
+        <li className="nav-item" key="sign_up">
+          <Link className="nav-link" to="/signup">Sign Up</Link>
+        </li>
       ];
     }
   };
@@ -41,6 +37,9 @@ class Header extends Component {
     return (
       <nav className="navbar navbar-toggleable navbar-inverse bg-secondary">
         <Link className="navbar-brand" to="/">VisualVest</Link>
+        <Link to="/dashboard">Dashboard</Link>
+
+        <Link to="/wertentwicklung">Wertentwicklung</Link>
         <ul className="nav navbar-nav navbar-toggler-right">
           {this.renderAuthNavItems()}
         </ul>

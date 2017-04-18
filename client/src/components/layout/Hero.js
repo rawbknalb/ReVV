@@ -32,7 +32,6 @@ export const HeaderDiv = styled.div`
   background-image: linear-gradient(#ff9d2f, #ff6126);
   transform: skewY(-10deg);
   transform-origin: top left;
-  z-index: auto;
   box-shadow: 5px 5px 20px rgba(0,0,0,0.25);
 `;
 

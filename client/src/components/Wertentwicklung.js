@@ -18,7 +18,7 @@ export const SectionHeader = styled.h3`
 export const SiteTextBlock = styled.p`
   font-size: 18px;
   color: white;
-  padding: 0 15% 0 15%;
+  /* padding: 0 15% 0 15%; */
   margin-right: auto;
   margin-left: auto;
 `;
