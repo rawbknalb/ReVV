@@ -10,8 +10,9 @@ injectGlobal`
     background: #232526;  /* fallback for old browsers */
     /* blau: linear-gradient(to right, #00BCD4, #2196F3) */
     /* schwarz: linear-gradient(to right, #414345, #232526) */
-    background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /* vv: linear-gradient(-270deg,#304d98,#4c6eb2) */
+    background: -webkit-linear-gradient(to right, #414345, #232526) , url(./style/brush.svg);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #414345, #232526) , url(./style/brush.svg); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   }
   

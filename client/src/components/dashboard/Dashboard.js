@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchUser } from "../../store/actions/user";
+import { getForecast } from "../../store/actions/simulation";
 
 // Import Style
 import { ThemeProvider } from "styled-components";
@@ -19,6 +20,7 @@ import MotionMenu from "./MotionMenu";
 // Import Portfolio Charts
 import PortfolioHistoryChart from "../charts/LineChart";
 import AllocationDonutPieChart from "../charts/DonutPieChart";
+import ForeCastChart from "../charts/ForeCastChart";
 
 import RiskSlider from "./RiskSlider";
 
@@ -45,15 +47,14 @@ const gridTheme = {
 };
 
 class Dashboard extends Component {
+  
   componentDidMount() {
     this.props.fetchUser();
+    this.props.getForecast(1);
   }
-
-  callback() {}
 
   render() {
     if (this.props.assetAllocation) {
-      console.log(this.props.assetAllocation);
       return (
         <div>
           {/* ToDo: Wrap in Header Component */}
@@ -82,22 +83,22 @@ class Dashboard extends Component {
                       defaultActiveKey="1"
                       onChange={this.callback}
                       renderTabBar={() => (
-                        <SwipeableInkTabBar pageSize={5} speed={10} />
+                        <SwipeableInkTabBar pageSize={4} speed={10} />
                       )}
                       renderTabContent={() => <TabContent />}
                     >
                       <TabPane tab="Historie" key="1">
-                        {" "}<PortfolioHistoryChart />
+                        <PortfolioHistoryChart />
                       </TabPane>
                       <TabPane tab="Anlageaufteilung" key="2">
-                        {" "}
                         <AllocationDonutPieChart
                           data={this.props.assetAllocation}
                         />
                       </TabPane>
-                      <TabPane tab="Prognose" key="3">third</TabPane>
-                      <TabPane tab="Testo" key="4">third</TabPane>
-                      <TabPane tab="Testu" key="5">third</TabPane>
+                      <TabPane tab="Prognose" key="3">
+                        <ForeCastChart />
+                      </TabPane>
+                      <TabPane tab="Länder" key="4">third</TabPane>
                     </Tabs>
                   </Panel>
                 </Col>
@@ -112,7 +113,7 @@ class Dashboard extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col xs={12} md={12} lg={7}> <RiskSlider /> </Col>
+                <Col xs={12} md={12} lg={7}> <RiskSlider defaultPortfolioId={1} /> </Col>
               </Row>
               <Wertentwicklung />
             </Grid>
@@ -126,7 +127,7 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-  assetAllocation: state.user.assetAllocation
+  assetAllocation: state.user.assetAllocation,
 });
 
-export default connect(mapStateToProps, { fetchUser })(Dashboard);
+export default connect(mapStateToProps, { fetchUser, getForecast })(Dashboard);
