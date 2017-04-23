@@ -1,6 +1,6 @@
 import axios from "axios";
 import { FETCH_USER } from "./types";
-const API_URL = "http://localhost:3090";
+const API_URL = "http://192.168.2.40:3090";
 
 export const fetchUser = () => dispatch => {
   axios

@@ -14,6 +14,7 @@
     "rc-tabs": "^7.3.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-media": "^1.5.1",
     "react-motion-menu": "^0.4.2",
     "react-redux": "^5.0.2",
     "react-router-dom": "next",

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, SIGNUP_USER } from "./types";
-const API_URL = "http://localhost:3090";
+const API_URL = "http://192.168.2.40:3090";
 
 export const authError = errorMessage => ({
   type: AUTH_ERROR,

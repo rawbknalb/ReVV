@@ -35,7 +35,7 @@ class App extends Component {
     const { match } = this.props;
     return (
       <div>
-        <Hero />
+        {/* <Hero /> */}
         <div>
           <Route exact path={match.url} component={Home} />
           <Route exact path="/wertentwicklung" component={Wertentwicklung} />
