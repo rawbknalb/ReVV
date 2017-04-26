@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getForecast } from "../../store/actions/simulation";
+import { selectPortfolio } from "../../store/actions/simulation";
 import Slider from "rc-slider";
 
 import "rc-slider/assets/index.css";
 
 class RiskSlider extends Component {
+  componentDidMount() {
+    this.props.selectPortfolio(1)
+  }
+
   render() {
     return (
       <div>
@@ -14,7 +18,7 @@ class RiskSlider extends Component {
           min={1}
           max={7}
           step={1}
-          onAfterChange={value => this.props.getForecast(value)}
+          onAfterChange={value => this.props.selectPortfolio(value)}
           maximumTrackStyle={{ backgroundColor: "white", height: 1 }}
           minimumTrackStyle={{ backgroundColor: "#80e6fb", height: 4 }}
           handleStyle={{
@@ -32,4 +36,9 @@ class RiskSlider extends Component {
   }
 }
 
-export default connect(null, { getForecast })(RiskSlider);
+const mapStateToProps = state => ({
+  portfolioId: state.simulation_data.portfolio.selected.portfolioId
+});
+
+
+export default connect(mapStateToProps, { selectPortfolio })(RiskSlider);

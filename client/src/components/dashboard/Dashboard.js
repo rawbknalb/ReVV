@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchUser } from "../../store/actions/user";
-import { getForecast } from "../../store/actions/simulation";
 
 // Import Style
 import { ThemeProvider } from "styled-components";
@@ -10,7 +9,6 @@ import { Panel, PanelHeadline } from "../style/Panel";
 import { PortfolioHeadlineInfo } from "../style/PortfolioHeadline";
 
 import Tabs, { TabPane } from "rc-tabs";
-import ScrollableInkTabBar from "rc-tabs/lib/ScrollableInkTabBar";
 import TabContent from "rc-tabs/lib/SwipeableTabContent";
 import SwipeableInkTabBar from "rc-tabs/lib/SwipeableInkTabBar";
 import "../../style/tabs.css";
@@ -18,9 +16,10 @@ import "../../style/tabs.css";
 import MotionMenu from "./MotionMenu";
 
 // Import Portfolio Charts
-import PortfolioHistoryChart from "../charts/LineChart";
-import AllocationDonutPieChart from "../charts/DonutPieChart";
-import ForeCastChart from "../charts/ForeCastChart";
+//import PortfolioHistoryChart from "../portfolioCharts/charts/LineChart";
+import HistoryChart from "../portfolioCharts/HistoryChart";
+import AllocationDonutPieChart from "../portfolioCharts/charts/DonutPieChart";
+import ForeCastChart from "../portfolioCharts/charts/ForeCastChart";
 
 import RiskSlider from "./RiskSlider";
 
@@ -47,10 +46,8 @@ const gridTheme = {
 };
 
 class Dashboard extends Component {
-  
   componentDidMount() {
     this.props.fetchUser();
-    this.props.getForecast(1);
   }
 
   render() {
@@ -88,7 +85,7 @@ class Dashboard extends Component {
                       renderTabContent={() => <TabContent />}
                     >
                       <TabPane tab="Historie" key="1">
-                        <PortfolioHistoryChart />
+                        <HistoryChart />
                       </TabPane>
                       <TabPane tab="Anlageaufteilung" key="2">
                         <AllocationDonutPieChart
@@ -113,7 +110,9 @@ class Dashboard extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col xs={12} md={12} lg={7}> <RiskSlider defaultPortfolioId={1} /> </Col>
+                <Col xs={12} md={12} lg={7}>
+                  <RiskSlider defaultPortfolioId={1} />
+                </Col>
               </Row>
               <Wertentwicklung />
             </Grid>
@@ -127,7 +126,9 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-  assetAllocation: state.user.assetAllocation,
+  assetAllocation: state.user.assetAllocation
 });
 
-export default connect(mapStateToProps, { fetchUser, getForecast })(Dashboard);
+export default connect(mapStateToProps, { fetchUser })(
+  Dashboard
+);

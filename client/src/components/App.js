@@ -10,7 +10,6 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 
 // Components
 import Header from "./layout/Header";
-import Hero from "./layout/Hero";
 import { VVLogo } from "./style/Logo";
 import SignIn from "./auth/SignIn";
 import SignUp from "./auth/SignUp";
@@ -36,6 +35,7 @@ class App extends Component {
     return (
       <div>
         {/* <Hero /> */}
+        <Header />
         <div>
           <Route exact path={match.url} component={Home} />
           <Route exact path="/wertentwicklung" component={Wertentwicklung} />
