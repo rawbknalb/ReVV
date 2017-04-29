@@ -38,7 +38,7 @@ const gridTheme = {
     },
     breakpoints: {
       xs: 0, // em
-      sm: 768, // em
+      sm: 991, // em
       md: 1024, // em
       lg: 1200 // em
     }

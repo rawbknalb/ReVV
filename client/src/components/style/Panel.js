@@ -5,10 +5,11 @@ export const Panel = styled.section`
   margin: 5px;
   margin-bottom: 1rem;
   box-shadow: 5px 5px 20px rgba(0,0,0,0.25);
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: rgba(255, 255, 255, 0.098);
   border-radius: 10px;
   width: 100%;
   color: white;
+  height: 500px;
 `;
 
 export const PanelHeadline = styled.h5`

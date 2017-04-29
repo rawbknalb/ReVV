@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_FORECAST, FETCH_HISTORY, SELECT_PORTFOLIO } from "./types";
+import { FETCH_FORECAST, FETCH_HISTORY, SELECT_PORTFOLIO, COMPUTE_PORTFOLIO, SET_HISTORY_RANGE } from "./types";
 
 const FORECAST_API_URL =
   "https://service.visualvest.de/anlageziel-functional-service/simulation";
@@ -45,7 +45,17 @@ export const fetchHistoryData = (portfolioId, months) => async dispatch => {
   }
 };
 
+export const computePortfolio = portfolioId => ({
+  type: COMPUTE_PORTFOLIO,
+  payload: { portfolioId: portfolioId }
+});
+
 export const selectPortfolio = portfolioId => ({
   type: SELECT_PORTFOLIO,
   payload: { portfolioId: portfolioId }
 });
+
+export const setHistoryRange = months => ({
+  type: SET_HISTORY_RANGE,
+  payload: months
+})

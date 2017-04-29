@@ -1,10 +1,7 @@
 import React from "react";
 import Chart from "./Chart";
 
-const LineChart = props => {
-  const portfolio_1 = { ...props.data[0] };
-  const portfolio_2 = { ...props.data[1] };
-
+const LineChart = ({ data }) => {
   const convertDate = date => {
     // const options = { year: "numeric", month: "long", day: "2-digit" };
     // const d = new Date(date);
@@ -17,30 +14,81 @@ const LineChart = props => {
   };
 
   const convertPercentage = value =>
-    (value != 0 ? parseFloat(value.toFixed(2)) : value);
+    (value !== 0 ? parseFloat(value.toFixed(2)) : value);
 
-  const history_1 = portfolio_1.history.map(val => [
-    convertDate(val.date),
-    convertPercentage(val.percentage)
-  ]);
+  const convertHistoryData = historyData => {
+    return historyData.map(val => [
+      convertDate(val.date),
+      convertPercentage(val.percentage)
+    ]);
+  };
 
-  const series = [
-    {
-      name: "Angebotenes Portfolio",
-      data: history_1
-      //dataLabels: { enabled: false }
+  const buildSeries = data => {
+    const portfolio_1 = {
+      ...data[0],
+      history: convertHistoryData(data[0].history)
+    };
+
+    if (data.length === 2) {
+      const portfolio_2 = {
+        ...data[1],
+        history: convertHistoryData(data[1].history)
+      };
+
+      return [
+        {
+          name: "Angebotenes Portfolio",
+          data: portfolio_1.history
+          //dataLabels: { enabled: false }
+        },
+        {
+          name: "Gewähltes Portfolio",
+          data: portfolio_2.history
+          //dataLabels: { enabled: false }
+        }
+      ];
     }
-  ];
+
+    return [
+      {
+        name: "Angebotenes Portfolio",
+        data: portfolio_1.history
+        //dataLabels: { enabled: false }
+      }
+    ];
+  };
 
   const options = {
     chart: {
-      type: "spline",
+      type: "line",
       backgroundColor: "none"
+    },
+    rangeSelector: {
+      enabled: false,
+      inputEnabled: false,
+      buttons: [
+        {
+          type: "year",
+          count: 1,
+          text: "1 Jahr"
+        },
+        {
+          type: "year",
+          count: 3,
+          text: "3 Jahre"
+        },
+        {
+          type: "all",
+          text: "Maximal"
+        }
+      ],
+      height: 35
     },
     title: { text: "" },
     tooltip: {
-      pointFormat: "<span>{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>",
-      valueDecimals: 2
+      pointFormat: "<span>{series.name}</span>: <b>{point.y} %</b> <br/>",
+      valueDecimals: 2,
+      crosshairs: true
     },
     xAxis: {
       type: "datetime",
@@ -56,6 +104,16 @@ const LineChart = props => {
       },
       floor: -9,
       ceiling: 30,
+      gridLineDashStyle: "dash",
+      gridLineWidth: 0.8,
+      gridLineColor: "rgba(255, 255, 255, 0.2)",
+      plotLines: [
+        {
+          color: "#fff",
+          width: 0.5,
+          value: 0
+        }
+      ],
       labels: {
         style: {
           color: "white"
@@ -64,14 +122,38 @@ const LineChart = props => {
     },
     plotOptions: {
       series: {
-        color: "rgb(184, 233, 134)"
+        // rgb(0, 175, 210)
+        states: {
+          hover: {
+            enabled: true,
+            lineWidth: 2,
+            halo: {
+              size: 5,
+              opacity: 1
+            },
+            marker: {
+              enabled: false
+            }
+          }
+        }
       }
     },
-    series: series
+    scrollbar: {
+      enabled: false
+    },
+    navigator: {
+      enabled: false
+    },
+    colors: ["#b8e986", "#00afd2"],
+    series: buildSeries(data)
   };
 
   return (
-    <Chart container="asset-allocation-performance-history" options={options} />
+    <Chart
+      type="stockChart"
+      container="asset-allocation-performance-history"
+      options={options}
+    />
   );
 };
 
