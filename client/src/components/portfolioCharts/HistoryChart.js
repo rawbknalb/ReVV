@@ -10,7 +10,7 @@ import styled from "styled-components";
 
 import LineChart from "./charts/LineChart";
 
-const HistoryRangeButton = styled.button`
+const HistoryRangeButton = styled.span`
   /* Adapt the colors based on primary prop */
   background: rgba(0, 0, 0, 0);
   color: white;
@@ -23,43 +23,38 @@ const HistoryRangeButton = styled.button`
 `;
 
 class HistoryChart extends Component {
+  initialFetchHistory() {
+    this.props.fetchHistoryData(
+      this.props.computedPortfolioId,
+      this.props.selectedPortfolioId,
+      this.props.historyRange
+    );
+  }
+
   componentDidMount() {
     if (this.props.selectedPortfolioId !== null) {
-      this.props.fetchHistoryData(
-        this.props.selectedPortfolioId,
-        this.props.historyRange
-      );
+      this.initialFetchHistory();
     }
   }
 
   componentWillReceiveProps(nextProps) {
+    const fetchHistory = () => {
+      this.props.fetchHistoryData(
+        nextProps.computedPortfolioId,
+        nextProps.selectedPortfolioId,
+        nextProps.historyRange
+      );
+    };
+
     const fetchHistoryDataAfterSelect = () => {
       if (this.props.selectedPortfolioId !== nextProps.selectedPortfolioId) {
-        this.props.fetchHistoryData(
-          nextProps.selectedPortfolioId,
-          nextProps.historyRange
-        );
+        fetchHistory();
       }
     };
 
     const fetchHistoryDataAfterRangeChange = () => {
       if (this.props.historyRange !== nextProps.historyRange) {
-        this.props.fetchHistoryData(
-          nextProps.computedPortfolioId,
-          nextProps.historyRange
-        );
-        // If computed PortfolioId is equal to the seleced PortfolioId
-        // it's not necessary to fetch the History Data again
-        // Only fetch if the selected Id's are are not equal
-        if (
-          this.props.historyData.length !== 0 &&
-          this.props.computedPortfolioId !== nextProps.selectedPortfolioId
-        ) {
-          this.props.fetchHistoryData(
-            nextProps.selectedPortfolioId,
-            nextProps.historyRange
-          );
-        }
+        fetchHistory();
       }
     };
 
@@ -109,8 +104,8 @@ class HistoryChart extends Component {
 const mapStateToProps = state => ({
   historyData: state.simulation_data.history,
   historyRange: state.simulation_data.historyRange,
-  selectedPortfolioId: state.simulation_data.portfolio.selected.portfolioId,
-  computedPortfolioId: state.simulation_data.portfolio.computed.portfolioId
+  selectedPortfolioId: state.simulation_data.portfolios.selected.portfolioId,
+  computedPortfolioId: state.simulation_data.portfolios.computed.portfolioId
 });
 
 export default connect(mapStateToProps, { fetchHistoryData, setHistoryRange })(

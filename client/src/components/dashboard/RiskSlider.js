@@ -3,16 +3,24 @@ import { connect } from "react-redux";
 import { selectPortfolio } from "../../store/actions/simulation";
 import Slider from "rc-slider";
 
+
+import styled from "styled-components";
+
+const Div = styled.div`
+  padding-top: 60px;
+  margin: 30px;
+`;
+
 import "rc-slider/assets/index.css";
 
 class RiskSlider extends Component {
   componentDidMount() {
-    this.props.selectPortfolio(1)
+    this.props.selectPortfolio(this.props.portfolioId);
   }
 
   render() {
     return (
-      <div>
+      <Div>
         <Slider
           dots
           min={1}
@@ -31,14 +39,13 @@ class RiskSlider extends Component {
             backgroundColor: "#80e6fb"
           }}
         />
-      </div>
+      </Div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  portfolioId: state.simulation_data.portfolio.selected.portfolioId
+  portfolioId: state.simulation_data.portfolios.computed.portfolioId
 });
-
 
 export default connect(mapStateToProps, { selectPortfolio })(RiskSlider);

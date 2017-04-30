@@ -3,54 +3,74 @@ import {
   FETCH_HISTORY,
   SELECT_PORTFOLIO,
   COMPUTE_PORTFOLIO,
-  SET_HISTORY_RANGE
+  SET_HISTORY_RANGE,
+  FETCH_PORTFOLIO_METADATA
 } from "../actions/simulation/types";
 
 const initialState = {
-  portfolio: {
+  portfolios: {
+    metaData: [],
     computed: { portfolioId: 1 },
-    selected: { portfolioId: null }
+    selected: { portfolioId: null, metaData: {} }
   },
   forecast: {},
   history: [],
-  historyRange: 0
+  historyRange: 36
 };
-
 const simulation_reducer = (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_PORTFOLIO_METADATA:
+      const selectedPortfolioMeta = action.payload.filter(
+        portfolio => portfolio.id === state.portfolios.selected.portfolioId
+      );
+      console.log(selectedPortfolioMeta);
+      return {
+        ...state,
+        portfolios: {
+          ...state.portfolios,
+          metaData: action.payload,
+          selected: {
+            ...state.portfolios.selected,
+            metaData: selectedPortfolioMeta[0]
+          }
+        }
+      };
+
     case COMPUTE_PORTFOLIO:
       return {
         ...state,
-        portfolio: { ...state.portfolio, computed: action.payload }
+        portfolios: { ...state.portfolios, computed: action.payload }
       };
+
     case SELECT_PORTFOLIO:
+      const newSelectedPortfolioMeta = state.portfolios.metaData.filter(
+        portfolio => portfolio.id === action.payload.portfolioId
+      );
       return {
         ...state,
-        portfolio: { ...state.portfolio, selected: action.payload }
+        portfolios: {
+          ...state.portfolios,
+          selected: {
+            ...state.portfolios.selected,
+            ...action.payload,
+            metaData: newSelectedPortfolioMeta[0]
+          }
+        }
       };
+
     case FETCH_FORECAST:
       return { ...state, forecast: action.payload };
+
     case FETCH_HISTORY:
-      // check length of history array in order to
-      // decide if first element shouldn be copied
-      if (state.history.length !== 0) {
-        // check if first element is exactly equaly to fetched payload
-        // if both objects are equal you only need the first element
-        // because there is nothing to compare
-        if (
-          JSON.stringify(state.history[0]) === JSON.stringify(action.payload)
-        ) {
-          return { ...state, history: [state.history[0]] };
-          // carry the first element allways with you
-        } else return { ...state, history: [state.history[0], action.payload] };
-      } else {
-        return { ...state, history: [...state.history, action.payload] };
-      }
+      return { ...state, history: action.payload };
+
     case SET_HISTORY_RANGE:
-      // only 
+      // only
       if (state.historyRange !== action.payload) {
-        return { ...state, historyRange: action.payload, history: [] };
+        return { ...state, historyRange: action.payload };
       }
+      return;
+
     default:
       return state;
   }

@@ -22,8 +22,7 @@ import AllocationDonutPieChart from "../portfolioCharts/charts/DonutPieChart";
 import ForeCastChart from "../portfolioCharts/charts/ForeCastChart";
 
 import RiskSlider from "./RiskSlider";
-
-import Wertentwicklung from "../Wertentwicklung";
+import PortfolioDetail from "./PortfolioDetail";
 
 const gridTheme = {
   flexboxgrid: {
@@ -51,77 +50,84 @@ class Dashboard extends Component {
   }
 
   render() {
-    if (this.props.assetAllocation) {
-      return (
-        <div>
-          {/* ToDo: Wrap in Header Component */}
-          <PortfolioHeadlineInfo>
-            Unser vorläufiges Angebot: {this.props.assetAllocation.name}
-          </PortfolioHeadlineInfo>
-          <PortfolioHeadlineInfo>
-            Das dynamische ETF-VestFolio mit Chancen in Aktien-
-            und Rohstoffmärkten zu erhöhtem Risiko
-          </PortfolioHeadlineInfo>
-          <br />
-          {/* Wrap in Charts Component ????? */}
-          <ThemeProvider theme={gridTheme}>
-            <Grid>
-              <Row>
-                <Col xs>
-                  <Row center="xs">
-                    <MotionMenu />
-                  </Row>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={12} sm={8} md={8} lg={8}>
-                  <Panel>
-                    <Tabs
-                      defaultActiveKey="1"
-                      onChange={this.callback}
-                      renderTabBar={() => (
-                        <SwipeableInkTabBar pageSize={4} speed={10} />
-                      )}
-                      renderTabContent={() => <TabContent />}
-                    >
-                      <TabPane tab="Historie" key="1">
-                        <HistoryChart />
-                      </TabPane>
-                      <TabPane tab="Anlageaufteilung" key="2">
-                        <AllocationDonutPieChart
-                          data={this.props.assetAllocation}
-                        />
-                      </TabPane>
-                      <TabPane tab="Prognose" key="3">
-                        <ForeCastChart />
-                      </TabPane>
-                      <TabPane tab="Länder" key="4">third</TabPane>
-                    </Tabs>
-                  </Panel>
-                </Col>
-                <Col xs={false} sm={4} md={4} lg={4}>
-                  <Panel>
-                    {/* Include PanelHeadline in Panel as prop? */}
-                    <PanelHeadline>Anlageaufteilung</PanelHeadline>
-                    <AllocationDonutPieChart
-                      data={this.props.assetAllocation}
-                    />
-                  </Panel>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={12} md={12} lg={7}>
-                  <RiskSlider defaultPortfolioId={1} />
-                </Col>
-              </Row>
-              <Wertentwicklung />
-            </Grid>
-          </ThemeProvider>
-        </div>
-      );
-    } else {
+    if (!this.props.assetAllocation) {
       return <div>Loading...</div>;
     }
+    return (
+      <div>
+        {/* ToDo: Wrap in Header Component */}
+
+        <PortfolioHeadlineInfo>
+          {this.props.selectedPortfolioId !== this.props.computedPortfolioId
+            ? "Deine Wahl: "
+            : "Unser vorläufiges Angebot: "}
+          {this.props.assetAllocation.name}
+        </PortfolioHeadlineInfo>
+        <PortfolioHeadlineInfo>
+          Das dynamische ETF-VestFolio mit Chancen in Aktien-
+          und Rohstoffmärkten zu erhöhtem Risiko
+        </PortfolioHeadlineInfo>
+        <br />
+        {/* Wrap in Charts Component ????? */}
+        <ThemeProvider theme={gridTheme}>
+          <Grid>
+            <Row>
+              <Col xs>
+                <Row center="xs">
+                  <MotionMenu />
+                </Row>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12} sm={8} md={8} lg={8}>
+                <Panel>
+                  <Tabs
+                    defaultActiveKey="1"
+                    onChange={this.callback}
+                    renderTabBar={() => (
+                      <SwipeableInkTabBar pageSize={4} speed={10} />
+                    )}
+                    renderTabContent={() => <TabContent />}
+                  >
+                    <TabPane tab="Historie" key="1">
+                      <HistoryChart />
+                    </TabPane>
+                    <TabPane tab="Anlageaufteilung" key="2">
+                      <AllocationDonutPieChart
+                        data={this.props.assetAllocation}
+                      />
+                    </TabPane>
+                    <TabPane tab="Prognose" key="3">
+                      <ForeCastChart />
+                    </TabPane>
+                    <TabPane tab="Länder" key="4">third</TabPane>
+                  </Tabs>
+                </Panel>
+              </Col>
+              <Col xs={false} sm={4} md={4} lg={4}>
+                <Panel>
+                  {/* Include PanelHeadline in Panel as prop? */}
+                  <PanelHeadline>Anlageaufteilung</PanelHeadline>
+                  <AllocationDonutPieChart data={this.props.assetAllocation} />
+                </Panel>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12} md={12} lg={7}>
+                <RiskSlider />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs>
+                <Row center="xs">
+                  <PortfolioDetail />
+                </Row>
+              </Col>
+            </Row>
+          </Grid>
+        </ThemeProvider>
+      </div>
+    );
   }
 }
 
@@ -129,6 +135,4 @@ const mapStateToProps = state => ({
   assetAllocation: state.user.assetAllocation
 });
 
-export default connect(mapStateToProps, { fetchUser })(
-  Dashboard
-);
+export default connect(mapStateToProps, { fetchUser })(Dashboard);
