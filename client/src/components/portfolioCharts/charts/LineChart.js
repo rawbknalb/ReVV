@@ -121,6 +121,9 @@ const LineChart = ({ data }) => {
       }
     },
     plotOptions: {
+      line: {
+        animation: false
+      },
       series: {
         // rgb(0, 175, 210)
         states: {

@@ -37,6 +37,16 @@ class HistoryChart extends Component {
     }
   }
 
+  shouldComponentUpdate(nextprops) {
+    if (
+      nextprops.historyData === [] ||
+      nextprops.selectedPortfolioId !== this.props.selectedPortfolioId
+    ) {
+      return false;
+    }
+    return true;
+  }
+
   componentWillReceiveProps(nextProps) {
     const fetchHistory = () => {
       this.props.fetchHistoryData(
