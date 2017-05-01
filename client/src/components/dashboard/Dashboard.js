@@ -18,7 +18,7 @@ import MotionMenu from "./MotionMenu";
 // Import Portfolio Charts
 //import PortfolioHistoryChart from "../portfolioCharts/charts/LineChart";
 import HistoryChart from "../portfolioCharts/HistoryChart";
-import AllocationDonutPieChart from "../portfolioCharts/charts/DonutPieChart";
+import AssetAllocationChart from "../portfolioCharts/AssetAllocationChart";
 import ForeCastChart from "../portfolioCharts/charts/ForeCastChart";
 
 import RiskSlider from "./RiskSlider";
@@ -93,9 +93,10 @@ class Dashboard extends Component {
                       <HistoryChart />
                     </TabPane>
                     <TabPane tab="Anlageaufteilung" key="2">
-                      <AllocationDonutPieChart
+                      {/*<AllocationDonutPieChart
                         data={this.props.assetAllocation}
-                      />
+                      />*/}
+                      <AssetAllocationChart />
                     </TabPane>
                     <TabPane tab="Prognose" key="3">
                       <ForeCastChart />
@@ -108,7 +109,8 @@ class Dashboard extends Component {
                 <Panel>
                   {/* Include PanelHeadline in Panel as prop? */}
                   <PanelHeadline>Anlageaufteilung</PanelHeadline>
-                  <AllocationDonutPieChart data={this.props.assetAllocation} />
+                  {/* <AllocationDonutPieChart data={this.props.assetAllocation} />*/}
+                  <AssetAllocationChart />
                 </Panel>
               </Col>
             </Row>

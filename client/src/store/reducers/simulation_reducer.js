@@ -7,6 +7,8 @@ import {
   FETCH_PORTFOLIO_METADATA
 } from "../actions/simulation/types";
 
+import { getSelectedPortfolio, createAssetAllocation } from "../utils/PortfolioCollection";
+
 const initialState = {
   portfolios: {
     metaData: [],
@@ -17,36 +19,17 @@ const initialState = {
   history: [],
   historyRange: 36
 };
+
 const simulation_reducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_PORTFOLIO_METADATA:
       // after fetching all portfolios: this function filters out from the payload
       // the selected Portfolio into a new Array [{selectedPortfolio}]
-      const selectedPortfolioMeta = action.payload
-        .filter(
-          portfolio => portfolio.id === state.portfolios.selected.portfolioId
-        )
-        .reduce(portfolio => ({ ...portfolio }));
-
-      const createAssetAllocation = portfolio => {
-        return portfolio.funds.reduce((obj, fund) => {
-          const assetClassName = fund.assetClass;
-          const { sharePercentage } = fund;
-
-          return {
-            ...obj,
-            [assetClassName]: obj[assetClassName] !== undefined
-              ? sharePercentage + obj[assetClassName]
-              : sharePercentage
-          };
-        }, {});
-      };
 
       const enhancedPortfolioCollection = action.payload.map(portfolio => ({
         ...portfolio,
         assetAllocation: createAssetAllocation(portfolio)
       }));
-      console.log(enhancedPortfolioCollection);
 
       return {
         ...state,
@@ -55,7 +38,10 @@ const simulation_reducer = (state = initialState, action) => {
           metaData: enhancedPortfolioCollection,
           selected: {
             ...state.portfolios.selected,
-            metaData: selectedPortfolioMeta
+            metaData: getSelectedPortfolio(
+              enhancedPortfolioCollection,
+              state.portfolios.selected.portfolioId
+            )
           }
         }
       };
@@ -68,15 +54,7 @@ const simulation_reducer = (state = initialState, action) => {
 
     case SELECT_PORTFOLIO:
       // after selecting a new portfolio this function filters
-      // the selected Portfolio 
-      const createSelectedPortfolioMeta = () => {
-        if (state.portfolios.metaData.length === 0) {
-          return;
-        }
-        return state.portfolios.metaData
-          .filter(portfolio => portfolio.id === action.payload.portfolioId)
-          .reduce(portfolio => ({ ...portfolio }));
-      };
+      // the selected Portfolio
 
       return {
         ...state,
@@ -85,7 +63,12 @@ const simulation_reducer = (state = initialState, action) => {
           selected: {
             ...state.portfolios.selected,
             ...action.payload,
-            metaData: createSelectedPortfolioMeta()
+            metaData: state.portfolios.metaData.length === 0
+              ? []
+              : getSelectedPortfolio(
+                  state.portfolios.metaData,
+                  action.payload.portfolioId
+                )
           }
         }
       };

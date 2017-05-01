@@ -14,7 +14,6 @@ class PortfolioDetail extends Component {
   }
 
   renderList() {
-    console.log(this.props.selectedPortfolioMeta);
     return (
       <ul>
         {this.props.selectedPortfolioMeta.funds.map(fund => (

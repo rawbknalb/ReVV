@@ -121,11 +121,10 @@ const LineChart = ({ data }) => {
       }
     },
     plotOptions: {
-      line: {
-        animation: false
-      },
       series: {
-        // rgb(0, 175, 210)
+        animation: {
+          duration: 1000
+        },
         states: {
           hover: {
             enabled: true,
@@ -152,11 +151,7 @@ const LineChart = ({ data }) => {
   };
 
   return (
-    <Chart
-      type="stockChart"
-      container="asset-allocation-performance-history"
-      options={options}
-    />
+    <Chart type="stockChart" container="history-chart" options={options} />
   );
 };
 
