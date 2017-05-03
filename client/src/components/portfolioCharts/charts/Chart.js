@@ -5,7 +5,7 @@ import Highstock from "highcharts/highstock";
 class Chart extends Component {
   initializeChart() {
     switch (this.props.type) {
-      case "stockChart": 
+      case "stockChart":
         return (this.chart = new Highstock[this.props.type](
           this.props.container,
           this.props.options
@@ -31,7 +31,11 @@ class Chart extends Component {
   }
 
   render() {
-    return <div id={this.props.container} />;
+    return (
+      <div style={{ height: "100%", width: "100%" }}>
+        <div style={{ height: "100%", width: "100%" }} id={this.props.container} />
+      </div>
+    );
   }
 }
 

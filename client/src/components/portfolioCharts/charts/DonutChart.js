@@ -33,9 +33,7 @@ const DonutChart = ({ data }) => {
   const options = {
     chart: {
       type: "pie",
-      backgroundColor: "none",
-      inverted: true
-      //height: 230
+      backgroundColor: "none"
     },
     title: { text: "" },
     yAxis: {

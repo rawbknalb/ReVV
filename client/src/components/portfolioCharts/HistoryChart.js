@@ -22,6 +22,17 @@ const HistoryRangeButton = styled.span`
   border-bottom: ${props => (props.active ? "2px solid #80e6fb" : "none")};
 `;
 
+const FinePrintDiv = styled.div`
+  padding-top: 10px;
+  font-size: 12px;
+  line-height: 16px;
+`;
+
+const Div = styled.div`
+  height: 100%;
+  width: 100%;
+`;
+
 class HistoryChart extends Component {
   initialFetchHistory() {
     this.props.fetchHistoryData(
@@ -37,10 +48,11 @@ class HistoryChart extends Component {
     }
   }
 
-  shouldComponentUpdate(nextprops) {
+  shouldComponentUpdate(nextProps) {
     if (
-      nextprops.historyData === [] ||
-      nextprops.selectedPortfolioId !== this.props.selectedPortfolioId
+      nextProps.historyData === [] ||
+      nextProps.selectedPortfolioId !== this.props.selectedPortfolioId ||
+      nextProps.historyRange !== this.props.historyRange
     ) {
       return false;
     }
@@ -75,7 +87,7 @@ class HistoryChart extends Component {
   render() {
     if (this.props.historyData.length !== 0) {
       return (
-        <div>
+        <Div>
           <Grid fluid>
             <Row center="xs">
               <HistoryRangeButton
@@ -99,14 +111,22 @@ class HistoryChart extends Component {
             </Row>
             <Row>
               <Col xs>
-                <LineChart data={this.props.historyData} />
+                  <LineChart data={this.props.historyData} />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={8} md={8} lg={8}>
+                <FinePrintDiv>
+                  Die frühere Wertentwicklung ist kein verlässlicher Indikator für die künftige Wertentwicklung.
+                </FinePrintDiv>
+                <FinePrintDiv>Weitere Informationen findest du hier</FinePrintDiv>
               </Col>
             </Row>
           </Grid>
-        </div>
+        </Div>
       );
     } else {
-      return <div>Historie wird geladen...</div>;
+      return <div style={{ height: "100%", width: "100%" }}>Historie wird geladen...</div>;
     }
   }
 }

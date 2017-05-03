@@ -64,7 +64,7 @@ const simulation_reducer = (state = initialState, action) => {
             ...state.portfolios.selected,
             ...action.payload,
             metaData: state.portfolios.metaData.length === 0
-              ? []
+              ? {}
               : getSelectedPortfolio(
                   state.portfolios.metaData,
                   action.payload.portfolioId

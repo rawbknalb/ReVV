@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchUser } from "../../store/actions/user";
 
 // Import Style
 import { ThemeProvider } from "styled-components";
@@ -15,14 +14,12 @@ import "../../style/tabs.css";
 
 import MotionMenu from "./MotionMenu";
 
-// Import Portfolio Charts
-//import PortfolioHistoryChart from "../portfolioCharts/charts/LineChart";
 import HistoryChart from "../portfolioCharts/HistoryChart";
 import AssetAllocationChart from "../portfolioCharts/AssetAllocationChart";
 import ForeCastChart from "../portfolioCharts/charts/ForeCastChart";
 
 import RiskSlider from "./RiskSlider";
-import PortfolioDetail from "./PortfolioDetail";
+import PortfolioDetail from "./portfolioDetails/PortfolioDetail";
 
 const gridTheme = {
   flexboxgrid: {
@@ -45,14 +42,17 @@ const gridTheme = {
 };
 
 class Dashboard extends Component {
-  componentDidMount() {
-    this.props.fetchUser();
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.selectedPortfolio !== this.props.selectedPortfolio) {
+      return true;
+    }
+    return false;
   }
 
   render() {
-    if (!this.props.assetAllocation) {
-      return <div>Loading...</div>;
-    }
+    // if (!this.props.assetAllocation) {
+    //   return <div>Loading...</div>;
+    // }
     return (
       <div>
         {/* ToDo: Wrap in Header Component */}
@@ -61,7 +61,7 @@ class Dashboard extends Component {
           {this.props.selectedPortfolioId !== this.props.computedPortfolioId
             ? "Deine Wahl: "
             : "Unser vorläufiges Angebot: "}
-          {this.props.assetAllocation.name}
+          {this.props.selectedPortfolio}
         </PortfolioHeadlineInfo>
         <PortfolioHeadlineInfo>
           Das dynamische ETF-VestFolio mit Chancen in Aktien-
@@ -71,13 +71,13 @@ class Dashboard extends Component {
         {/* Wrap in Charts Component ????? */}
         <ThemeProvider theme={gridTheme}>
           <Grid>
-            <Row>
+            {/*<Row>
               <Col xs>
                 <Row center="xs">
                   <MotionMenu />
                 </Row>
               </Col>
-            </Row>
+            </Row>*/}
             <Row>
               <Col xs={12} sm={8} md={8} lg={8}>
                 <Panel>
@@ -120,10 +120,8 @@ class Dashboard extends Component {
               </Col>
             </Row>
             <Row>
-              <Col xs>
-                <Row center="xs">
-                  <PortfolioDetail />
-                </Row>
+              <Col xs={12} md={12} lg={12}>
+                <PortfolioDetail />
               </Col>
             </Row>
           </Grid>
@@ -134,7 +132,7 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-  assetAllocation: state.user.assetAllocation
+  selectedPortfolio: state.simulation_data.portfolios.selected.metaData.name
 });
 
-export default connect(mapStateToProps, { fetchUser })(Dashboard);
+export default connect(mapStateToProps)(Dashboard);

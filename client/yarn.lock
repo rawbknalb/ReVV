@@ -2325,6 +2325,10 @@ get-caller-file@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.2.tgz#f702e63127e7e231c160a80c1554acb70d5047e5"
 
+get-node-dimensions@^1.2.0:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/get-node-dimensions/-/get-node-dimensions-1.2.2.tgz#7a71e8624cf9e1ab74599bb05b7e5116e995e45b"
+
 get-stdin@5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/get-stdin/-/get-stdin-5.0.1.tgz#122e161591e21ff4c52530305693f20e6393a398"
@@ -4420,6 +4424,10 @@ rc@~1.1.6:
     minimist "^1.2.0"
     strip-json-comments "~1.0.4"
 
+react-cardstack@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/react-cardstack/-/react-cardstack-0.1.1.tgz#18e216227bda62cd64061a6c7f0513d05891c411"
+
 react-dev-utils@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-0.5.0.tgz#aedbf69cb1fbedb6f42350e4a988021f5cb4c493"
@@ -4445,6 +4453,14 @@ react-hammerjs@~0.5.0:
   resolved "https://registry.yarnpkg.com/react-hammerjs/-/react-hammerjs-0.5.0.tgz#aa20e5c5f44d660f3e8e87ed11282f12173e77ae"
   dependencies:
     hammerjs "^2.0.8"
+
+react-measure@^1.4.7:
+  version "1.4.7"
+  resolved "https://registry.yarnpkg.com/react-measure/-/react-measure-1.4.7.tgz#a1d2ca0dcfef04978b7ac263a765dcb6a0936fdb"
+  dependencies:
+    get-node-dimensions "^1.2.0"
+    prop-types "^15.5.4"
+    resize-observer-polyfill "^1.4.1"
 
 react-media@^1.5.1:
   version "1.5.1"
@@ -4801,6 +4817,10 @@ require-uncached@^1.0.2:
 requires-port@1.0.x, requires-port@1.x.x:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
+
+resize-observer-polyfill@^1.4.1:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.4.2.tgz#a37198e6209e888acb1532a9968e06d38b6788e5"
 
 resolve-from@^1.0.0:
   version "1.0.1"

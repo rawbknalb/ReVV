@@ -501,6 +501,7 @@
 .rc-tabs-top {
   border-bottom: 0px solid #f3f3f3;
   overflow-x: hidden;
+  height: 100%;
 }
 
 .rc-tabs-top .rc-tabs-content {
@@ -556,6 +557,7 @@
 
 .rc-tabs-top .rc-tabs-content-animated .rc-tabs-tabpane {
   width: 100%;
+  height: 100%;
 }
 
 .rc-tabs-top .rc-tabs-tab-next {

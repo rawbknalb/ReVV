@@ -35,7 +35,7 @@ class App extends Component {
     return (
       <div>
         {/* <Hero /> */}
-        <Header />
+        {/*<Header />*/}
         <VVLogo />
         <div>
           <Route exact path={match.url} component={Home} />

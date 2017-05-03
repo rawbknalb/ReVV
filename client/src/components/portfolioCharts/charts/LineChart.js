@@ -62,6 +62,7 @@ const LineChart = ({ data }) => {
     chart: {
       type: "line",
       backgroundColor: "none"
+      // height: "100%"
     },
     rangeSelector: {
       enabled: false,

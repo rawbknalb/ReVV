@@ -5,8 +5,9 @@ import logo from "../../style/logo.svg";
 const Logo = styled.img`
   margin: auto;
   display: block;
-  width: 300px;
-  padding: 50px 0 0 0;
+  width: 155px;
+  height: 60px;
+  padding: 17px 0 0 0;
   z-index: auto;
   position: relative;
 `;

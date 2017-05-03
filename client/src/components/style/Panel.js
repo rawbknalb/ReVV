@@ -9,7 +9,7 @@ export const Panel = styled.section`
   border-radius: 10px;
   width: 100%;
   color: white;
-  height: 500px;
+  height: ${props => (props.ChartPanel ? "30vw" : "100%")};
 `;
 
 export const PanelHeadline = styled.h5`
@@ -18,5 +18,4 @@ export const PanelHeadline = styled.h5`
   padding-top: 26px;
   padding-bottom: 26px
   z-index: auto;
-
 `;
