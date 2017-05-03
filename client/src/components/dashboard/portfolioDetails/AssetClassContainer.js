@@ -10,14 +10,21 @@ const AssetClassName = styled.div`
   vertical-align: middle;
   font-weight: 300;
   border-bottom: 1px solid #80e6fb;
+  padding-top: 8px;
+  padding-bottom: 8px;
+`;
+
+const Div = styled.div`
+  padding-bottom: 20px;
+  border-bottom: 1px solid #80e6fb;
 `;
 
 const AssetClassContainer = ({ assetClass, funds }) => {
   return (
-    <div>
+    <Div>
       <AssetClassName>{assetClass}</AssetClassName>
       <FundsCardStack assetClass={assetClass} funds={funds} />
-    </div>
+    </Div>
   );
 };
 

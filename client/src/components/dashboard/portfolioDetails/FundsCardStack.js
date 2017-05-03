@@ -26,19 +26,17 @@ const FundDoc = styled(TinyFundInfo)`
   color: #80e6fb;
 `;
 
-import { CardStack, Card } from "react-cardstack";
+import { CardStack, Card } from "./React-Cardstack";
 
 const FundsCardStack = ({ assetClass, funds }) => {
-  //console.log(funds);
 
   const filteredFunds = funds.filter(fund => fund.assetClass === assetClass);
-  console.log("filteredFunds: ", filteredFunds);
 
   const renderStack = filteredFunds.map(fund => (
     <Card
       key={fund.fundIsin}
       background="rgba(255, 255, 255, 0.09)"
-      cardClicked={() => console.log("hello")}
+      cardClicked={() => console.log("Card clicked")}
     >
       <div style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px -5px 14px 0px" }}>
         <FundInfo>{fund.fundName}</FundInfo>
@@ -54,22 +52,20 @@ const FundsCardStack = ({ assetClass, funds }) => {
 
   const renderFund = (
     <div style={{ height: "300px", width: "100%" }}>
-      <div style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px -5px 14px 0px" }}>
-        <FundInfo>{filteredFunds[0].fundName}</FundInfo>
-        <TinyFundInfo>
-          {filteredFunds[0].fundIsin} <FundDoc>Jahresbericht |</FundDoc>{" "}
-          <FundDoc>Halbjahresbericht |</FundDoc> {" "}
-          <FundDoc>Anlegerinformationen (KID) |</FundDoc> {" "}
-          <FundDoc>Verkaufsprospekt</FundDoc>
-        </TinyFundInfo>
-      </div>
+      <FundInfo>{filteredFunds[0].fundName}</FundInfo>
+      <TinyFundInfo>
+        {filteredFunds[0].fundIsin} <FundDoc>Jahresbericht |</FundDoc>{" "}
+        <FundDoc>Halbjahresbericht |</FundDoc> {" "}
+        <FundDoc>Anlegerinformationen (KID) |</FundDoc> {" "}
+        <FundDoc>Verkaufsprospekt</FundDoc>
+      </TinyFundInfo>
     </div>
   );
 
   return (
     <div>
       {filteredFunds.length > 1
-        ? <CardStack height={400} width={null} hoverOffset={25}>
+        ? <CardStack height={400} width={null} hoverOffset={50}>
             {renderStack}
           </CardStack>
         : renderFund}
