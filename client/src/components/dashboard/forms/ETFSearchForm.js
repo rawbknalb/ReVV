@@ -19,7 +19,6 @@ export const renderField = (
 
 class ETFSearch_Form extends Component {
   handleFormSubmit(values) {
-    console.log(values);
     this.props.fetchPrice(values);
   }
 

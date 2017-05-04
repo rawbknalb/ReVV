@@ -42,7 +42,6 @@ class PortfolioDetail extends Component {
       ? <Div><Panel>Loading...</Panel></Div>
       : <Div>
           <Panel>
-          {console.log(this.props.selectedPortfolio.funds)}
             {this.renderAssetClasses()}
           </Panel>
         </Div>;

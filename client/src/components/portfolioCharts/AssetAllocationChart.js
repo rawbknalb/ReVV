@@ -10,7 +10,7 @@ class AssetAllocationChart extends Component {
     }
     return (
       <div>
-        <DonutChart data={this.props.assetAllocation} />
+        <DonutChart assetAllocation={this.props.assetAllocation} />
       </div>
     );
   }

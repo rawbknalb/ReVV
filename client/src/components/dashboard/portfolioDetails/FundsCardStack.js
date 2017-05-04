@@ -31,7 +31,6 @@ import { CardStack, Card } from "./React-Cardstack";
 const FundsCardStack = ({ assetClass, funds }) => {
 
   const filteredFunds = funds.filter(fund => fund.assetClass === assetClass);
-
   const renderStack = filteredFunds.map(fund => (
     <Card
       key={fund.fundIsin}

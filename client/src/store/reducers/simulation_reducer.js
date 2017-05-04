@@ -7,7 +7,7 @@ import {
   FETCH_PORTFOLIO_METADATA
 } from "../actions/simulation/types";
 
-import { getSelectedPortfolio, createAssetAllocation } from "../utils/PortfolioCollection";
+import { getSelectedPortfolio, createAssetAllocation, transformAssetClassNames } from "../utils/PortfolioCollection";
 
 const initialState = {
   portfolios: {
@@ -28,6 +28,7 @@ const simulation_reducer = (state = initialState, action) => {
 
       const enhancedPortfolioCollection = action.payload.map(portfolio => ({
         ...portfolio,
+        funds: transformAssetClassNames(portfolio),
         assetAllocation: createAssetAllocation(portfolio)
       }));
 

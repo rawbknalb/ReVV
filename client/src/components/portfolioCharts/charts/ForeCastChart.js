@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import Chart from "./Chart";
 
 class ForeCastChart extends Component {
-  // console.log(props);
   values = this.rops.data.map(value => value.percentage);
   dates = this.props.data.map(date => date.date);
 

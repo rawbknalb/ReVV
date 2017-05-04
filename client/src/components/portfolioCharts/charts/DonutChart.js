@@ -1,22 +1,21 @@
 import React from "react";
 import Chart from "./Chart";
 
-const DonutChart = ({ data }) => {
+const DonutChart = ({ assetAllocation }) => {
   const colors = {
-    CASH: "rgba(245, 169, 0, 0.35)",
-    RENTEN: "rgba(183, 232, 134, 0.35)",
-    AKTIEN: "rgba(0, 174, 209, 0.35)",
-    ROHSTOFFE: "rgba(217, 217, 217, 0.35)"
+    Geldmarkt: "rgba(245, 169, 0, 0.35)",
+    Anleihen: "rgba(183, 232, 134, 0.35)",
+    Aktien: "rgba(0, 174, 209, 0.35)",
+    Rohstoffe: "rgba(217, 217, 217, 0.35)"
   };
 
-  const allocation = Object.keys(data).map(assetClass => {
+  const allocation = Object.keys(assetAllocation).map(assetClass => {
     return {
       name: assetClass,
-      y: Math.round(data[assetClass] * 100) / 100,
+      y: Math.round(assetAllocation[assetClass] * 100) / 100,
       color: colors[assetClass]
     };
   });
-  console.log(data);
   const series = [
     {
       name: "Anlageaufteilung",

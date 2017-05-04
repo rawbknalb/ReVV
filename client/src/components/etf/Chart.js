@@ -62,7 +62,6 @@ class Chart extends Component {
         }
       ]
     };
-    console.log(values);
     this.chart = new Highcharts.Chart(this.props.isin, config);
   }
 

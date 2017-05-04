@@ -19,7 +19,6 @@ export const renderField = (
 
 class SignIn_Form extends Component {
   handleFormSubmit(values) {
-    console.log(values);
     this.props.signInUser(values);
   }
 
