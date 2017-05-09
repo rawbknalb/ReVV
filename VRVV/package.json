@@ -1,0 +1,39 @@
+{
+  "name": "VRVV",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node -e \"console.log('open browser at http:/localhost:8081/vr/\\n\\n');\" && node node_modules/react-native/local-cli/cli.js start",
+    "bundle": "node node_modules/react-vr/scripts/bundle.js",
+    "open": "node -e \"require('xopen')('http://localhost:8081/vr/')\"",
+    "test": "jest"
+  },
+  "dependencies": {
+    "connected-react-router": "^4.2.0",
+    "history": "^4.6.1",
+    "ovrui": "~1.0.0",
+    "prettier": "^1.3.1",
+    "react": "~15.4.1",
+    "react-native": "~0.42.0",
+    "react-native-pathjs-charts": "^0.0.28",
+    "react-native-svg": "^5.1.8",
+    "react-redux": "^5.0.4",
+    "react-vr": "~1.0.0",
+    "react-vr-web": "~1.0.0",
+    "redux": "^3.6.0",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-thunk": "^2.2.0",
+    "styled-components": "^1.4.6",
+    "three": "^0.80.1"
+  },
+  "devDependencies": {
+    "babel-jest": "^19.0.0",
+    "babel-preset-react-native": "^1.9.1",
+    "jest": "^19.0.2",
+    "react-test-renderer": "~15.4.1",
+    "xopen": "1.0.0"
+  },
+  "jest": {
+    "preset": "react-vr"
+  }
+}

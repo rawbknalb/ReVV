@@ -40,6 +40,7 @@ class App extends Component {
         <div>
           <Route exact path={match.url} component={Home} />
           <Route exact path="/wertentwicklung" component={Wertentwicklung} />
+          <Route exact path="/dashboard" component={Dashboard} />          
           <Route
             path="/signin"
             render={() => this.redirectWhenAuthd(<SignIn />)}
@@ -49,11 +50,11 @@ class App extends Component {
             render={() => this.redirectWhenAuthd(<SignUp />)}
           />
           <Route path="/signout" render={() => this.redirectWhenUnAthd()} />
-          <ProtectedRoute
+          {/*<ProtectedRoute
             path="/dashboard"
             component={Dashboard}
             isAuthenticated={this.props.isAuthenticated}
-          />
+          />*/}
         </div>
       </div>
     );
