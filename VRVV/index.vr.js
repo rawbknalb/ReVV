@@ -11,22 +11,25 @@ import {
   connectRouter,
   routerMiddleware
 } from "connected-react-router";
+
 // Redux
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware, compose } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { createStore, applyMiddleware } from "redux";
+import { composeWithDevTools } from "remote-redux-devtools";
+
+//import { composeWithDevTools } from "redux-devtools-extension";
 import reduxThunk from "redux-thunk";
 // Import Root Reducer
 import rootReducer from "./src/store/reducers";
 // Middlewares
-const middlewares = [reduxThunk];
+const middlewares = [reduxThunk, routerMiddleware(history)];
 const composer = process.env.NODE_ENV !== "production"
   ? composeWithDevTools
   : compose;
 // Create the store
 const store = createStore(
-  rootReducer,
-  composer(applyMiddleware(...middlewares))
+  connectRouter(history)(rootReducer),
+  composeWithDevTools(applyMiddleware(...middlewares))
 );
 
 export default class VRVV extends React.Component {

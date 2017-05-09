@@ -9,7 +9,8 @@ function init(bundle, parent, options) {
   const vr = new VRInstance(bundle, 'VRVV', parent, {
     // Add custom options here
     ...options,
-    enableHotReload: true
+    enableHotReload: true,
+    cursorVisibility: 'visible'
   });
   vr.render = function() {
     // Any custom behavior you want to perform on each frame goes here
