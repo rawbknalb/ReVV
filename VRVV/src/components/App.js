@@ -8,13 +8,18 @@ import ChartPanel from "./ChartPanel";
 class App extends React.Component {
   renderPanels() {
     const images = [
-      { uri: "../static_assets/1yr.jpg", header: "1 Jahr" },
-      { uri: "../static_assets/3yrs.jpg", header: "3 Jahre" },
-      { uri: "../static_assets/maxyrs.jpg", header: "Maximal" }
+      { uri: "../static_assets/1yr.jpg", header: "Wertentwicklung 1 Jahr" },
+      { uri: "../static_assets/3yrs.jpg", header: "Wertentwicklung 3 Jahre" },
+      { uri: "../static_assets/maxyrs.jpg", header: "Wertentwicklung Maximal" }
     ];
 
     return images.map((image, index) => (
-      <ChartPanel header={image.header} uri={image.uri} index={index} />
+      <ChartPanel
+        rotate="x"
+        header={image.header}
+        uri={image.uri}
+        index={index}
+      />
     ));
   }
   render() {
@@ -39,7 +44,8 @@ class App extends React.Component {
           style={{
             flex: 1,
             flexDirection: "row",
-            justifyContent: "space-between"
+            justifyContent: "space-between",
+            transform: [{ rotate: "0deg" }]
           }}
         >
           {this.renderPanels()}

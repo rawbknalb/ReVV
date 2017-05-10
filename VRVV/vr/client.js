@@ -3,14 +3,18 @@
 // If you want to modify your application, start in "index.vr.js"
 
 // Auto-generated content.
-import {VRInstance} from 'react-vr-web';
+import { VRInstance } from "react-vr-web";
+import * as SimpleRaycaster from "simple-raycaster";
 
 function init(bundle, parent, options) {
-  const vr = new VRInstance(bundle, 'VRVV', parent, {
+  const vr = new VRInstance(bundle, "VRVV", parent, {
     // Add custom options here
-    ...options,
+    raycasters: [
+      SimpleRaycaster // Add SimpleRaycaster to the options
+    ],
+    cursorVisibility: "auto", // Add cursorVisibility
     enableHotReload: true,
-    cursorVisibility: 'visible'
+    ...options
   });
   vr.render = function() {
     // Any custom behavior you want to perform on each frame goes here
@@ -20,4 +24,4 @@ function init(bundle, parent, options) {
   return vr;
 }
 
-window.ReactVR = {init};
+window.ReactVR = { init };
