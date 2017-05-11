@@ -12,9 +12,9 @@ const FORECAST_API_URL =
   "https://service.visualvest.de/anlageziel-functional-service/simulation";
 const PORTFOLIO_HISTORY_API_URL =
   "https://service.visualvest.de/portfolio-functional-service/history/portfolio";
-
 const PORTFOLIO_METADATA_API_URL =
   "https://service.visualvest.de/portfolio-functional-service/portfolios";
+const PORTFOLIO_HISTORY_IMG_API_URL = "http://localhost:3090/history";
 
 export const fetchForecast = (
   portfolioID,
@@ -48,6 +48,7 @@ export const selectPortfolio = portfolioId => ({
   payload: { portfolioId: portfolioId }
 });
 
+// Fetch History Data from VV Service
 export const fetchHistoryData = (
   computedPortfolio,
   selectedPortfolio,
@@ -97,6 +98,28 @@ export const fetchPortfolioMetadata = (
     dispatch({
       type: FETCH_PORTFOLIO_METADATA,
       payload: PortfolioMetaData.data
+    });
+  } catch (err) {
+    console.warn(err);
+  }
+};
+
+export const getHistoryImages = history => async dispatch => {
+  try {
+    const anlageziel = {
+      productType: "PORTFOLIO",
+      balance: 0,
+      monthlyRate: 25,
+      targetAmount: null,
+      timeFrameYears: null
+    };
+    const HistoryImages = await axios.get("http://localhost:3090/history", {
+      anlageziel
+    });
+    console.log(HistoryImages);
+    dispatch({
+      type: "Testo",
+      payload: HistoryImages.data
     });
   } catch (err) {
     console.warn(err);

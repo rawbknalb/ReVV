@@ -13,7 +13,7 @@ const initialState = {
   portfolios: {
     metaData: [],
     computed: { portfolioId: 1 },
-    selected: { portfolioId: null, metaData: {} }
+    selected: { portfolioId: 1, metaData: {} }
   },
   forecast: {},
   history: [],

@@ -1,11 +1,27 @@
 import React from "react";
 import { asset, Pano, Text, View } from "react-vr";
+import { connect } from "react-redux";
+import {
+  fetchHistoryData,
+  setHistoryRange,
+  selectPortfolio
+} from "../store/actions/simulation";
 
-import ChartPanel from "./ChartPanel";
-
-//import Dashboard from "./dashboard/Dashboard"
+import ChartsWorld from "../world/ChartsWorld";
 
 class App extends React.Component {
+  // Only fetch HistoryData in case Portfolio is selected
+  // initialy the selected Portfolio is the computed one
+  componentDidMount() {
+    if (this.props.selectedPortfolioId !== null) {
+      this.props.fetchHistoryData(
+        this.props.computedPortfolioId,
+        this.props.selectedPortfolioId,
+        this.props.historyRange
+      );
+    }
+  }
+
   renderPanels() {
     const images = [
       { uri: "../static_assets/1yr.jpg", header: "Wertentwicklung 1 Jahr" },
@@ -15,13 +31,14 @@ class App extends React.Component {
 
     return images.map((image, index) => (
       <ChartPanel
-        rotate="x"
+        rotate="y"
         header={image.header}
         uri={image.uri}
         index={index}
       />
     ));
   }
+
   render() {
     return (
       <View>
@@ -40,20 +57,19 @@ class App extends React.Component {
         >
           VisualVest
         </Text>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            transform: [{ rotate: "0deg" }]
-          }}
-        >
-          {this.renderPanels()}
-        </View>
-
+        <ChartsWorld historyData={this.props.historyData} />
       </View>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  historyData: state.simulation_data.history,
+  historyRange: state.simulation_data.historyRange,
+  selectedPortfolioId: state.simulation_data.portfolios.selected.portfolioId,
+  computedPortfolioId: state.simulation_data.portfolios.computed.portfolioId
+});
+
+export default connect(mapStateToProps, { fetchHistoryData, setHistoryRange })(
+  App
+);

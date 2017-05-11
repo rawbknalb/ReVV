@@ -1,3 +1,0 @@
-export const GET_ALLOCATION = "GET_ALLOCATION";
-export const SET_ALLOCATION = "SET_ALLOCATION";
-export const FETCH_USER = "FETCH_USER";

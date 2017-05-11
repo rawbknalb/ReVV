@@ -18,7 +18,7 @@ class ChartPanel extends React.Component {
   }
 
   bounce() {
-    this.state.bounceValue.setValue(1.1); // Start large
+    this.state.bounceValue.setValue(1.05); // Start large
     Animated.spring(
       // Base: spring, decay, timing
       this.state.bounceValue, // Animate `bounceValue`
