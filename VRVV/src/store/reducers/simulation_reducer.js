@@ -1,13 +1,18 @@
 import {
   FETCH_FORECAST,
   FETCH_HISTORY,
+  FETCH_HISTORY_IMAGE,
   SELECT_PORTFOLIO,
   COMPUTE_PORTFOLIO,
   SET_HISTORY_RANGE,
   FETCH_PORTFOLIO_METADATA
 } from "../actions/simulation/types";
 
-import { getSelectedPortfolio, createAssetAllocation, transformAssetClassNames } from "../utils/PortfolioCollection";
+import {
+  getSelectedPortfolio,
+  createAssetAllocation,
+  transformAssetClassNames
+} from "../utils/PortfolioCollection";
 
 const initialState = {
   portfolios: {
@@ -17,6 +22,7 @@ const initialState = {
   },
   forecast: {},
   history: [],
+  historyImages: {},
   historyRange: 36
 };
 
@@ -86,6 +92,9 @@ const simulation_reducer = (state = initialState, action) => {
         return { ...state, historyRange: action.payload };
       }
       return;
+
+    case FETCH_HISTORY_IMAGE:
+      return { ...state, historyImages: { [state.historyRange]: action.payload } };
 
     default:
       return state;

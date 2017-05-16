@@ -16,13 +16,13 @@ import { getHistoryImages } from "../store/actions/simulation";
 import ChartPanel from "../components/ChartPanel";
 
 class ChartsWorld extends React.Component {
-  // componentDidMount() {
-  //   this.props.historyData.length !== 0 &&
-  //     this.props.getHistoryImages(this.props.historyData);
-  // }
-
   componentWillReceiveProps(nextProps) {
-    if (nextProps.historyData.length !== 0) {
+    if (
+      nextProps.historyData.length !== 0 &&
+      this.props.historyData !== nextProps.historyData
+    ) {
+      // fetches base64 image from highcharts server via this action
+      // passes the pre-fetched history data from parent
       this.props.getHistoryImages(nextProps.historyData);
     }
   }
@@ -30,7 +30,10 @@ class ChartsWorld extends React.Component {
   renderPanels() {
     const images = [
       { uri: "../static_assets/1yr.jpg", header: "Wertentwicklung 1 Jahr" },
-      { uri: "../static_assets/3yrs.jpg", header: "Wertentwicklung 3 Jahre" },
+      {
+        uri: `data:image/png;base64,${this.props.historyImages["36"].img}`,
+        header: `Wertentwicklung 3 Jahre`
+      },
       { uri: "../static_assets/maxyrs.jpg", header: "Wertentwicklung Maximal" }
     ];
 
@@ -60,6 +63,8 @@ class ChartsWorld extends React.Component {
   }
 }
 
-//onst mapStateToProps = (state) => ({images})
+const mapStateToProps = state => ({
+  historyImages: state.simulation_data.historyImages
+});
 
-export default connect(null, { getHistoryImages })(ChartsWorld);
+export default connect(mapStateToProps, { getHistoryImages })(ChartsWorld);

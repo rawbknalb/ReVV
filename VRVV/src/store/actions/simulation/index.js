@@ -2,11 +2,14 @@ import axios from "axios";
 import {
   FETCH_FORECAST,
   FETCH_HISTORY,
+  FETCH_HISTORY_IMAGE,
   SELECT_PORTFOLIO,
   COMPUTE_PORTFOLIO,
   SET_HISTORY_RANGE,
   FETCH_PORTFOLIO_METADATA
 } from "./types";
+
+import prepareLineChart from "../../utils/prepareLineChart";
 
 const FORECAST_API_URL =
   "https://service.visualvest.de/anlageziel-functional-service/simulation";
@@ -104,21 +107,15 @@ export const fetchPortfolioMetadata = (
   }
 };
 
-export const getHistoryImages = history => async dispatch => {
+// get History Images from the Highcharts export server running on localhost
+export const getHistoryImages = historyData => async dispatch => {
   try {
-    const anlageziel = {
-      productType: "PORTFOLIO",
-      balance: 0,
-      monthlyRate: 25,
-      targetAmount: null,
-      timeFrameYears: null
-    };
+    const history = prepareLineChart(historyData);
     const HistoryImages = await axios.get("http://localhost:3090/history", {
-      anlageziel
+      params: history
     });
-    console.log(HistoryImages);
     dispatch({
-      type: "Testo",
+      type: FETCH_HISTORY_IMAGE,
       payload: HistoryImages.data
     });
   } catch (err) {
