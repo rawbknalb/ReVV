@@ -4,7 +4,7 @@ import createHistory from "history/createMemoryHistory";
 const history = createHistory();
 
 // Components
-import App from "./src/components/App";
+import App from "./src/container/App";
 // Router
 import {
   ConnectedRouter,

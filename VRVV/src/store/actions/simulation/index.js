@@ -6,7 +6,7 @@ import {
   SELECT_PORTFOLIO,
   COMPUTE_PORTFOLIO,
   SET_HISTORY_RANGE,
-  FETCH_PORTFOLIO_METADATA
+  FETCH_PORTFOLIOS
 } from "./types";
 
 import prepareLineChart from "../../utils/prepareLineChart";
@@ -53,28 +53,16 @@ export const selectPortfolio = portfolioId => ({
 
 // Fetch History Data from VV Service
 export const fetchHistoryData = (
-  computedPortfolio,
   selectedPortfolio,
   months
 ) => async dispatch => {
   try {
     const HistoryData = [];
-    // First allways fetch History for computed Portfolio
-    const computedPortfolioHistory = await axios.get(
-      `${PORTFOLIO_HISTORY_API_URL}/${computedPortfolio}${months ? `?months=${months}` : ""}`
+    // First allways fetch History for selected Portfolio
+    const selectedPortfolioHistory = await axios.get(
+      `${PORTFOLIO_HISTORY_API_URL}/${selectedPortfolio}${months ? `?months=${months}` : ""}`
     );
-
-    HistoryData.push(computedPortfolioHistory.data);
-
-    // Next only fetch history for selected Portfolio
-    // if selected Portfolio is not equal to the computed Portfolio
-    if (computedPortfolio !== selectedPortfolio) {
-      const selectedPortfolioHistory = await axios.get(
-        `${PORTFOLIO_HISTORY_API_URL}/${selectedPortfolio}${months ? `?months=${months}` : ""}`
-      );
-      HistoryData.push(selectedPortfolioHistory.data);
-    }
-
+    HistoryData.push(selectedPortfolioHistory.data);
     dispatch({ type: FETCH_HISTORY, payload: HistoryData });
   } catch (err) {
     console.warn(err);
@@ -91,16 +79,16 @@ export const setHistoryRange = months => ({
   payload: months
 });
 
-export const fetchPortfolioMetadata = (
-  portfolioId = "all"
-) => async dispatch => {
+// fetches Portfolio meta data: pass portfolioId to fetch a specific portfolio
+// if no portfolioId gets passed fetch *all* portfolio meta data
+export const fetchPortfolios = (portfolioId = "all") => async dispatch => {
   try {
-    const PortfolioMetaData = await axios.get(
+    const allPortfolios = await axios.get(
       `${PORTFOLIO_METADATA_API_URL}/${portfolioId}`
     );
     dispatch({
-      type: FETCH_PORTFOLIO_METADATA,
-      payload: PortfolioMetaData.data
+      type: FETCH_PORTFOLIOS,
+      payload: allPortfolios.data
     });
   } catch (err) {
     console.warn(err);

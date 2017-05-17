@@ -64,7 +64,7 @@ const LineChart = data => {
   };
 
   const options = {
-    scale: 20,
+    scale: 2.5 /*(1800x1200*/,
     type: "png",
     options: {
       chart: {

@@ -26,7 +26,7 @@ class ChartPanel extends React.Component {
       },
       cylinderStyle: {
         position: "absolute",
-        transform: [{ translate: [0, 1.5, 0] }, this.rotate(this.props.rotate)]
+        transform: [{ translate: [0, 2.5, 0] }, this.rotate(this.props.rotate)]
       }
     };
 

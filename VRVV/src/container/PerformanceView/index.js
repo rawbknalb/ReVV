@@ -4,39 +4,34 @@ import { connect } from "react-redux";
 import {
   fetchHistoryData,
   setHistoryRange,
-  selectPortfolio
-} from "../store/actions/simulation";
+  getHistoryImages
+} from "../../store/actions/simulation";
 
-import ChartsWorld from "../world/ChartsWorld";
+import PerformancePanels from "../../world/PerformancePanels";
 
-class App extends React.Component {
+class PerformanceView extends React.Component {
   // Only fetch HistoryData in case Portfolio is selected
   // initialy the selected Portfolio is the computed one
   componentDidMount() {
     if (this.props.selectedPortfolioId !== null) {
       this.props.fetchHistoryData(
-        this.props.computedPortfolioId,
         this.props.selectedPortfolioId,
         this.props.historyRange
       );
     }
   }
 
-  renderPanels() {
-    const images = [
-      { uri: "../static_assets/1yr.jpg", header: "Wertentwicklung 1 Jahr" },
-      { uri: "../static_assets/3yrs.jpg", header: "Wertentwicklung 3 Jahre" },
-      { uri: "../static_assets/maxyrs.jpg", header: "Wertentwicklung Maximal" }
-    ];
-
-    return images.map((image, index) => (
-      <ChartPanel
-        rotate="y"
-        header={image.header}
-        uri={image.uri}
-        index={index}
-      />
-    ));
+  componentWillReceiveProps(nextProps) {
+    // check if historyData arrives and that the next receiving
+    // history data is not identical to exisiting history data
+    if (
+      nextProps.historyData.length !== 0 &&
+      this.props.historyData !== nextProps.historyData
+    ) {
+      // fetches base64 image from highcharts server via this action
+      // passes the pre-fetched history data from parent
+      this.props.getHistoryImages(nextProps.historyData);
+    }
   }
 
   render() {
@@ -55,9 +50,13 @@ class App extends React.Component {
             transform: [{ translate: [0, 9, -10] }]
           }}
         >
-          VisualVest
+          Performance
+          {/*<ViewTitle title=""/>*/}
         </Text>
-        <ChartsWorld historyData={this.props.historyData} />
+        <PerformancePanels
+          historyData={this.props.historyData}
+          historyImages={this.props.historyImages}
+        />
       </View>
     );
   }
@@ -66,10 +65,12 @@ class App extends React.Component {
 const mapStateToProps = state => ({
   historyData: state.simulation_data.history,
   historyRange: state.simulation_data.historyRange,
-  selectedPortfolioId: state.simulation_data.portfolios.selected.portfolioId,
-  computedPortfolioId: state.simulation_data.portfolios.computed.portfolioId
+  historyImages: state.simulation_data.historyImages,
+  selectedPortfolioId: state.simulation_data.portfolios.selected.portfolioId
 });
 
-export default connect(mapStateToProps, { fetchHistoryData, setHistoryRange })(
-  App
-);
+export default connect(mapStateToProps, {
+  fetchHistoryData,
+  setHistoryRange,
+  getHistoryImages
+})(PerformanceView);

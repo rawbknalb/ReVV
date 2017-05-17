@@ -5,7 +5,7 @@ import {
   SELECT_PORTFOLIO,
   COMPUTE_PORTFOLIO,
   SET_HISTORY_RANGE,
-  FETCH_PORTFOLIO_METADATA
+  FETCH_PORTFOLIOS
 } from "../actions/simulation/types";
 
 import {
@@ -28,10 +28,10 @@ const initialState = {
 
 const simulation_reducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_PORTFOLIO_METADATA:
-      // after fetching all portfolios: this function filters out from the payload
-      // the selected Portfolio into a new Array [{selectedPortfolio}]
-
+    case FETCH_PORTFOLIOS:
+      // transforms each Portfolio from the fetched data from vv server:
+      // 1. transforms AssetClass Names
+      // 2. creates a new Object Property "assetAllocation" for each portfolio
       const enhancedPortfolioCollection = action.payload.map(portfolio => ({
         ...portfolio,
         funds: transformAssetClassNames(portfolio),
@@ -45,6 +45,9 @@ const simulation_reducer = (state = initialState, action) => {
           metaData: enhancedPortfolioCollection,
           selected: {
             ...state.portfolios.selected,
+            // method to get the selected Portfolio with transformed
+            // and enhanced portfolio data
+            // pass the portfolio Object and the selected portfolioId
             metaData: getSelectedPortfolio(
               enhancedPortfolioCollection,
               state.portfolios.selected.portfolioId
@@ -94,7 +97,10 @@ const simulation_reducer = (state = initialState, action) => {
       return;
 
     case FETCH_HISTORY_IMAGE:
-      return { ...state, historyImages: { [state.historyRange]: action.payload } };
+      return {
+        ...state,
+        historyImages: { [state.historyRange]: action.payload }
+      };
 
     default:
       return state;
