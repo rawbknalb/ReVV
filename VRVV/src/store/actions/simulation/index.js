@@ -4,6 +4,7 @@ import {
   FETCH_HISTORY,
   FETCH_HISTORY_IMAGE,
   SELECT_PORTFOLIO,
+  SELECT_PORTFOLIO_VARIATION,
   COMPUTE_PORTFOLIO,
   SET_HISTORY_RANGE,
   FETCH_PORTFOLIOS
@@ -49,6 +50,11 @@ export const fetchForecast = (
 export const selectPortfolio = portfolioId => ({
   type: SELECT_PORTFOLIO,
   payload: { portfolioId: portfolioId }
+});
+
+export const selectPortfolioVariation = variation => ({
+  type: SELECT_PORTFOLIO_VARIATION,
+  payload: variation
 });
 
 // Fetch History Data from VV Service

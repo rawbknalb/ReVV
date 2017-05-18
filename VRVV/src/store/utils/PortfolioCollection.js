@@ -44,3 +44,17 @@ export const createAssetAllocation = portfolio => {
     };
   }, {});
 };
+
+// filter all portfolios which contain the String passed as variation
+export const filterByVariation = (allPortfolios, variation) => {
+  switch (variation) {
+    case "VestFolio":
+      return allPortfolios.filter(portfolio => portfolio.managed === false && portfolio.sustainable === false);
+    case "GreenFolio":
+      return allPortfolios.filter(portfolio => portfolio.sustainable === true);
+    case "Aktiv":
+      return allPortfolios.filter(portfolio => portfolio.managed === true && portfolio.sustainable === false);
+    default:
+      return;
+  }
+};

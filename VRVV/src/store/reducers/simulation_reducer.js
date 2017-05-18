@@ -3,6 +3,7 @@ import {
   FETCH_HISTORY,
   FETCH_HISTORY_IMAGE,
   SELECT_PORTFOLIO,
+  SELECT_PORTFOLIO_VARIATION,
   COMPUTE_PORTFOLIO,
   SET_HISTORY_RANGE,
   FETCH_PORTFOLIOS
@@ -11,15 +12,18 @@ import {
 import {
   getSelectedPortfolio,
   createAssetAllocation,
-  transformAssetClassNames
+  transformAssetClassNames,
+  filterByVariation
 } from "../utils/PortfolioCollection";
 
 const initialState = {
   portfolios: {
     metaData: [],
+    byVariation: [],
     computed: { portfolioId: 1 },
     selected: { portfolioId: 1, metaData: {} }
   },
+  selectedPortfolioVariation: { variation: "" },
   forecast: {},
   history: [],
   historyImages: {},
@@ -81,6 +85,19 @@ const simulation_reducer = (state = initialState, action) => {
                 )
           }
         }
+      };
+
+    case SELECT_PORTFOLIO_VARIATION:
+      return {
+        ...state,
+        portfolios: {
+          ...state.portfolios,
+          byVariation: filterByVariation(
+            state.portfolios.metaData,
+            action.payload
+          )
+        },
+        selectedPortfolioVariation: { variation: action.payload }
       };
 
     case FETCH_FORECAST:

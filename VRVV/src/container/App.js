@@ -35,7 +35,7 @@ class App extends React.Component {
             transform: [{ translate: [0, 5, -12] }]
           }}
         >
-          Herzlich Willkommen zu VisualVest
+          Herzlich Willkommen zu VisualVest <Text style={{color: "orangered"}}>VR</Text>
         </Text>
 
         <PortfolioOverView />
