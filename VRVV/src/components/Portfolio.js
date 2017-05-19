@@ -1,5 +1,15 @@
 import React from "react";
-import { asset, View, Text, Image, StyleSheet } from "react-vr";
+import {
+  asset,
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  CylindricalPanel
+} from "react-vr";
+
+import FlatPanel from "./FlatPanel";
+import CurvedPanel from "./CurvedPanel";
 
 class Portfolio extends React.Component {
   renderAssetAllocation() {
@@ -8,7 +18,8 @@ class Portfolio extends React.Component {
     ).map(assetClass => {
       return {
         name: assetClass,
-        percentage: Math.round(this.props.assetAllocation[assetClass] * 100) / 100
+        percentage: Math.round(this.props.assetAllocation[assetClass] * 100) /
+          100
       };
     });
 
@@ -30,40 +41,48 @@ class Portfolio extends React.Component {
     };
 
     return (
-      <View
-        style={{
-          flexDirection: "column",
-          justifyContent: "space-between",
-          alignItems: "center",
-          height: 15
-        }}
-      >
-        <Text
+      <FlatPanel color={this.props.color}>
+        <View
           style={{
-            fontSize: 1,
-            fontWeight: "400",
-            paddingLeft: 0.2,
-            paddingRight: 0.2,
-            textAlign: "center",
-            textAlignVertical: "center"
+            flexDirection: "column",
+            justifyContent: "space-between",
+            alignItems: "center",
+            height: 15
           }}
         >
-          {this.props.name}
-        </Text>
-        <View style={{ flexDirection: "column", justifyContent: "flex-end", margin: 1 }}>
           <Text
             style={{
-              fontSize: 0.9,
+              fontSize: 1,
               fontWeight: "400",
+              paddingLeft: 0.2,
+              paddingRight: 0.2,
               textAlign: "center",
-              textAlignVertical: "center",
+              textAlignVertical: "center"
             }}
           >
-            Asset Allocation
+            {this.props.name}
           </Text>
-          {this.renderAssetAllocation()}
+          <View
+            style={{
+              flexDirection: "column",
+              justifyContent: "flex-end",
+              margin: 1
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 0.9,
+                fontWeight: "400",
+                textAlign: "center",
+                textAlignVertical: "center"
+              }}
+            >
+              Asset Allocation
+            </Text>
+            {this.renderAssetAllocation()}
+          </View>
         </View>
-      </View>
+      </FlatPanel>
     );
   }
 

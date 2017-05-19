@@ -6,7 +6,6 @@ import {
   selectPortfolioVariation
 } from "../../store/actions/simulation";
 
-import FlatPanel from "../../components/FlatPanel";
 import PortfolioVariation from "../../components/PortfolioVariation";
 import Portfolio from "../../components/Portfolio";
 
@@ -42,7 +41,8 @@ class PortfolioOverView extends Component {
       },
       animatePortfolios: {
         translateY: new Animated.Value(0),
-        opacity: new Animated.Value(0)
+        opacity: new Animated.Value(0),
+        borderWidth: new Animated.Value(0)
       }
     };
   }
@@ -64,7 +64,7 @@ class PortfolioOverView extends Component {
           friction: 3,
           duration: 1000
         })
-      ]),
+      ])
       // Animated.timing(this.state.animateVariations.translateZ, {
       //   toValue: -30,
       //   duration: 2000
@@ -104,33 +104,44 @@ class PortfolioOverView extends Component {
     this.slideToFloor();
   }
 
+  animateProgress() {
+    this;
+  }
+
+  stopProgress() {}
+
   renderVariationPanels() {
     return PortfolioVariationList.map(variation => (
       <VrButton
         key={variation.type}
         onClick={() => this.handleVariationClick(variation.type)}
       >
-        <FlatPanel color="slateblue">
-          <PortfolioVariation
-            header={variation.header}
-            text={variation.text}
-            img={variation.img}
-          />
-        </FlatPanel>
+        <PortfolioVariation
+          header={variation.header}
+          text={variation.text}
+          img={variation.img}
+          color="slateblue"
+        />
       </VrButton>
     ));
   }
 
   renderPortfolioPanels() {
     if (this.props.portfolios.length !== 0) {
-      return this.props.portfolios.map(portfolio => (
-        <VrButton key={portfolio.name} onClick={() => "hello"}>
-          <FlatPanel color="tomato">
-            <Portfolio
-              name={portfolio.name}
-              assetAllocation={portfolio.assetAllocation}
-            />
-          </FlatPanel>
+      return this.props.portfolios.map((portfolio, index) => (
+        <VrButton
+          key={portfolio.name}
+          onClick={() => this.handlePortfolioClick()}
+          onEnter={() => this.animateProgress()}
+          onExit={() => this.stopProgress()}
+        >
+          <Portfolio
+            name={portfolio.name}
+            assetAllocation={portfolio.assetAllocation}
+            color="tomato"
+            index={index}
+          />
+
         </VrButton>
       ));
     }

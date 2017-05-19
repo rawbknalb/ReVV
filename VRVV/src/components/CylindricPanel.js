@@ -21,12 +21,12 @@ class ChartPanel extends React.Component {
       viewStyle: {
         flexDirection: "column",
         alignItems: "center",
-        width: 1400,
-        height: 1000
+        width: 1,
+        height: 1
       },
       cylinderStyle: {
         position: "absolute",
-        transform: [{ translate: [0, 2.5, 0] }, this.rotate(this.props.rotate)]
+        transform: [{ translate: [0, 0, -1] }, this.rotate(this.props.rotate)]
       }
     };
 
@@ -34,15 +34,11 @@ class ChartPanel extends React.Component {
       <CylindricalPanel
         layer={{
           width: 1400,
-          height: 1000,
-          density: 12000,
-          radius: 3
+          height: 1000
         }}
         style={styles.cylinderStyle}
       >
-        <View style={styles.viewStyle}>
-          {this.props.children}
-        </View>
+        {this.props.children}
       </CylindricalPanel>
     );
   }

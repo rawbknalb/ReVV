@@ -21,7 +21,8 @@ class FlatPanel extends React.Component {
           backgroundColor: this.props.color,
           margin: 0.5,
           width: 9,
-          borderRadius: 0.5
+          borderRadius: 0.5,
+          borderWidth: 0.1
         }}
       >
         {this.props.children}
