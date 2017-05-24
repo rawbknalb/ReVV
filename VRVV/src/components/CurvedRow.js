@@ -24,15 +24,17 @@ class CurvedPanel extends React.Component {
         return [{ rotateY: 0 }];
       }
       if (index < Math.floor(count / 2)) {
-        return ([
-          { rotateY: `${oddMultiplier * 1.5 * 15}deg` },
-          { translateZ: oddMultiplier * 2 }
-        ]);
+        return [
+          { rotateY: `${oddMultiplier * 1 * 15}deg` },
+          { translateZ: oddMultiplier * 2.5 },
+          { translateX: oddMultiplier * -1 }
+        ];
       }
       if (index > Math.floor(count / 2)) {
         return [
-          { rotateY: `${oddMultiplier * 1.5 * -15}deg` },
-          { translateZ: oddMultiplier *2 }
+          { rotateY: `${oddMultiplier * 1 * -15}deg` },
+          { translateZ: oddMultiplier * 2 },
+          { translateX: oddMultiplier * 1 }
         ];
       }
     }
@@ -40,7 +42,9 @@ class CurvedPanel extends React.Component {
 
   render() {
     return (
-      <View style={{ transform: this.rotate("y") }}>
+      <View 
+        //style={{ transform: this.rotate("y") }}
+      >
         {this.props.children}
       </View>
     );

@@ -21,7 +21,8 @@ const initialState = {
     metaData: [],
     byVariation: [],
     computed: { portfolioId: null },
-    selected: { portfolioId: null, metaData: {} }
+    selected: { portfolioId: null, metaData: {} },
+    unselected: []
   },
   selectedPortfolioVariation: { variation: "" },
   forecast: {},
@@ -76,7 +77,10 @@ const simulation_reducer = (state = initialState, action) => {
                   state.portfolios.metaData,
                   action.payload.portfolioId
                 )
-          }
+          },
+          unselected: state.portfolios.byVariation.filter(
+            portfolio => portfolio.id !== action.payload
+          )
         }
       };
 

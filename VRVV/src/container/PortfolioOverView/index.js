@@ -53,6 +53,12 @@ class PortfolioOverView extends Component {
     return this.props.fetchPortfolios();
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.props.selectedPortfolio !== nextProps.selectedPortfoli
+      ? this.setState
+      : false;
+  }
+
   slideToFloor() {
     Animated.sequence([
       Animated.parallel([
@@ -129,17 +135,20 @@ class PortfolioOverView extends Component {
 
   renderPortfolioPanels() {
     if (this.props.portfolios.length !== 0) {
-      return this.props.portfolios.map((portfolio, index) => (
-        <Portfolio
-          portfolios={this.props.portfolios}
-          portfolioId={portfolio.id}
-          name={portfolio.name}
-          assetAllocation={portfolio.assetAllocation}
-          color="tomato"
-          key={portfolio.name}
-          index={index}
-        />
-      ));
+      return this.props.portfolios
+        .filter(portfolio => portfolio.id !== this.props.selectedPortfolio)
+        .map((portfolio, index) => (
+          <Portfolio
+            portfolios={this.props.portfolios}
+            portfolioId={portfolio.id}
+            name={portfolio.name}
+            assetAllocation={portfolio.assetAllocation}
+            color="tomato"
+            key={portfolio.name}
+            index={index}
+            selectedPortfolio={this.props.selectedPortfolio}
+          />
+        ));
     }
   }
 
@@ -147,7 +156,6 @@ class PortfolioOverView extends Component {
     return (
       <View>
         <View>
-          <CurvedPanel />
           <Animated.View style={this.portfolioStyles()}>
             {this.renderPortfolioPanels()}
           </Animated.View>
@@ -173,13 +181,14 @@ class PortfolioOverView extends Component {
   });
 
   portfolioStyles = () => ({
-    flexDirection: "row",
+    flexDirection: "column",
     position: "absolute",
     transform: [
       { translateY: this.state.animatePortfolios.translateY },
-      { translateZ: 0 }
+      { translateZ: -10 }
     ],
     alignItems: "center",
+    justifyContent: "center",
     layoutOrigin: [0.5, 0.5],
     opacity: this.state.animatePortfolios.opacity
   });
@@ -187,7 +196,8 @@ class PortfolioOverView extends Component {
 
 const mapStateToProps = state => ({
   selectedVariation: state.simulation_data.selectedPortfolioVariation,
-  portfolios: state.simulation_data.portfolios.byVariation
+  portfolios: state.simulation_data.portfolios.unselected,
+  selectedPortfolio: state.simulation_data.portfolios.selected.metaData
 });
 
 export default connect(mapStateToProps, {

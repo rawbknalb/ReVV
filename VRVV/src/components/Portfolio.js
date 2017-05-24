@@ -12,6 +12,7 @@ import {
 import FlatPanel from "./FlatPanel";
 import HoverPanel from "./HoverPanel";
 import CurvedPanel from "./CurvedPanel";
+import CurvedRow from "./CurvedRow";
 
 class Portfolio extends React.Component {
   state = { hover: false };
@@ -40,58 +41,92 @@ class Portfolio extends React.Component {
 
   render() {
     return (
-      <HoverPanel portfolioId={this.props.portfolioId}>
-        <CurvedPanel index={this.props.index}>
-          <FlatPanel color={this.props.color} margin={1}>
-            <View
-              style={{
-                flexDirection: "column",
-                justifyContent: "space-between",
-                alignItems: "center",
-                width: 250,
-                height: 512
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 50,
-                  fontWeight: "400",
-                  paddingLeft: 0.2,
-                  paddingRight: 0.2,
-                  textAlign: "center"
-                }}
-              >
-                {this.props.name}
-              </Text>
+      <HoverPanel
+        portfolioId={this.props.portfolioId}
+        index={this.props.index}
+        count={this.props.portfolios.length}
+      >
+        <CurvedRow
+          index={this.props.index}
+          count={this.props.portfolios.length}
+        >
+          <View
+            style={{
+              flexDirection: "column",
+              justifyContent: "space-around",
+              alignItems: "center",
+              backgroundColor: this.props.color,
+              margin: this.props.margin,
+              borderRadius: 0.2,
+             width: this.props.portfolioId ===
+                    this.props.selectedPortfolio.id
+                    ? 1
+                    : 3,
+                  height: this.props.portfolioId ===
+                    this.props.selectedPortfolio.id
+                    ? 1
+                    : 4
+              //borderWidth: 0.1
+            }}
+          >
+            {this.props.portfolioId === this.props.selectedPortfolio.id &&
               <View
                 style={{
                   flexDirection: "column",
-                  //justifyContent: "flex-end",
-                  margin: 2
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  width: this.props.portfolioId ===
+                    this.props.selectedPortfolio.id
+                    ? 1
+                    : 3,
+                  height: this.props.portfolioId ===
+                    this.props.selectedPortfolio.id
+                    ? 1
+                    : 4
+                  // width: 250,
+                  // height: 512
                 }}
               >
                 <Text
                   style={{
-                    fontSize: 40,
+                    fontSize: 0.5,
                     fontWeight: "400",
-                    textAlign: "center",
-                    textAlignVertical: "center"
+                    paddingLeft: 0.2,
+                    paddingRight: 0.2,
+                    textAlign: "center"
                   }}
                 >
-                  Asset Allocation
+                  {this.props.name}
                 </Text>
-                {this.renderAssetAllocation()}
-              </View>
-            </View>
-          </FlatPanel>
-        </CurvedPanel>
+                <View
+                  style={{
+                    flexDirection: "column",
+                    //justifyContent: "flex-end",
+                    margin: 0.5
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 0.5,
+                      fontWeight: "400",
+                      textAlign: "center",
+                      textAlignVertical: "center"
+                    }}
+                  >
+                    Asset Allocation
+                  </Text>
+                  {this.renderAssetAllocation()}
+                </View>
+              </View>}
+          </View>
+        </CurvedRow>
       </HoverPanel>
     );
   }
 
   styles = StyleSheet.create({
     assetAllocation: {
-      fontSize: 30,
+      fontSize: 0.2,
       fontWeight: "400"
     }
   });
