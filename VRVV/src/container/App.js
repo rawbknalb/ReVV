@@ -1,5 +1,5 @@
 import React from "react";
-import { asset, Pano, Text, View, Image } from "react-vr";
+import { asset, Pano, Text, View, Image, CylindricalPanel } from "react-vr";
 import { connect } from "react-redux";
 
 import PerformanceView from "./PerformanceView";
@@ -35,7 +35,9 @@ class App extends React.Component {
             transform: [{ translate: [0, 5, -12] }]
           }}
         >
-          Herzlich Willkommen zu VisualVest <Text style={{color: "orangered"}}>VR</Text>
+          Herzlich Willkommen zu VisualVest
+          {" "}
+          <Text style={{ color: "orangered" }}>VR</Text>
         </Text>
 
         <PortfolioOverView />

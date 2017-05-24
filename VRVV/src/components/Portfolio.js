@@ -5,13 +5,21 @@ import {
   Text,
   Image,
   StyleSheet,
-  CylindricalPanel
+  CylindricalPanel,
+  VrButton
 } from "react-vr";
 
 import FlatPanel from "./FlatPanel";
+import HoverPanel from "./HoverPanel";
 import CurvedPanel from "./CurvedPanel";
 
 class Portfolio extends React.Component {
+  state = { hover: false };
+
+  onHover() {
+    this.setState({ hover: !this.state.hover });
+  }
+
   renderAssetAllocation() {
     const assetAllocation = Object.keys(
       this.props.assetAllocation
@@ -31,64 +39,59 @@ class Portfolio extends React.Component {
   }
 
   render() {
-    const styles = {
-      viewStyle: {
-        flexDirection: "column",
-        alignItems: "center",
-        width: 1400,
-        height: 1000
-      }
-    };
-
     return (
-      <FlatPanel color={this.props.color}>
-        <View
-          style={{
-            flexDirection: "column",
-            justifyContent: "space-between",
-            alignItems: "center",
-            height: 15
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 1,
-              fontWeight: "400",
-              paddingLeft: 0.2,
-              paddingRight: 0.2,
-              textAlign: "center",
-              textAlignVertical: "center"
-            }}
-          >
-            {this.props.name}
-          </Text>
-          <View
-            style={{
-              flexDirection: "column",
-              justifyContent: "flex-end",
-              margin: 1
-            }}
-          >
-            <Text
+      <HoverPanel portfolioId={this.props.portfolioId}>
+        <CurvedPanel index={this.props.index}>
+          <FlatPanel color={this.props.color} margin={1}>
+            <View
               style={{
-                fontSize: 0.9,
-                fontWeight: "400",
-                textAlign: "center",
-                textAlignVertical: "center"
+                flexDirection: "column",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: 250,
+                height: 512
               }}
             >
-              Asset Allocation
-            </Text>
-            {this.renderAssetAllocation()}
-          </View>
-        </View>
-      </FlatPanel>
+              <Text
+                style={{
+                  fontSize: 50,
+                  fontWeight: "400",
+                  paddingLeft: 0.2,
+                  paddingRight: 0.2,
+                  textAlign: "center"
+                }}
+              >
+                {this.props.name}
+              </Text>
+              <View
+                style={{
+                  flexDirection: "column",
+                  //justifyContent: "flex-end",
+                  margin: 2
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 40,
+                    fontWeight: "400",
+                    textAlign: "center",
+                    textAlignVertical: "center"
+                  }}
+                >
+                  Asset Allocation
+                </Text>
+                {this.renderAssetAllocation()}
+              </View>
+            </View>
+          </FlatPanel>
+        </CurvedPanel>
+      </HoverPanel>
     );
   }
 
   styles = StyleSheet.create({
     assetAllocation: {
-      fontSize: 0.6,
+      fontSize: 30,
       fontWeight: "400"
     }
   });

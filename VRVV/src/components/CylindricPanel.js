@@ -18,12 +18,6 @@ class ChartPanel extends React.Component {
 
   render() {
     const styles = {
-      viewStyle: {
-        flexDirection: "column",
-        alignItems: "center",
-        width: 1,
-        height: 1
-      },
       cylinderStyle: {
         position: "absolute",
         transform: [{ translate: [0, 0, -1] }, this.rotate(this.props.rotate)]

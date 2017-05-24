@@ -15,18 +15,19 @@ class PortfolioVariation extends React.Component {
     };
 
     return (
-      <FlatPanel color={this.props.color}>
+      <FlatPanel color={this.props.color} margin={0.5}>
         <View
           style={{
             flexDirection: "column",
             justifyContent: "space-around",
             alignItems: "center",
-            height: 15
+            height: 4,
+            width: 3
           }}
         >
           <Text
             style={{
-              fontSize: 1,
+              fontSize: 0.2,
               fontWeight: "400",
               paddingLeft: 0.2,
               paddingRight: 0.2,
@@ -38,11 +39,11 @@ class PortfolioVariation extends React.Component {
           </Text>
           <Image
             source={asset(this.props.img)}
-            style={{ width: 5, height: 5 }}
+            style={{ width: 1, height: 1 }}
           />
           <Text
             style={{
-              fontSize: 0.6,
+              fontSize: 0.2,
               fontWeight: "400",
               paddingLeft: 0.2,
               paddingRight: 0.2,

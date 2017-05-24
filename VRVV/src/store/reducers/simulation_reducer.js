@@ -20,8 +20,8 @@ const initialState = {
   portfolios: {
     metaData: [],
     byVariation: [],
-    computed: { portfolioId: 1 },
-    selected: { portfolioId: 1, metaData: {} }
+    computed: { portfolioId: null },
+    selected: { portfolioId: null, metaData: {} }
   },
   selectedPortfolioVariation: { variation: "" },
   forecast: {},
@@ -48,14 +48,7 @@ const simulation_reducer = (state = initialState, action) => {
           ...state.portfolios,
           metaData: enhancedPortfolioCollection,
           selected: {
-            ...state.portfolios.selected,
-            // method to get the selected Portfolio with transformed
-            // and enhanced portfolio data
-            // pass the portfolio Object and the selected portfolioId
-            metaData: getSelectedPortfolio(
-              enhancedPortfolioCollection,
-              state.portfolios.selected.portfolioId
-            )
+            ...state.portfolios.selected
           }
         }
       };

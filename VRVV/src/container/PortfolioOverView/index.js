@@ -8,6 +8,7 @@ import {
 
 import PortfolioVariation from "../../components/PortfolioVariation";
 import Portfolio from "../../components/Portfolio";
+import CurvedPanel from "../../components/CurvedPanel";
 
 const PortfolioVariationList = [
   {
@@ -37,7 +38,7 @@ class PortfolioOverView extends Component {
       animateVariations: {
         rotationValue: new Animated.Value(0),
         translateY: new Animated.Value(0),
-        translateZ: new Animated.Value(-30)
+        translateZ: new Animated.Value(-10)
       },
       animatePortfolios: {
         translateY: new Animated.Value(0),
@@ -60,7 +61,7 @@ class PortfolioOverView extends Component {
           friction: 6
         }),
         Animated.spring(this.state.animateVariations.translateY, {
-          toValue: 0,
+          toValue: -5,
           friction: 3,
           duration: 1000
         })
@@ -129,41 +130,38 @@ class PortfolioOverView extends Component {
   renderPortfolioPanels() {
     if (this.props.portfolios.length !== 0) {
       return this.props.portfolios.map((portfolio, index) => (
-        <VrButton
+        <Portfolio
+          portfolios={this.props.portfolios}
+          portfolioId={portfolio.id}
+          name={portfolio.name}
+          assetAllocation={portfolio.assetAllocation}
+          color="tomato"
           key={portfolio.name}
-          onClick={() => this.handlePortfolioClick()}
-          onEnter={() => this.animateProgress()}
-          onExit={() => this.stopProgress()}
-        >
-          <Portfolio
-            name={portfolio.name}
-            assetAllocation={portfolio.assetAllocation}
-            color="tomato"
-            index={index}
-          />
-
-        </VrButton>
+          index={index}
+        />
       ));
     }
   }
 
   render() {
     return (
-      <View style={{ flexDirection: "column", justifyContent: "center" }}>
-
-        <Animated.View style={this.portfolioStyles()}>
-          {this.renderPortfolioPanels()}
-        </Animated.View>
-
-        <Animated.View style={this.variationStyles()}>
-          {this.renderVariationPanels()}
-        </Animated.View>
+      <View>
+        <View>
+          <CurvedPanel />
+          <Animated.View style={this.portfolioStyles()}>
+            {this.renderPortfolioPanels()}
+          </Animated.View>
+          <Animated.View style={this.variationStyles()}>
+            {this.renderVariationPanels()}
+          </Animated.View>
+        </View>
       </View>
     );
   }
 
   variationStyles = () => ({
     flexDirection: "row",
+    position: "absolute",
     transform: [
       { translateY: this.state.animateVariations.translateY },
       { translateZ: this.state.animateVariations.translateZ },
@@ -176,9 +174,10 @@ class PortfolioOverView extends Component {
 
   portfolioStyles = () => ({
     flexDirection: "row",
+    position: "absolute",
     transform: [
       { translateY: this.state.animatePortfolios.translateY },
-      { translateZ: -35 }
+      { translateZ: 0 }
     ],
     alignItems: "center",
     layoutOrigin: [0.5, 0.5],
