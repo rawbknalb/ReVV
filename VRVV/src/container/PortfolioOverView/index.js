@@ -3,7 +3,8 @@ import { Pano, Text, View, Animated, VrButton, StyleSheet } from "react-vr";
 import { connect } from "react-redux";
 import {
   fetchPortfolios,
-  selectPortfolioVariation
+  selectPortfolioVariation,
+  unselectPortfolio
 } from "../../store/actions/simulation";
 
 import PortfolioVariation from "../../components/PortfolioVariation";
@@ -35,10 +36,12 @@ class PortfolioOverView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      newMount: false,
       animateVariations: {
         rotationValue: new Animated.Value(0),
         translateY: new Animated.Value(0),
-        translateZ: new Animated.Value(-10)
+        translateZ: new Animated.Value(-10),
+        opacity: new Animated.Value(0)
       },
       animatePortfolios: {
         translateY: new Animated.Value(0),
@@ -46,16 +49,21 @@ class PortfolioOverView extends Component {
         borderWidth: new Animated.Value(0)
       },
       animateSelectedPortfolio: {
-        translateZ: new Animated.Value(-40),
+        translateZ: new Animated.Value(-1000),
         translateY: new Animated.Value(0),
-        scale: new Animated.Value(0)
+        scale: new Animated.Value(1)
       }
     };
   }
 
   componentDidMount() {
-    this.springOnRender();
+    this.animateOnRender();
+    this.setState({ newMount: true });
     return this.props.fetchPortfolios();
+  }
+
+  componentWillUnmount() {
+    this.props.unselectPortfolio();
   }
 
   slideToFloor() {
@@ -66,7 +74,7 @@ class PortfolioOverView extends Component {
           friction: 6
         }),
         Animated.spring(this.state.animateVariations.translateY, {
-          toValue: 8,
+          toValue: 9,
           friction: 3,
           duration: 1000
         })
@@ -74,11 +82,17 @@ class PortfolioOverView extends Component {
     ]).start();
   }
 
-  springOnRender() {
-    Animated.spring(this.state.animateVariations.rotationValue, {
-      toValue: 6,
-      friction: 1
-    }).start();
+  animateOnRender() {
+    Animated.parallel([
+      Animated.spring(this.state.animateVariations.rotationValue, {
+        toValue: 6,
+        friction: 1
+      }),
+      Animated.timing(this.state.animateVariations.opacity, {
+        toValue: 0.9,
+        duration: 1000
+      })
+    ]).start();
   }
 
   dropDown() {
@@ -97,20 +111,26 @@ class PortfolioOverView extends Component {
 
   AnimateAfterPortfolioSelect() {
     this.state.animateSelectedPortfolio.scale.setValue(1.1);
-    Object.keys(this.props.selectedPortfolio).length === 0
+    Object.keys(this.props.selectedPortfolio).length === 0 ||
+      this.state.newMount
       ? Animated.parallel([
           Animated.spring(this.state.animatePortfolios.translateY, {
             toValue: 4,
             friction: 8
           }),
-          Animated.timing(this.state.animateSelectedPortfolio.translateZ, {
+          Animated.spring(this.state.animateSelectedPortfolio.translateZ, {
             toValue: 0,
-            duration: 1500
+            spring: 5,
+            tension: 10
+          }),
+          Animated.spring(this.state.animateSelectedPortfolio.scale, {
+            toValue: 1,
+            friction: 2
           })
         ]).start()
       : Animated.spring(this.state.animateSelectedPortfolio.scale, {
           toValue: 1,
-          friction: 2,
+          friction: 2
           //tension: 0
         }).start();
   }
@@ -246,7 +266,7 @@ class PortfolioOverView extends Component {
     ],
     alignItems: "center",
     layoutOrigin: [0.5, 0.5],
-    opacity: 0.9
+    opacity: this.state.animateVariations.opacity
   });
 
   portfolioStyles = () => ({
@@ -268,7 +288,7 @@ class PortfolioOverView extends Component {
     transform: [
       { translateZ: this.state.animateSelectedPortfolio.translateZ },
       { translateY: this.state.animateSelectedPortfolio.translateY },
-      { scaleY: this.state.animateSelectedPortfolio.scale },
+      { scaleY: this.state.animateSelectedPortfolio.scale }
       //{ scaleX: this.state.animateSelectedPortfolio.scale }
     ]
   });
@@ -282,5 +302,6 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   fetchPortfolios,
-  selectPortfolioVariation
+  selectPortfolioVariation,
+  unselectPortfolio
 })(PortfolioOverView);

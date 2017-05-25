@@ -3,6 +3,7 @@ import {
   FETCH_HISTORY,
   FETCH_HISTORY_IMAGE,
   SELECT_PORTFOLIO,
+  UNSELECT_PORTFOLIO,
   SELECT_PORTFOLIO_VARIATION,
   COMPUTE_PORTFOLIO,
   SET_HISTORY_RANGE,
@@ -77,6 +78,15 @@ const simulation_reducer = (state = initialState, action) => {
                   action.payload.portfolioId
                 )
           }
+        }
+      };
+
+    case UNSELECT_PORTFOLIO:
+      return {
+        ...state,
+        portfolios: {
+          ...state.portfolios,
+          selected: { portfolioId: null, metaData: [] }
         }
       };
 

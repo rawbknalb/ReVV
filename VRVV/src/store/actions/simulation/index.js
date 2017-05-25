@@ -4,6 +4,7 @@ import {
   FETCH_HISTORY,
   FETCH_HISTORY_IMAGE,
   SELECT_PORTFOLIO,
+  UNSELECT_PORTFOLIO,
   SELECT_PORTFOLIO_VARIATION,
   COMPUTE_PORTFOLIO,
   SET_HISTORY_RANGE,
@@ -51,6 +52,8 @@ export const selectPortfolio = portfolioId => ({
   type: SELECT_PORTFOLIO,
   payload: { portfolioId: portfolioId }
 });
+
+export const unselectPortfolio = () => ({ type: UNSELECT_PORTFOLIO });
 
 export const selectPortfolioVariation = variation => ({
   type: SELECT_PORTFOLIO_VARIATION,
