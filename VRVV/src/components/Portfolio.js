@@ -44,45 +44,34 @@ class Portfolio extends React.Component {
       <HoverPanel
         portfolioId={this.props.portfolioId}
         index={this.props.index}
-        count={this.props.portfolios.length}
+        //count={this.props.portfolios.length}
       >
-        <CurvedRow
-          index={this.props.index}
-          count={this.props.portfolios.length}
+        <View
+          style={{
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: this.props.color,
+            margin: this.props.margin,
+            borderRadius: this.props.portfolioId === this.props.selectedPortfolio.id
+              ? 0.2
+              : 1,
+            width: this.props.portfolioId === this.props.selectedPortfolio.id
+              ? 3
+              : 1,
+            height: this.props.portfolioId === this.props.selectedPortfolio.id
+              ? 4
+              : 1
+          }}
         >
-          <View
-            style={{
-              flexDirection: "column",
-              justifyContent: "space-around",
-              alignItems: "center",
-              backgroundColor: this.props.color,
-              margin: this.props.margin,
-              borderRadius: 0.2,
-             width: this.props.portfolioId ===
-                    this.props.selectedPortfolio.id
-                    ? 1
-                    : 3,
-                  height: this.props.portfolioId ===
-                    this.props.selectedPortfolio.id
-                    ? 1
-                    : 4
-              //borderWidth: 0.1
-            }}
-          >
-            {this.props.portfolioId === this.props.selectedPortfolio.id &&
-              <View
+          {this.props.portfolioId === this.props.selectedPortfolio.id
+            ? <View
                 style={{
                   flexDirection: "column",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  width: this.props.portfolioId ===
-                    this.props.selectedPortfolio.id
-                    ? 1
-                    : 3,
-                  height: this.props.portfolioId ===
-                    this.props.selectedPortfolio.id
-                    ? 1
-                    : 4
+                  width: 3,
+                  height: 4
                   // width: 250,
                   // height: 512
                 }}
@@ -117,9 +106,19 @@ class Portfolio extends React.Component {
                   </Text>
                   {this.renderAssetAllocation()}
                 </View>
-              </View>}
-          </View>
-        </CurvedRow>
+              </View>
+            : <Text
+                style={{
+                  fontSize: 0.2,
+                  fontWeight: "400",
+                  paddingLeft: 0.2,
+                  paddingRight: 0.2,
+                  textAlign: "center"
+                }}
+              >
+                {this.props.name}
+              </Text>}
+        </View>
       </HoverPanel>
     );
   }

@@ -25,11 +25,7 @@ class HoverPanel extends React.Component {
     //this.setState({ hover: !this.state.hover });
     Animated.parallel([
       Animated.timing(this.state.translateZ, {
-        toValue: 2,
-        duration: this.duration
-      }),
-      Animated.timing(this.state.translateX, {
-        toValue: rotateOnHover(this.props.count, this.props.index),
+        toValue: 1,
         duration: this.duration
       })
     ]).start();
