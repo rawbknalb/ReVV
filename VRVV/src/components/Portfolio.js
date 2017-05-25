@@ -41,11 +41,10 @@ class Portfolio extends React.Component {
 
   render() {
     return (
-      <HoverPanel
-        portfolioId={this.props.portfolioId}
-        index={this.props.index}
-        //count={this.props.portfolios.length}
-      >
+      <HoverPanel portfolioId={this.props.portfolioId} index={this.props.index}>
+        {/* 
+          Render View Container: Style depends on if the Portfolio is the selected Portfolio
+        */}
         <View
           style={{
             flexDirection: "column",
@@ -53,7 +52,8 @@ class Portfolio extends React.Component {
             alignItems: "center",
             backgroundColor: this.props.color,
             margin: this.props.margin,
-            borderRadius: this.props.portfolioId === this.props.selectedPortfolio.id
+            borderRadius: this.props.portfolioId ===
+              this.props.selectedPortfolio.id
               ? 0.2
               : 1,
             width: this.props.portfolioId === this.props.selectedPortfolio.id
@@ -64,6 +64,10 @@ class Portfolio extends React.Component {
               : 1
           }}
         >
+          {/* 
+          Render a bigger Panel if the passed PortfolioId and selected Portfolio
+          are equal.
+        */}
           {this.props.portfolioId === this.props.selectedPortfolio.id
             ? <View
                 style={{
@@ -78,14 +82,25 @@ class Portfolio extends React.Component {
               >
                 <Text
                   style={{
-                    fontSize: 0.5,
+                    fontSize: 0.35,
                     fontWeight: "400",
                     paddingLeft: 0.2,
                     paddingRight: 0.2,
                     textAlign: "center"
                   }}
                 >
-                  {this.props.name}
+                  {this.props.name}:
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 0.3,
+                    fontWeight: "400",
+                    paddingLeft: 0.2,
+                    paddingRight: 0.2,
+                    textAlign: "center"
+                  }}
+                >
+                 {this.props.title}
                 </Text>
                 <View
                   style={{
@@ -96,10 +111,11 @@ class Portfolio extends React.Component {
                 >
                   <Text
                     style={{
-                      fontSize: 0.5,
+                      fontSize: 0.3,
                       fontWeight: "400",
                       textAlign: "center",
-                      textAlignVertical: "center"
+                      textAlignVertical: "center",
+                      margin: 0.01
                     }}
                   >
                     Asset Allocation
@@ -113,7 +129,8 @@ class Portfolio extends React.Component {
                   fontWeight: "400",
                   paddingLeft: 0.2,
                   paddingRight: 0.2,
-                  textAlign: "center"
+                  textAlign: "center",
+                  textAlignVertical: "center"
                 }}
               >
                 {this.props.name}

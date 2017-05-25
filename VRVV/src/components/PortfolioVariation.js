@@ -39,7 +39,7 @@ class PortfolioVariation extends React.Component {
           </Text>
           <Image
             source={asset(this.props.img)}
-            style={{ width: 1, height: 1 }}
+            style={{ width: 1.8, height: 1.8 }}
           />
           <Text
             style={{

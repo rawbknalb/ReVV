@@ -14,6 +14,33 @@ const SubAssetClassNames = {
   ROHSTOFFE: "Rohstoffe"
 };
 
+const PortfolioTitle = {
+  // ETF
+  1: "Unser defensives Musterportfolio",
+  2: "Unser Musterportfolio mit Substanz",
+  3: "Unser ertragreiches Musterportfolio",
+  4: "Das ausgewogene Musterportfolio",
+  5: "Das gewinnorientierte Musterportfolio",
+  6: "Das dynamische Musterportfolio",
+  7: "Das chancenorientierte Musterportfolio",
+  // Aktiv
+  11: "Unser defensives Musterportfolio",
+  12: "Unser Musterportfolio mit Substanz",
+  13: "Unser ertragreiches Musterportfolio",
+  14: "Das ausgewogene Musterportfolio",
+  15: "Das gewinnorientierte Musterportfolio",
+  16: "Das dynamische Musterportfolio",
+  17: "Das chancenorientierte Musterportfolio",
+  // GreenFolio
+  21: "Unser ertragreiches Musterportfolio",
+  22: "Das ausgewogene Musterportfolio",
+  23: "Das chancenorientierte Musterportfolio"
+};
+
+export const addPortfolioTitle = portfolio => {
+  return PortfolioTitle[portfolio.id];
+};
+
 export const getSelectedPortfolio = (allPortfolios, selectedPortfolioId) => {
   return allPortfolios
     .filter(portfolio => portfolio.id === selectedPortfolioId)
@@ -49,11 +76,17 @@ export const createAssetAllocation = portfolio => {
 export const filterByVariation = (allPortfolios, variation) => {
   switch (variation) {
     case "VestFolio":
-      return allPortfolios.filter(portfolio => portfolio.managed === false && portfolio.sustainable === false);
+      return allPortfolios.filter(
+        portfolio =>
+          portfolio.managed === false && portfolio.sustainable === false
+      );
     case "GreenFolio":
       return allPortfolios.filter(portfolio => portfolio.sustainable === true);
     case "Aktiv":
-      return allPortfolios.filter(portfolio => portfolio.managed === true && portfolio.sustainable === false);
+      return allPortfolios.filter(
+        portfolio =>
+          portfolio.managed === true && portfolio.sustainable === false
+      );
     default:
       return;
   }

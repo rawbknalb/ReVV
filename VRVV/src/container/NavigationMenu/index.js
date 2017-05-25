@@ -34,11 +34,11 @@ class NavigationMenu extends Component {
   renderNavButtons() {
     return NAV_BUTTONS.map((button, index) => (
       <VrButton
-        index={button.text}
+        key={button.text}
         onClick={() => this.handleClick(button)}
       >
         <Animated.View style={this.buttonStyle(index)}>
-          <Text style={{ fontSize: 0.1, color: "red", textAlign: "center" }}>
+          <Text style={{ fontSize: 0.1, fontWeight: "900", color: "palegreen", textAlign: "center" }}>
             {button.text}
           </Text>
         </Animated.View>
@@ -66,7 +66,9 @@ class NavigationMenu extends Component {
       height: 0.5,
       borderRadius: 1,
       //position: "absolute",
-      backgroundColor: "papayawhip",
+      borderColor: "white",
+      borderWidth: 0.008,
+      opacity: 0.9,
       justifyContent: "center",
       transform: [{ translateX: this.state.translateX  }]
     };

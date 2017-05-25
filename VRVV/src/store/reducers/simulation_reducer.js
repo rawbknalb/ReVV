@@ -11,6 +11,7 @@ import {
 } from "../actions/simulation/types";
 
 import {
+  addPortfolioTitle,
   getSelectedPortfolio,
   createAssetAllocation,
   transformAssetClassNames,
@@ -40,7 +41,8 @@ const simulation_reducer = (state = initialState, action) => {
       const enhancedPortfolioCollection = action.payload.map(portfolio => ({
         ...portfolio,
         funds: transformAssetClassNames(portfolio),
-        assetAllocation: createAssetAllocation(portfolio)
+        assetAllocation: createAssetAllocation(portfolio),
+        title: addPortfolioTitle(portfolio)
       }));
 
       return {

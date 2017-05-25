@@ -20,7 +20,7 @@ class HoverPanel extends React.Component {
     translateZ: new Animated.Value(0),
     translateX: new Animated.Value(0)
   };
-  duration = 500;
+  duration = 400;
   handleEnter() {
     //this.setState({ hover: !this.state.hover });
     Animated.parallel([
@@ -36,11 +36,7 @@ class HoverPanel extends React.Component {
     Animated.parallel([
       Animated.spring(this.state.translateZ, {
         toValue: 0,
-        friction: 5
-      }),
-      Animated.spring(this.state.translateX, {
-        toValue: 0,
-        friction: 5
+        friction: 3
       })
     ]).start();
   }

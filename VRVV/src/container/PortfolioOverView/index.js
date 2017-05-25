@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Pano, Text, View, Animated, VrButton, StyleSheet } from "react-vr";
+import {
+  Pano,
+  Text,
+  View,
+  Animated,
+  VrButton,
+  StyleSheet,
+  Plane
+} from "react-vr";
 import { connect } from "react-redux";
 import {
   fetchPortfolios,
@@ -10,6 +18,7 @@ import {
 import PortfolioVariation from "../../components/PortfolioVariation";
 import Portfolio from "../../components/Portfolio";
 import CurvedPanel from "../../components/CurvedPanel";
+import { PortfolioOverViewHeadlines } from "../../components/Headlines";
 
 const PortfolioVariationList = [
   {
@@ -74,7 +83,7 @@ class PortfolioOverView extends Component {
           friction: 6
         }),
         Animated.spring(this.state.animateVariations.translateY, {
-          toValue: 9,
+          toValue: 11,
           friction: 3,
           duration: 1000
         })
@@ -95,11 +104,15 @@ class PortfolioOverView extends Component {
     ]).start();
   }
 
+  dropTo_Y = 2;
+
   dropDown() {
     this.state.animatePortfolios.translateY.setValue(200);
     Animated.parallel([
       Animated.spring(this.state.animatePortfolios.translateY, {
-        toValue: Object.keys(this.props.selectedPortfolio).length !== 0 ? 4 : 2,
+        toValue: Object.keys(this.props.selectedPortfolio).length !== 0
+          ? 2.5
+          : 1,
         friction: 8
       }),
       Animated.timing(this.state.animatePortfolios.opacity, {
@@ -110,12 +123,12 @@ class PortfolioOverView extends Component {
   }
 
   AnimateAfterPortfolioSelect() {
-    this.state.animateSelectedPortfolio.scale.setValue(1.1);
+    this.state.animateSelectedPortfolio.scale.setValue(1.05);
     Object.keys(this.props.selectedPortfolio).length === 0 ||
       this.state.newMount
       ? Animated.parallel([
           Animated.spring(this.state.animatePortfolios.translateY, {
-            toValue: 4,
+            toValue: 2.5,
             friction: 8
           }),
           Animated.spring(this.state.animateSelectedPortfolio.translateZ, {
@@ -190,6 +203,7 @@ class PortfolioOverView extends Component {
               portfolios={this.props.portfolios}
               portfolioId={portfolio.id}
               name={portfolio.name}
+              title={portfolio.title}
               assetAllocation={portfolio.assetAllocation}
               color="tomato"
               index={index}
@@ -206,6 +220,7 @@ class PortfolioOverView extends Component {
     if (Object.keys(this.props.selectedPortfolio).length !== 0) {
       return (
         <Portfolio
+          title={this.props.selectedPortfolio.title}
           selectedPortfolio={this.props.selectedPortfolio}
           portfolioId={this.props.selectedPortfolio.id}
           assetAllocation={this.props.selectedPortfolio.assetAllocation}
@@ -220,12 +235,14 @@ class PortfolioOverView extends Component {
     return (
       <View>
         <View>
+          <PortfolioOverViewHeadlines />
           <View
             style={{
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              layoutOrigin: [0.5, 0.5]
+              layoutOrigin: [0.5, 0.5],
+              position: "absolute"
             }}
           >
             <Animated.View style={this.portfolioStyles()}>
@@ -242,7 +259,7 @@ class PortfolioOverView extends Component {
             </Animated.View>
 
             <Animated.View style={this.selectedPortfolioStyles()}>
-              <View style={{ transform: [{ translate: [0, 1, -10] }] }}>
+              <View style={{ transform: [{ translate: [0, 0, -10] }] }}>
                 {this.renderSelectedPortfolio()}
               </View>
             </Animated.View>
@@ -287,7 +304,7 @@ class PortfolioOverView extends Component {
   selectedPortfolioStyles = () => ({
     transform: [
       { translateZ: this.state.animateSelectedPortfolio.translateZ },
-      { translateY: this.state.animateSelectedPortfolio.translateY },
+      { translateY: -0.2 },
       { scaleY: this.state.animateSelectedPortfolio.scale }
       //{ scaleX: this.state.animateSelectedPortfolio.scale }
     ]
