@@ -22,7 +22,6 @@ class App extends React.Component {
             alignItems: "center"
           }}
         >
-          <NavigationMenu />
           <View style={{ flexDirection: "row" }}>
             <Image
               source={asset("vr_head_green.png")}
@@ -33,6 +32,7 @@ class App extends React.Component {
               style={{ width: 2.2, height: 1 }}
             />
           </View>
+          <NavigationMenu />
         </View>
         <Router />
       </View>

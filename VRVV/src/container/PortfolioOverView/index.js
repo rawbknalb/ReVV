@@ -108,11 +108,16 @@ class PortfolioOverView extends Component {
 
   dropDown() {
     this.state.animatePortfolios.translateY.setValue(200);
+    /**
+     * If a portfolio is allready selected and dropDown() gets called
+     * the panels should stop at a higher y-coordinate. If no portfolio
+     * is selected with this call, the panels drop to a lower y-coordinate
+     */
     Animated.parallel([
       Animated.spring(this.state.animatePortfolios.translateY, {
         toValue: Object.keys(this.props.selectedPortfolio).length !== 0
-          ? 2.5
-          : 1,
+          ? 1.5
+          : 0.5,
         friction: 8
       }),
       Animated.timing(this.state.animatePortfolios.opacity, {
@@ -128,7 +133,7 @@ class PortfolioOverView extends Component {
       this.state.newMount
       ? Animated.parallel([
           Animated.spring(this.state.animatePortfolios.translateY, {
-            toValue: 2.5,
+            toValue: 1.5,
             friction: 8
           }),
           Animated.spring(this.state.animateSelectedPortfolio.translateZ, {
@@ -304,7 +309,7 @@ class PortfolioOverView extends Component {
   selectedPortfolioStyles = () => ({
     transform: [
       { translateZ: this.state.animateSelectedPortfolio.translateZ },
-      { translateY: -0.2 },
+      { translateY: -1 },
       { scaleY: this.state.animateSelectedPortfolio.scale }
       //{ scaleX: this.state.animateSelectedPortfolio.scale }
     ]

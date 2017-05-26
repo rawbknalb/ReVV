@@ -26,7 +26,7 @@ export class PortfolioOverViewHeadlines extends React.Component {
               layoutOrigin: [0.5, 0.5],
               paddingLeft: 0.2,
               paddingRight: 0.2,
-              textAlign: "center",
+              textAlign: "left",
               textAlignVertical: "center"
             }}
           >
@@ -41,7 +41,7 @@ export class PortfolioOverViewHeadlines extends React.Component {
               layoutOrigin: [0.5, 0.5],
               paddingLeft: 0.2,
               paddingRight: 0.2,
-              textAlign: "center",
+              textAlign: "left",
               textAlignVertical: "center"
             }}
           >
@@ -54,11 +54,24 @@ export class PortfolioOverViewHeadlines extends React.Component {
               layoutOrigin: [0.5, 0.5],
               paddingLeft: 0.2,
               paddingRight: 0.2,
-              textAlign: "right",
+              textAlign: "center",
               textAlignVertical: "center"
             }}
           >
-            VestFolios mit nachhaltigen Fonds und VestFolios mit aktiv verwalteten Fonds
+            VestFolios mit nachhaltigen Fonds und
+          </Text>
+          <Text
+            style={{
+              fontSize: 0.8,
+              fontWeight: "300",
+              layoutOrigin: [0.5, 0.5],
+              paddingLeft: 0.2,
+              paddingRight: 0.2,
+              textAlign: "center",
+              textAlignVertical: "center"
+            }}
+          >
+            VestFolios mit aktiv verwalteten Fonds
           </Text>
         </View>
       </Animated.View>

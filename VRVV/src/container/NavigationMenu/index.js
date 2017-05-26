@@ -4,74 +4,58 @@ import { connect } from "react-redux";
 
 import { switchRoute } from "../../store/actions/routes";
 
+import NavButton from "../../components/NavButton";
+
 const NAV_BUTTONS = [
   { text: "Menü", route: "", type: "toggle" },
-  { text: "Home", route: "home", type: "nav" },
-  { text: "Portfolios", route: "portfolios", type: "nav" },
-  { text: "Wissen", route: "wissen", type: "nav" }
+  { text: "Home", route: "home", type: "nav", position: 1 },
+  { text: "Portfolios", route: "portfolios", type: "nav", position: 2 },
+  { text: "Wissen", route: "wissen", type: "nav", position: 3 }
 ];
 
 class NavigationMenu extends Component {
   constructor() {
     super();
     this.state = {
-      translateX: new Animated.Value(0)
+      open: false
     };
   }
 
-  animateToggle() {
-    Animated.spring(this.state.translateX, {
-      toValue: 1,
-      spring: 1
-    }).start();
-  }
-  handleClick(button, index) {
-    button.type === "toggle"
-      ? this.animateToggle()
-      : this.props.switchRoute(button.route);
+  renderNavButtons() {
+    return NAV_BUTTONS.map(
+      button =>
+        button.type === "toggle"
+          ? <VrButton onClick={() => this.toggleMenu()}>
+              <NavButton open={this.state.open} button={button} />
+            </VrButton>
+          : <VrButton onClick={() => this.props.switchRoute(button.route)}>
+              <NavButton
+                position={button.position}
+                open={this.state.open}
+                button={button}
+              />
+            </VrButton>
+    );
   }
 
-  renderNavButtons() {
-    return NAV_BUTTONS.map((button, index) => (
-      <VrButton
-        key={button.text}
-        onClick={() => this.handleClick(button)}
-      >
-        <Animated.View style={this.buttonStyle(index)}>
-          <Text style={{ fontSize: 0.1, fontWeight: "900", color: "palegreen", textAlign: "center" }}>
-            {button.text}
-          </Text>
-        </Animated.View>
-      </VrButton>
-    ));
+  toggleMenu() {
+    this.setState({ open: !this.state.open });
   }
 
   render() {
     return (
       <View
         style={{
+          flex: 1,
           flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center"
+          justifyContent: "flex-start",
+          position: "absolute",
+          transform: [{ translate: [0, -5, 0] }]
         }}
       >
         {this.renderNavButtons()}
       </View>
     );
-  }
-
-  buttonStyle(index) {
-    return {
-      width: 0.5,
-      height: 0.5,
-      borderRadius: 1,
-      //position: "absolute",
-      borderColor: "white",
-      borderWidth: 0.008,
-      opacity: 0.9,
-      justifyContent: "center",
-      transform: [{ translateX: this.state.translateX  }]
-    };
   }
 }
 
