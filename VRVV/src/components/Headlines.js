@@ -21,12 +21,12 @@ export class PortfolioOverViewHeadlines extends React.Component {
         <View>
           <Text
             style={{
-              fontSize: 0.8,
+              fontSize: 0.6,
               fontWeight: "300",
               layoutOrigin: [0.5, 0.5],
               paddingLeft: 0.2,
               paddingRight: 0.2,
-              textAlign: "left",
+              textAlign: "center",
               textAlignVertical: "center"
             }}
           >
@@ -36,12 +36,12 @@ export class PortfolioOverViewHeadlines extends React.Component {
         <View>
           <Text
             style={{
-              fontSize: 0.8,
+              fontSize: 0.6,
               fontWeight: "300",
               layoutOrigin: [0.5, 0.5],
               paddingLeft: 0.2,
               paddingRight: 0.2,
-              textAlign: "left",
+              textAlign: "right",
               textAlignVertical: "center"
             }}
           >
@@ -49,7 +49,7 @@ export class PortfolioOverViewHeadlines extends React.Component {
           </Text>
           <Text
             style={{
-              fontSize: 0.8,
+              fontSize: 0.6,
               fontWeight: "300",
               layoutOrigin: [0.5, 0.5],
               paddingLeft: 0.2,
@@ -62,7 +62,7 @@ export class PortfolioOverViewHeadlines extends React.Component {
           </Text>
           <Text
             style={{
-              fontSize: 0.8,
+              fontSize: 0.6,
               fontWeight: "300",
               layoutOrigin: [0.5, 0.5],
               paddingLeft: 0.2,
@@ -80,7 +80,9 @@ export class PortfolioOverViewHeadlines extends React.Component {
   viewStyle() {
     return {
       transform: [{ translate: [0, 8, -20] }],
-      opacity: this.state.opacity
+      opacity: this.state.opacity,
+      flexDirection: "column",
+      alignItems: "center"
     };
   }
 }

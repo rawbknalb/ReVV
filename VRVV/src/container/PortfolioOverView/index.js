@@ -75,7 +75,7 @@ class PortfolioOverView extends Component {
     this.props.unselectPortfolio();
   }
 
-  slideToFloor() {
+  slideToCeiling() {
     Animated.sequence([
       Animated.parallel([
         Animated.spring(this.state.animateVariations.rotationValue, {
@@ -83,7 +83,7 @@ class PortfolioOverView extends Component {
           friction: 6
         }),
         Animated.spring(this.state.animateVariations.translateY, {
-          toValue: 11,
+          toValue: 10,
           friction: 3,
           duration: 1000
         })
@@ -116,7 +116,7 @@ class PortfolioOverView extends Component {
     Animated.parallel([
       Animated.spring(this.state.animatePortfolios.translateY, {
         toValue: Object.keys(this.props.selectedPortfolio).length !== 0
-          ? 1.5
+          ? 2
           : 0.5,
         friction: 8
       }),
@@ -133,13 +133,13 @@ class PortfolioOverView extends Component {
       this.state.newMount
       ? Animated.parallel([
           Animated.spring(this.state.animatePortfolios.translateY, {
-            toValue: 1.5,
+            toValue: 2,
             friction: 8
           }),
           Animated.spring(this.state.animateSelectedPortfolio.translateZ, {
             toValue: 0,
             spring: 5,
-            tension: 10
+            tension: 2
           }),
           Animated.spring(this.state.animateSelectedPortfolio.scale, {
             toValue: 1,
@@ -149,25 +149,18 @@ class PortfolioOverView extends Component {
       : Animated.spring(this.state.animateSelectedPortfolio.scale, {
           toValue: 1,
           friction: 2
-          //tension: 0
         }).start();
   }
 
   handleVariationClick(variation) {
     this.props.selectPortfolioVariation(variation);
-    this.slideToFloor();
+    this.slideToCeiling();
     this.dropDown();
   }
 
   handlePortfolioClick(portoflio) {
-    this.slideToFloor();
+    this.slideToCeiling();
   }
-
-  animateProgress() {
-    this;
-  }
-
-  stopProgress() {}
 
   /**
    * Renders all Portfolio Variations. Maps over PortfolioVariationList 

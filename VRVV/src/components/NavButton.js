@@ -6,7 +6,7 @@ class NavigationMenu extends Component {
   constructor() {
     super();
     this.state = {
-      translateX: new Animated.Value(0)
+      translateY: new Animated.Value(0)
     };
   }
 
@@ -18,15 +18,15 @@ class NavigationMenu extends Component {
   }
 
   openMenu(position) {
-    Animated.spring(this.state.translateX, {
-      toValue: position,
+    Animated.spring(this.state.translateY, {
+      toValue: -position,
       spring: 1,
       tenstion: 10
     }).start();
   }
 
   closeMenu() {
-    Animated.spring(this.state.translateX, {
+    Animated.spring(this.state.translateY, {
       toValue: 0,
       spring: 1,
       tenstion: 10
@@ -88,7 +88,7 @@ class NavigationMenu extends Component {
       borderWidth: 0.008,
       opacity: 0.9,
       justifyContent: "center",
-      transform: [{ translateX: this.state.translateX }]
+      transform: [{ translateY: this.state.translateY }]
     };
   }
 }

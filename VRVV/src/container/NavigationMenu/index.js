@@ -50,7 +50,7 @@ class NavigationMenu extends Component {
           flexDirection: "row",
           justifyContent: "flex-start",
           position: "absolute",
-          transform: [{ translate: [0, -5, 0] }]
+          transform: [{ translate: [-2, 0, 0] }]
         }}
       >
         {this.renderNavButtons()}
