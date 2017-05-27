@@ -28,7 +28,7 @@ class PortfolioVariation extends React.Component {
           <Text
             style={{
               fontSize: 0.2,
-              fontWeight: "400",
+              fontWeight: "100",
               paddingLeft: 0.2,
               paddingRight: 0.2,
               textAlign: "center",
@@ -44,7 +44,7 @@ class PortfolioVariation extends React.Component {
           <Text
             style={{
               fontSize: 0.2,
-              fontWeight: "400",
+              fontWeight: "100",
               paddingLeft: 0.2,
               paddingRight: 0.2,
               textAlign: "center",

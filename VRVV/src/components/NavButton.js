@@ -6,27 +6,26 @@ class NavigationMenu extends Component {
   constructor() {
     super();
     this.state = {
-      translateY: new Animated.Value(0)
+      translateX: new Animated.Value(0)
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     nextProps.open === true && nextProps.button.type !== "toggle"
       ? this.openMenu(nextProps.button.position)
       : this.closeMenu();
   }
 
   openMenu(position) {
-    Animated.spring(this.state.translateY, {
-      toValue: -position,
+    Animated.spring(this.state.translateX, {
+      toValue: position,
       spring: 1,
       tenstion: 10
     }).start();
   }
 
   closeMenu() {
-    Animated.spring(this.state.translateY, {
+    Animated.spring(this.state.translateX, {
       toValue: 0,
       spring: 1,
       tenstion: 10
@@ -51,8 +50,9 @@ class NavigationMenu extends Component {
               <Text
                 style={{
                   fontSize: 0.1,
-                  fontWeight: "900",
-                  color: "palegreen",
+                  fontWeight: "200",
+                  //color: "palegreen",
+                  color: "black",
                   textAlign: "center"
                 }}
               >
@@ -64,8 +64,9 @@ class NavigationMenu extends Component {
                 <Text
                   style={{
                     fontSize: 0.1,
-                    fontWeight: "900",
-                    color: "palegreen",
+                    fontWeight: "200",
+                    //color: "palegreen",
+                    color: "black",
                     textAlign: "center"
                   }}
                 >
@@ -88,7 +89,7 @@ class NavigationMenu extends Component {
       borderWidth: 0.008,
       opacity: 0.9,
       justifyContent: "center",
-      transform: [{ translateY: this.state.translateY }]
+      transform: [{ translateX: this.state.translateX }]
     };
   }
 }

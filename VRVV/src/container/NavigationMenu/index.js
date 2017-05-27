@@ -17,6 +17,7 @@ class NavigationMenu extends Component {
   constructor() {
     super();
     this.state = {
+      translateX: new Animated.Value(-0.2),
       open: false
     };
   }
@@ -25,10 +26,10 @@ class NavigationMenu extends Component {
     return NAV_BUTTONS.map(
       button =>
         button.type === "toggle"
-          ? <VrButton onClick={() => this.toggleMenu()}>
+          ? <VrButton key={button.text} onClick={() => this.toggleMenu()}>
               <NavButton open={this.state.open} button={button} />
             </VrButton>
-          : <VrButton onClick={() => this.props.switchRoute(button.route)}>
+          : <VrButton key={button.text} onClick={() => this.handleNavButtonClick(button.route)}>
               <NavButton
                 position={button.position}
                 open={this.state.open}
@@ -38,25 +39,41 @@ class NavigationMenu extends Component {
     );
   }
 
+  moveMenu() {
+    Animated.spring(this.state.translateX, {
+      toValue: this.state.open ? -0.2 : -2,
+      spring: 1
+    }).start();
+  }
+
   toggleMenu() {
     this.setState({ open: !this.state.open });
+    this.moveMenu();
+  }
+
+  handleNavButtonClick(route) {
+    this.props.switchRoute(route);
+    this.toggleMenu();
   }
 
   render() {
     return (
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          justifyContent: "flex-start",
-          position: "absolute",
-          transform: [{ translate: [-2, 0, 0] }]
-        }}
-      >
+      <Animated.View style={this.navigationMenuStyle()}>
         {this.renderNavButtons()}
-      </View>
+      </Animated.View>
     );
   }
+
+  navigationMenuStyle = () => ({
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    position: "absolute",
+    //layoutOrigin: [0.5, 0.5],
+    transform: [
+      { translateX: this.state.translateX },
+      { rotateX: -20 }
+    ]
+  })
 }
 
 mapStateToProps = state => ({

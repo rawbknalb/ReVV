@@ -34,7 +34,7 @@ class Portfolio extends React.Component {
 
     return assetAllocation.map(assetClass => (
       <Text key={assetClass.name} style={this.styles.assetAllocation}>
-        {assetClass.name}: {assetClass.percentage}%
+        {assetClass.name}: {assetClass.percentage} %
       </Text>
     ));
   }
@@ -50,20 +50,27 @@ class Portfolio extends React.Component {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: this.props.color,
             margin: this.props.margin,
+          }}
+        >
+          <View style={{
+            position: "absolute",
+            backgroundColor: this.props.color,
+            opacity: this.props.portfolioId === this.props.selectedPortfolio.id
+              ? 0.7
+              : 0.8,
             borderRadius: this.props.portfolioId ===
               this.props.selectedPortfolio.id
               ? 0.2
-              : 1,
+              : 0.5,
             width: this.props.portfolioId === this.props.selectedPortfolio.id
               ? 3
               : 1,
             height: this.props.portfolioId === this.props.selectedPortfolio.id
               ? 4
               : 1
-          }}
-        >
+            }} 
+          />
           {/* 
           Render a bigger Panel if the passed PortfolioId and selected Portfolio
           are equal.
@@ -83,7 +90,7 @@ class Portfolio extends React.Component {
                 <Text
                   style={{
                     fontSize: 0.35,
-                    fontWeight: "400",
+                    fontWeight: "200",
                     paddingLeft: 0.2,
                     paddingRight: 0.2,
                     textAlign: "center"
@@ -94,7 +101,7 @@ class Portfolio extends React.Component {
                 <Text
                   style={{
                     fontSize: 0.3,
-                    fontWeight: "400",
+                    fontWeight: "200",
                     paddingLeft: 0.2,
                     paddingRight: 0.2,
                     textAlign: "center"
@@ -112,10 +119,10 @@ class Portfolio extends React.Component {
                   <Text
                     style={{
                       fontSize: 0.3,
-                      fontWeight: "400",
+                      fontWeight: "200",
                       textAlign: "center",
                       textAlignVertical: "center",
-                      margin: 0.01
+                      margin: 0.02
                     }}
                   >
                     Asset Allocation
@@ -125,10 +132,12 @@ class Portfolio extends React.Component {
               </View>
             : <Text
                 style={{
+                  width: 1,
                   fontSize: 0.2,
-                  fontWeight: "400",
+                  fontWeight: "100",
                   paddingLeft: 0.2,
                   paddingRight: 0.2,
+                  color: "black",
                   textAlign: "center",
                   textAlignVertical: "center"
                 }}
@@ -143,7 +152,8 @@ class Portfolio extends React.Component {
   styles = StyleSheet.create({
     assetAllocation: {
       fontSize: 0.2,
-      fontWeight: "400"
+      fontWeight: "200",
+      margin: 0.05
     }
   });
 }

@@ -121,7 +121,7 @@ class PortfolioOverView extends Component {
         friction: 8
       }),
       Animated.timing(this.state.animatePortfolios.opacity, {
-        toValue: 0.9,
+        toValue: 1,
         duration: 2000
       })
     ]).start();
@@ -203,7 +203,7 @@ class PortfolioOverView extends Component {
               name={portfolio.name}
               title={portfolio.title}
               assetAllocation={portfolio.assetAllocation}
-              color="tomato"
+              color="lightsteelblue"
               index={index}
               margin={0.05}
               selectedPortfolio={this.props.selectedPortfolio}
@@ -223,7 +223,7 @@ class PortfolioOverView extends Component {
           portfolioId={this.props.selectedPortfolio.id}
           assetAllocation={this.props.selectedPortfolio.assetAllocation}
           name={this.props.selectedPortfolio.name}
-          color="tomato"
+          color="black"
         />
       );
     }

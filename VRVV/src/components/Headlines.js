@@ -22,8 +22,8 @@ export class PortfolioOverViewHeadlines extends React.Component {
           <Text
             style={{
               fontSize: 0.6,
-              fontWeight: "300",
-              layoutOrigin: [0.5, 0.5],
+              fontWeight: "200",
+              //layoutOrigin: [0.5, 0.5],
               paddingLeft: 0.2,
               paddingRight: 0.2,
               textAlign: "center",
@@ -37,8 +37,8 @@ export class PortfolioOverViewHeadlines extends React.Component {
           <Text
             style={{
               fontSize: 0.6,
-              fontWeight: "300",
-              layoutOrigin: [0.5, 0.5],
+              fontWeight: "200",
+              //layoutOrigin: [0.5, 0.5],
               paddingLeft: 0.2,
               paddingRight: 0.2,
               textAlign: "right",
@@ -50,8 +50,8 @@ export class PortfolioOverViewHeadlines extends React.Component {
           <Text
             style={{
               fontSize: 0.6,
-              fontWeight: "300",
-              layoutOrigin: [0.5, 0.5],
+              fontWeight: "200",
+              //layoutOrigin: [0.5, 0.5],
               paddingLeft: 0.2,
               paddingRight: 0.2,
               textAlign: "center",
@@ -63,8 +63,8 @@ export class PortfolioOverViewHeadlines extends React.Component {
           <Text
             style={{
               fontSize: 0.6,
-              fontWeight: "300",
-              layoutOrigin: [0.5, 0.5],
+              fontWeight: "200",
+              //layoutOrigin: [0.5, 0.5],
               paddingLeft: 0.2,
               paddingRight: 0.2,
               textAlign: "center",
@@ -79,10 +79,11 @@ export class PortfolioOverViewHeadlines extends React.Component {
   }
   viewStyle() {
     return {
+      layoutOrigin: [0.5, 0.5],
       transform: [{ translate: [0, 8, -20] }],
       opacity: this.state.opacity,
       flexDirection: "column",
-      alignItems: "center"
+      alignItems: "center",
     };
   }
 }
@@ -94,7 +95,7 @@ export class WelcomeViewHeadlines extends React.Component {
         <Text
           style={{
             fontSize: 1,
-            fontWeight: "300",
+            fontWeight: "200",
             layoutOrigin: [0.5, 0.5],
             paddingLeft: 0.2,
             paddingRight: 0.2,
