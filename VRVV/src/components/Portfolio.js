@@ -21,14 +21,19 @@ class Portfolio extends React.Component {
     this.setState({ hover: !this.state.hover });
   }
 
+  /**
+   * Renders the Text for each Asset Allocation, passed via props 
+   * from parent. First formats the assetAllocation Object in to an
+   * Array of it's keys. Then return for each element a new Object
+   * inside the new Array with the formatted percentage amount
+   */
   renderAssetAllocation() {
     const assetAllocation = Object.keys(
       this.props.assetAllocation
     ).map(assetClass => {
       return {
         name: assetClass,
-        percentage: Math.round(this.props.assetAllocation[assetClass] * 100) /
-          100
+        percentage: Math.round(this.props.assetAllocation[assetClass])
       };
     });
 
@@ -42,39 +47,42 @@ class Portfolio extends React.Component {
   render() {
     return (
       <HoverPanel portfolioId={this.props.portfolioId} index={this.props.index}>
-        {/* 
-          Render View Container: Style depends on if the Portfolio is the selected Portfolio
-        */}
         <View
           style={{
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            margin: this.props.margin,
+            margin: this.props.margin
           }}
         >
-          <View style={{
-            position: "absolute",
-            backgroundColor: this.props.color,
-            opacity: this.props.portfolioId === this.props.selectedPortfolio.id
-              ? 0.7
-              : 0.8,
-            borderRadius: this.props.portfolioId ===
-              this.props.selectedPortfolio.id
-              ? 0.2
-              : 0.5,
-            width: this.props.portfolioId === this.props.selectedPortfolio.id
-              ? 3
-              : 1,
-            height: this.props.portfolioId === this.props.selectedPortfolio.id
-              ? 4
-              : 1
-            }} 
+          {/*
+           * Render the Portfolio Card: Style depends on if this Portfolio is the selected Portfolio
+           * Variables are: opacity, borderRadius, width, height
+           */}
+          <View
+            style={{
+              position: "absolute",
+              backgroundColor: this.props.color,
+              opacity: this.props.portfolioId ===
+                this.props.selectedPortfolio.id
+                ? 0.5
+                : 0.8,
+              borderRadius: this.props.portfolioId ===
+                this.props.selectedPortfolio.id
+                ? 0.15
+                : 0.5,
+              width: this.props.portfolioId === this.props.selectedPortfolio.id
+                ? 3
+                : 1,
+              height: this.props.portfolioId === this.props.selectedPortfolio.id
+                ? 4
+                : 1
+            }}
           />
-          {/* 
-          Render a bigger Panel if the passed PortfolioId and selected Portfolio
-          are equal.
-        */}
+          {/*
+         * Render a bigger card if this PortfolioId and selected Portfolio
+         * are equal. 
+         */}
           {this.props.portfolioId === this.props.selectedPortfolio.id
             ? <View
                 style={{
@@ -83,8 +91,6 @@ class Portfolio extends React.Component {
                   alignItems: "center",
                   width: 3,
                   height: 4
-                  // width: 250,
-                  // height: 512
                 }}
               >
                 <Text
@@ -107,13 +113,35 @@ class Portfolio extends React.Component {
                     textAlign: "center"
                   }}
                 >
-                 {this.props.title}
+                  ________________
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 0.3,
+                    fontWeight: "200",
+                    paddingLeft: 0.2,
+                    paddingRight: 0.2,
+                    textAlign: "center"
+                  }}
+                >
+                  {this.props.title}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 0.3,
+                    fontWeight: "200",
+                    paddingLeft: 0.2,
+                    paddingRight: 0.2,
+                    textAlign: "center"
+                  }}
+                >
+                  ____________
                 </Text>
                 <View
                   style={{
                     flexDirection: "column",
                     //justifyContent: "flex-end",
-                    margin: 0.5
+                    margin: 0.1
                   }}
                 >
                   <Text
@@ -122,7 +150,7 @@ class Portfolio extends React.Component {
                       fontWeight: "200",
                       textAlign: "center",
                       textAlignVertical: "center",
-                      margin: 0.02
+                      margin: 0.2
                     }}
                   >
                     Asset Allocation
@@ -152,8 +180,8 @@ class Portfolio extends React.Component {
   styles = StyleSheet.create({
     assetAllocation: {
       fontSize: 0.2,
-      fontWeight: "200",
-      margin: 0.05
+      fontWeight: "200"
+      //margin: 0.05
     }
   });
 }
