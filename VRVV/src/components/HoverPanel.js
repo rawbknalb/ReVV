@@ -9,8 +9,6 @@ import {
   VrButton,
   Animated
 } from "react-vr";
-import { connect } from "react-redux";
-import { selectPortfolio } from "../store/actions/simulation";
 
 import { rotateOnHover } from "../utils";
 
@@ -41,16 +39,11 @@ class HoverPanel extends React.Component {
     ]).start();
   }
 
-  handleClick() {
-    this.props.selectPortfolio(this.props.portfolioId);
-  }
-
   render() {
     return (
       <VrButton
         onEnter={() => this.handleEnter()}
         onExit={() => this.handleExit()}
-        onClick={() => this.handleClick()}
       >
         <Animated.View style={this.hoverStyle()}>
           {this.props.children}
@@ -67,4 +60,4 @@ class HoverPanel extends React.Component {
   });
 }
 
-export default connect(null, { selectPortfolio })(HoverPanel);
+export default HoverPanel;

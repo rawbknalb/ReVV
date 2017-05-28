@@ -35,9 +35,12 @@ const initialState = {
 const simulation_reducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_PORTFOLIOS:
-      // transforms each Portfolio from the fetched data from vv server:
-      // 1. transforms AssetClass Names
-      // 2. creates a new Object Property "assetAllocation" for each portfolio
+      /** 
+     * transforms each Portfolio from the fetched data from VisualVest server:
+     * 1. transforms AssetClass Names
+     * 2. creates a new Object Property "assetAllocation" for each portfolio
+     * 3. adds a new title property
+     */
       const enhancedPortfolioCollection = action.payload.map(portfolio => ({
         ...portfolio,
         funds: transformAssetClassNames(portfolio),
@@ -55,17 +58,16 @@ const simulation_reducer = (state = initialState, action) => {
           }
         }
       };
+    // case COMPUTE_PORTFOLIO:
+    //   return {
+    //     ...state,
+    //     portfolios: { ...state.portfolios, computed: action.payload }
+    //   };
 
-    case COMPUTE_PORTFOLIO:
-      return {
-        ...state,
-        portfolios: { ...state.portfolios, computed: action.payload }
-      };
 
     case SELECT_PORTFOLIO:
       // after selecting a new portfolio this function filters
       // the selected Portfolio
-
       return {
         ...state,
         portfolios: {
@@ -108,8 +110,24 @@ const simulation_reducer = (state = initialState, action) => {
     case FETCH_FORECAST:
       return { ...state, forecast: action.payload };
 
+    /**
+     * Returns a new Object with a new history property inside 
+     * metaData of the selected Portfolio in store
+     */
     case FETCH_HISTORY:
-      return { ...state, history: action.payload };
+      return {
+        ...state,
+        portfolios: {
+          ...state.portfolios,
+          selected: {
+            ...state.portfolios.selected,
+            metaData: {
+              ...state.portfolios.selected.metaData,
+              history: action.payload
+            }
+          }
+        }
+      };
 
     case SET_HISTORY_RANGE:
       // only

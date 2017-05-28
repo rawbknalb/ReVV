@@ -12,12 +12,16 @@ import { connect } from "react-redux";
 import {
   fetchPortfolios,
   selectPortfolioVariation,
-  unselectPortfolio
+  unselectPortfolio,
+  selectPortfolio,
+  fetchHistoryData,
+  fetchHistoryImages
 } from "../../store/actions/simulation";
 
 import PortfolioVariation from "../../components/PortfolioVariation";
 import Portfolio from "../../components/Portfolio";
 import CurvedPanel from "../../components/CurvedPanel";
+import HistoryImage from "../../components/HistoryImage";
 import { PortfolioOverViewHeadlines } from "../../components/Headlines";
 
 const PortfolioVariationList = [
@@ -158,8 +162,18 @@ class PortfolioOverView extends Component {
     this.dropDown();
   }
 
-  handlePortfolioClick(portoflio) {
-    this.slideToCeiling();
+  selectPortfolio(portfolioId) {
+    this.props.selectPortfolio(portfolioId);
+    this.props.fetchHistoryData(portfolioId);
+    this.AnimateAfterPortfolioSelect();
+  }
+
+  fetchPortfolioDetails(portfolioId) {
+    this.props.fetchHistoryData(portfolioId).then;
+  }
+
+  fetchPortfolioHistoryImage(history) {
+    this.props.fetchHistoryImages(history);
   }
 
   /**
@@ -186,7 +200,10 @@ class PortfolioOverView extends Component {
    * Renders all Portfolios as small Panels. Only the unselected Portfolios
    * should be rendered. First filter only the portfolios which don't match
    * with the selectedPortfolio ID. Then map over this filtered Array and return
-   * each Portfolio-Component
+   * each Portfolio-Component.
+   * 
+   * OnClick: Calls selectPortfolio and passes the portfolio Id to the
+   * Redux Action Creator
    */
   renderPortfolioPanels() {
     if (this.props.portfolios.length !== 0) {
@@ -195,7 +212,7 @@ class PortfolioOverView extends Component {
         .map((portfolio, index) => (
           <VrButton
             key={portfolio.name}
-            onClick={() => this.AnimateAfterPortfolioSelect()}
+            onClick={() => this.selectPortfolio(portfolio.id)}
           >
             <Portfolio
               portfolios={this.props.portfolios}
@@ -217,14 +234,21 @@ class PortfolioOverView extends Component {
   renderSelectedPortfolio() {
     if (Object.keys(this.props.selectedPortfolio).length !== 0) {
       return (
-        <Portfolio
-          title={this.props.selectedPortfolio.title}
-          selectedPortfolio={this.props.selectedPortfolio}
-          portfolioId={this.props.selectedPortfolio.id}
-          assetAllocation={this.props.selectedPortfolio.assetAllocation}
-          name={this.props.selectedPortfolio.name}
-          color="black"
-        />
+        <VrButton
+          onClick={() =>
+            this.fetchPortfolioHistoryImage(
+              this.props.selectedPortfolio.history
+            )}
+        >
+          <Portfolio
+            title={this.props.selectedPortfolio.title}
+            selectedPortfolio={this.props.selectedPortfolio}
+            portfolioId={this.props.selectedPortfolio.id}
+            assetAllocation={this.props.selectedPortfolio.assetAllocation}
+            name={this.props.selectedPortfolio.name}
+            color="black"
+          />
+        </VrButton>
       );
     }
   }
@@ -262,6 +286,9 @@ class PortfolioOverView extends Component {
               </View>
             </Animated.View>
 
+          </View>
+          <View>
+            <HistoryImage historyURL={this.props.historyImages["36"]} />
           </View>
           <Animated.View style={this.variationStyles()}>
             {this.renderVariationPanels()}
@@ -312,11 +339,15 @@ class PortfolioOverView extends Component {
 const mapStateToProps = state => ({
   selectedVariation: state.simulation_data.selectedPortfolioVariation,
   portfolios: state.simulation_data.portfolios.byVariation,
-  selectedPortfolio: state.simulation_data.portfolios.selected.metaData
+  selectedPortfolio: state.simulation_data.portfolios.selected.metaData,
+  historyImages: state.simulation_data.historyImages
 });
 
 export default connect(mapStateToProps, {
   fetchPortfolios,
   selectPortfolioVariation,
-  unselectPortfolio
+  unselectPortfolio,
+  selectPortfolio,
+  fetchHistoryData,
+  fetchHistoryImages
 })(PortfolioOverView);

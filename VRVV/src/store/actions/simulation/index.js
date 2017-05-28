@@ -66,13 +66,34 @@ export const fetchHistoryData = (
   months
 ) => async dispatch => {
   try {
-    const HistoryData = [];
     // First allways fetch History for selected Portfolio
     const selectedPortfolioHistory = await axios.get(
       `${PORTFOLIO_HISTORY_API_URL}/${selectedPortfolio}${months ? `?months=${months}` : ""}`
     );
-    HistoryData.push(selectedPortfolioHistory.data);
+    /**
+     * Object contains: 
+     * dateFrom: String, 
+     * dateTo: String,
+     * history: Array
+     */
+    const HistoryData = [selectedPortfolioHistory.data];
     dispatch({ type: FETCH_HISTORY, payload: HistoryData });
+  } catch (err) {
+    console.warn(err);
+  }
+};
+
+// get History Images from the Highcharts export server running on localhost
+export const fetchHistoryImages = historyData => async dispatch => {
+  try {
+    const history = prepareLineChart(historyData);
+    const HistoryImages = await axios.get("http://localhost:3090/history", {
+      params: history
+    });
+    dispatch({
+      type: FETCH_HISTORY_IMAGE,
+      payload: HistoryImages.data
+    });
   } catch (err) {
     console.warn(err);
   }
@@ -98,22 +119,6 @@ export const fetchPortfolios = (portfolioId = "all") => async dispatch => {
     dispatch({
       type: FETCH_PORTFOLIOS,
       payload: allPortfolios.data
-    });
-  } catch (err) {
-    console.warn(err);
-  }
-};
-
-// get History Images from the Highcharts export server running on localhost
-export const getHistoryImages = historyData => async dispatch => {
-  try {
-    const history = prepareLineChart(historyData);
-    const HistoryImages = await axios.get("http://localhost:3090/history", {
-      params: history
-    });
-    dispatch({
-      type: FETCH_HISTORY_IMAGE,
-      payload: HistoryImages.data
     });
   } catch (err) {
     console.warn(err);

@@ -1,4 +1,5 @@
 const LineChart = data => {
+  
   const convertDate = date => {
     // const options = { year: "numeric", month: "long", day: "2-digit" };
     // const d = new Date(date);
@@ -21,6 +22,7 @@ const LineChart = data => {
   };
 
   const buildSeries = data => {
+    console.log(data[0])
     // if only 1 portfolio-history exists in the store
     // create this portfolio-history object by using
     // convertHistoryData - date and percentage
