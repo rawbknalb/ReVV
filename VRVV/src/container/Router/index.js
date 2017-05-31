@@ -6,10 +6,14 @@ import { connect } from "react-redux";
  */
 import PortfolioOverView from "../PortfolioOverView";
 import WelcomeView from "../WelcomeView";
+import EnterView from "../EnterView";
+
 
 class Router extends Component {
   renderComponent() {
     switch (this.props.route) {
+      case "enter":
+        return <EnterView />;
       case "home":
         return <WelcomeView />;
       case "portfolios":

@@ -6,7 +6,7 @@ import {
   Animated,
   VrButton,
   StyleSheet,
-  Plane
+  CylindricalPanel
 } from "react-vr";
 import { connect } from "react-redux";
 import {
@@ -18,32 +18,15 @@ import {
   fetchHistoryImages
 } from "../../store/actions/simulation";
 
-import PortfolioVariation from "../../components/PortfolioVariation";
-import Portfolio from "../../components/Portfolio";
+import { PortfolioVariationList } from "../../utils";
+
+import PortfolioVariation from "../../components/Portfolio/PortfolioVariation";
+import PortfolioSelectButton
+  from "../../components/Portfolio/PortfolioSelectButton";
+import SelectedPortfolio from "../../components/Portfolio/SelectedPortfolio";
 import CurvedPanel from "../../components/CurvedPanel";
 import HistoryImage from "../../components/HistoryImage";
 import { PortfolioOverViewHeadlines } from "../../components/Headlines";
-
-const PortfolioVariationList = [
-  {
-    type: "VestFolio",
-    header: "VestFolio aus ETFs",
-    text: "Mit unseren ETF-VestFolios investierst du in eines von sieben breit gestreuten Portfolios aus passiv verwalteten Indexfonds.",
-    img: "prod-passiv-mo.png"
-  },
-  {
-    type: "GreenFolio",
-    header: "GreenFolio",
-    text: "Mit unseren GreenFolios investierst du ausschließlich in nachhaltige Fonds, die sich dem Schutz von Natur und Menschenrechten widmen.",
-    img: "prod-green-mo.png"
-  },
-  {
-    type: "Aktiv",
-    header: "VestFolio aus aktiv verwalteten Fonds",
-    text: "Mit unseren aktiven VestFolios investierst du in eines von sieben breit gestreuten Portfolios aus aktiv verwalteten Fonds.",
-    img: "prod-aktiv-mo.png"
-  }
-];
 
 class PortfolioOverView extends Component {
   constructor(props) {
@@ -214,16 +197,10 @@ class PortfolioOverView extends Component {
             key={portfolio.name}
             onClick={() => this.selectPortfolio(portfolio.id)}
           >
-            <Portfolio
-              portfolios={this.props.portfolios}
-              portfolioId={portfolio.id}
-              name={portfolio.name}
-              title={portfolio.title}
-              assetAllocation={portfolio.assetAllocation}
+            <PortfolioSelectButton
               color="lightsteelblue"
               index={index}
               margin={0.05}
-              selectedPortfolio={this.props.selectedPortfolio}
               portfolio={portfolio}
             />
           </VrButton>
@@ -231,26 +208,22 @@ class PortfolioOverView extends Component {
     }
   }
 
+  /**
+   * When clicked on the selected Portfolio, the Portfolio History
+   * Image should get fetched
+   */
   renderSelectedPortfolio() {
-    if (Object.keys(this.props.selectedPortfolio).length !== 0) {
-      return (
-        <VrButton
-          onClick={() =>
-            this.fetchPortfolioHistoryImage(
-              this.props.selectedPortfolio.history
-            )}
-        >
-          <Portfolio
-            title={this.props.selectedPortfolio.title}
-            selectedPortfolio={this.props.selectedPortfolio}
-            portfolioId={this.props.selectedPortfolio.id}
-            assetAllocation={this.props.selectedPortfolio.assetAllocation}
-            name={this.props.selectedPortfolio.name}
-            color="black"
-          />
-        </VrButton>
-      );
-    }
+    return (
+      <VrButton
+        onClick={() =>
+          this.fetchPortfolioHistoryImage(this.props.selectedPortfolio.history)}
+      >
+        <SelectedPortfolio
+          selectedPortfolio={this.props.selectedPortfolio}
+          color="black"
+        />
+      </VrButton>
+    );
   }
 
   render() {

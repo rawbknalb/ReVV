@@ -29,7 +29,10 @@ class NavigationMenu extends Component {
           ? <VrButton key={button.text} onClick={() => this.toggleMenu()}>
               <NavButton open={this.state.open} button={button} />
             </VrButton>
-          : <VrButton key={button.text} onClick={() => this.handleNavButtonClick(button.route)}>
+          : <VrButton
+              key={button.text}
+              onClick={() => this.handleNavButtonClick(button.route)}
+            >
               <NavButton
                 position={button.position}
                 open={this.state.open}
@@ -39,6 +42,17 @@ class NavigationMenu extends Component {
     );
   }
 
+  /**
+   * Toggles State and calls moveMenu()
+   */
+  toggleMenu() {
+    this.setState({ open: !this.state.open });
+    this.moveMenu();
+  }
+
+  /**
+   * Moves Menu Toggle Button
+   */
   moveMenu() {
     Animated.spring(this.state.translateX, {
       toValue: this.state.open ? -0.2 : -2,
@@ -46,11 +60,11 @@ class NavigationMenu extends Component {
     }).start();
   }
 
-  toggleMenu() {
-    this.setState({ open: !this.state.open });
-    this.moveMenu();
-  }
-
+  /**
+   * Calls switchRoute and passes the new route
+   * as an argument. After a route-change the Menu
+   * should close again. Call toggleMenu()
+   */
   handleNavButtonClick(route) {
     this.props.switchRoute(route);
     this.toggleMenu();
@@ -69,15 +83,9 @@ class NavigationMenu extends Component {
     justifyContent: "flex-start",
     position: "absolute",
     //layoutOrigin: [0.5, 0.5],
-    transform: [
-      { translateX: this.state.translateX },
-      { rotateX: -20 }
-    ]
-  })
+    transform: [{ translateX: this.state.translateX }, { rotateX: -20 }]
+  });
 }
 
-mapStateToProps = state => ({
-  route: state.route
-});
 
-export default connect(mapStateToProps, { switchRoute })(NavigationMenu);
+export default connect(null, { switchRoute })(NavigationMenu);

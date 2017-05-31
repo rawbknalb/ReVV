@@ -25,3 +25,24 @@ export const rotateOnHover = (count, index) => {
     }
   }
 };
+
+export const PortfolioVariationList = [
+  {
+    type: "VestFolio",
+    header: "VestFolio aus ETFs",
+    text: "Mit unseren ETF-VestFolios investierst du in eines von sieben breit gestreuten Portfolios aus passiv verwalteten Indexfonds.",
+    img: "prod-passiv-mo.png"
+  },
+  {
+    type: "GreenFolio",
+    header: "GreenFolio",
+    text: "Mit unseren GreenFolios investierst du ausschließlich in nachhaltige Fonds, die sich dem Schutz von Natur und Menschenrechten widmen.",
+    img: "prod-green-mo.png"
+  },
+  {
+    type: "Aktiv",
+    header: "VestFolio aus aktiv verwalteten Fonds",
+    text: "Mit unseren aktiven VestFolios investierst du in eines von sieben breit gestreuten Portfolios aus aktiv verwalteten Fonds.",
+    img: "prod-aktiv-mo.png"
+  }
+];

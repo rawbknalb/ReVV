@@ -1,8 +1,6 @@
 import { SWITCH_ROUTE } from "../actions/routes/types";
 
-const initialState = {};
-
-const route_reducer = (state = initialState, action) => {
+const route_reducer = (state = "enter", action) => {
   switch (action.type) {
     case SWITCH_ROUTE:
       return action.payload;

@@ -1,7 +1,7 @@
 import React from "react";
 import { asset, View, Text, Image } from "react-vr";
 
-import FlatPanel from "./FlatPanel";
+import FlatPanel from "../FlatPanel";
 
 class PortfolioVariation extends React.Component {
   render() {
