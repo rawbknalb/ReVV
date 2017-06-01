@@ -118,7 +118,6 @@ class SelectedPortfolio extends React.Component {
               <View
                 style={{
                   flexDirection: "column",
-                  margin: 0.1
                 }}
               >
                 <Text
@@ -127,7 +126,6 @@ class SelectedPortfolio extends React.Component {
                     fontWeight: "200",
                     textAlign: "center",
                     textAlignVertical: "center",
-                    margin: 0.2
                   }}
                 >
                   Asset Allocation

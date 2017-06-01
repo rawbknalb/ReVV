@@ -83,16 +83,16 @@ export const fetchHistoryData = (
   }
 };
 
-// get History Images from the Highcharts export server running on localhost
-export const fetchHistoryImages = historyData => async dispatch => {
+// get History Image from the Highcharts export server running on localhost
+export const fetchHistoryImage = historyData => async dispatch => {
   try {
     const history = prepareLineChart(historyData);
-    const HistoryImages = await axios.get("http://localhost:3090/history", {
+    const HistoryImage = await axios.get("http://localhost:3090/history", {
       params: history
     });
     dispatch({
       type: FETCH_HISTORY_IMAGE,
-      payload: HistoryImages.data
+      payload: HistoryImage.data
     });
   } catch (err) {
     console.warn(err);

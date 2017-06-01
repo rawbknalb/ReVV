@@ -28,7 +28,7 @@ const initialState = {
   selectedPortfolioVariation: { variation: "" },
   forecast: {},
   history: [],
-  historyImages: {},
+  historyImage: {},
   historyRange: 36
 };
 
@@ -88,6 +88,7 @@ const simulation_reducer = (state = initialState, action) => {
     case UNSELECT_PORTFOLIO:
       return {
         ...state,
+        historyImage: {},
         portfolios: {
           ...state.portfolios,
           selected: { portfolioId: null, metaData: [] }
@@ -139,7 +140,7 @@ const simulation_reducer = (state = initialState, action) => {
     case FETCH_HISTORY_IMAGE:
       return {
         ...state,
-        historyImages: { [state.historyRange]: action.payload }
+        historyImage: action.payload
       };
 
     default:

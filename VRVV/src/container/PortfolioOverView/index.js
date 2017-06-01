@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  Pano,
-  Text,
-  View,
-  Animated,
-  VrButton,
-  StyleSheet,
-  CylindricalPanel
-} from "react-vr";
+import { Pano, Text, View, Animated, VrButton, StyleSheet } from "react-vr";
 import { connect } from "react-redux";
 import {
   fetchPortfolios,
@@ -15,7 +7,7 @@ import {
   unselectPortfolio,
   selectPortfolio,
   fetchHistoryData,
-  fetchHistoryImages
+  fetchHistoryImage
 } from "../../store/actions/simulation";
 
 import { PortfolioVariationList } from "../../utils";
@@ -156,7 +148,7 @@ class PortfolioOverView extends Component {
   }
 
   fetchPortfolioHistoryImage(history) {
-    this.props.fetchHistoryImages(history);
+    this.props.fetchHistoryImage(history);
   }
 
   /**
@@ -260,8 +252,8 @@ class PortfolioOverView extends Component {
             </Animated.View>
 
           </View>
-          <View>
-            <HistoryImage historyURL={this.props.historyImages["36"]} />
+          <View style={{position: "absolute"}}>
+            <HistoryImage historyURL={this.props.historyImage} />
           </View>
           <Animated.View style={this.variationStyles()}>
             {this.renderVariationPanels()}
@@ -313,7 +305,7 @@ const mapStateToProps = state => ({
   selectedVariation: state.simulation_data.selectedPortfolioVariation,
   portfolios: state.simulation_data.portfolios.byVariation,
   selectedPortfolio: state.simulation_data.portfolios.selected.metaData,
-  historyImages: state.simulation_data.historyImages
+  historyImage: state.simulation_data.historyImage
 });
 
 export default connect(mapStateToProps, {
@@ -322,5 +314,5 @@ export default connect(mapStateToProps, {
   unselectPortfolio,
   selectPortfolio,
   fetchHistoryData,
-  fetchHistoryImages
+  fetchHistoryImage
 })(PortfolioOverView);
