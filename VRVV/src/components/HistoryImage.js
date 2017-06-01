@@ -3,7 +3,7 @@ import { asset, View, Image } from "react-vr";
 
 import CurvedPanel from "./CurvedPanel";
 
-class Dummy extends React.Component {
+class HistoryImage extends React.Component {
   render() {
     console.log(this.props.historyURL)
     const { historyURL } = this.props;
@@ -22,4 +22,4 @@ class Dummy extends React.Component {
   }
 }
 
-export default Dummy;
+export default HistoryImage;

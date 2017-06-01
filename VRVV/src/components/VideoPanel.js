@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  asset,
   View,
   Text,
   Video,
@@ -47,7 +48,10 @@ class VideoPanel extends React.Component {
         </Text>
         <Video
           style={{ height: 4.5, width: videoWidth }}
-          source={{ uri: "../../static_assets/VisualVest_vid.webm" }}
+          source={[
+            asset("VisualVest_vid.webm", { format: "webm" }),
+            asset("VisualVest_vid.mp4", { format: "mp4" })
+          ]}
           playerState={this.state.playerState}
           onEnded={() => this.animateAfterEnd()}
         />

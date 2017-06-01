@@ -27,6 +27,7 @@ class CurvedPanel extends React.Component {
               width: this.props.width,
               height: this.props.height,
               transform: [{ translate: [0, 0, -5] }],
+              //backgroundColor: "blue"
             }}
           >
 

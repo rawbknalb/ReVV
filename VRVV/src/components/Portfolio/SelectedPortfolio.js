@@ -55,7 +55,7 @@ class SelectedPortfolio extends React.Component {
               style={{
                 position: "absolute",
                 backgroundColor: this.props.color,
-                opacity: 0.5,
+                opacity: 0.9,
                 borderRadius: 0.15,
                 width: 3,
                 height: 4
