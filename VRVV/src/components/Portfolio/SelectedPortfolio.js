@@ -56,7 +56,7 @@ class SelectedPortfolio extends React.Component {
               style={{
                 position: "absolute",
                 backgroundColor: this.props.color,
-                opacity: 0.9,
+                opacity: 0.8,
                 borderRadius: 0.1,
                 width: 6,
                 height: 4
@@ -84,17 +84,7 @@ class SelectedPortfolio extends React.Component {
               >
                 {this.props.selectedPortfolio.name}:
               </Text>
-              {/*<Text
-                style={{
-                  fontSize: 0.3,
-                  fontWeight: "200",
-                  paddingLeft: 0.2,
-                  paddingRight: 0.2,
-                  textAlign: "center"
-                }}
-              >
-                ________________
-              </Text>*/}
+
               <Text
                 style={{
                   fontSize: 0.3,
@@ -106,7 +96,9 @@ class SelectedPortfolio extends React.Component {
               >
                 {this.props.selectedPortfolio.title}
               </Text>
+
               <Plane dimWidth={4} dimHeight={0.03} />
+
               <View
                 style={{
                   flexDirection: "column"

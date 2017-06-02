@@ -18,7 +18,7 @@ class HistoryImage extends React.Component {
               width: 1200,
               height: 800,
               backgroundColor: "black",
-              opacity: 0.5,
+              opacity: 0.7,
               borderRadius: 10
             }}
           />
@@ -48,7 +48,7 @@ class HistoryImage extends React.Component {
               width: 1200,
               height: 800,
               backgroundColor: "black",
-              opacity: 0.5,
+              opacity: 0.7,
               borderRadius: 10
             }}
           />

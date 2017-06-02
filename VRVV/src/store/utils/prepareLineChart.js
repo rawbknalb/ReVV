@@ -1,5 +1,8 @@
-const LineChart = data => {
-  
+const LineChart = (data, unit) => {
+  /**
+   * Converts each date ("YYYY-MM-DD") to (D)D. Months
+   * e.g. "1. May", "12. Jun"
+   */
   const convertDate = date => {
     // const options = { year: "numeric", month: "long", day: "2-digit" };
     // const d = new Date(date);
@@ -11,9 +14,14 @@ const LineChart = data => {
     return convertedDate;
   };
 
-  const convertPercentage = value =>
+  const convertPercentage = (value, unit) =>
     value !== 0 ? parseFloat(value.toFixed(2)) : value;
 
+  /**
+   * Takes the whole historyData-Array as an argument.
+   * Maps over each element and creates a new Array 
+   * [Date, Percentage]. Uses convertDate() and convertPercentage()
+   */
   const convertHistoryData = historyData => {
     return historyData.map(val => [
       convertDate(val.date),
@@ -22,7 +30,7 @@ const LineChart = data => {
   };
 
   const buildSeries = data => {
-    console.log(data[0])
+    console.log(data[0]);
     // if only 1 portfolio-history exists in the store
     // create this portfolio-history object by using
     // convertHistoryData - date and percentage
@@ -71,7 +79,7 @@ const LineChart = data => {
     options: {
       chart: {
         type: "line",
-        backgroundColor: "#4c6eb2"
+        backgroundColor: ""
         // height: "100%"
       },
       title: {
@@ -81,6 +89,7 @@ const LineChart = data => {
         type: "datetime",
         labels: {
           style: {
+            fontSize: "15px",
             color: "#fff"
           }
         }
@@ -92,21 +101,22 @@ const LineChart = data => {
         floor: -9,
         ceiling: 30,
         gridLineDashStyle: "dash",
-        gridLineWidth: 0.8,
+        gridLineWidth: 1.5,
         gridLineColor: "#fff",
         plotLines: [
           {
             color: "#fff",
-            width: 0.5,
+            width: 2,
             value: 0
           }
         ],
         labels: {
           style: {
+            fontSize: "15px",
             color: "#fff"
           },
           formatter: function() {
-            return (this.value + "a");
+            return this.value + "a";
           }
         }
       },

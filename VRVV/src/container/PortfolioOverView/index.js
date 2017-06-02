@@ -172,7 +172,7 @@ class PortfolioOverView extends Component {
           header={variation.header}
           text={variation.text}
           img={variation.img}
-          color="slateblue"
+          color="black"
         />
       </VrButton>
     ));

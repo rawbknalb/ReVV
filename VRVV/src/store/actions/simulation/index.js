@@ -63,7 +63,7 @@ export const selectPortfolioVariation = variation => ({
 // Fetch History Data from VV Service
 export const fetchHistoryData = (
   selectedPortfolio,
-  months
+  months = 36
 ) => async dispatch => {
   try {
     // First allways fetch History for selected Portfolio

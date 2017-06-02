@@ -12,7 +12,10 @@ class App extends React.Component {
   render() {
     return (
       <View>
-        <Pano source={asset("sandnes_flakstadoya_lofoten_panorama_medium_res.jpg")} />
+        <Pano
+          style={{ transform: [{ rotateY: 180 }] }}
+          source={asset("render_3.jpg")}
+        />
         <View
           style={{
             transform: [{ translate: [0, 10.5, -20] }],
@@ -23,10 +26,16 @@ class App extends React.Component {
             position: "absolute"
           }}
         >
-          <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "flex-start" }}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "flex-start"
+            }}
+          >
             <Image
               source={asset("vr_head_green.png")}
-              style={{  width: 2.5, height: 2.5 }}
+              style={{ width: 2.5, height: 2.5 }}
             />
             <Image
               source={asset("visualvest-logo-transparent.png")}

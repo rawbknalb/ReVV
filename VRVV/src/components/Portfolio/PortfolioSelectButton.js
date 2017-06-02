@@ -33,7 +33,7 @@ class Portfolio extends React.Component {
             style={{
               position: "absolute",
               backgroundColor: this.props.color,
-              opacity: 0.8,
+              opacity: 0.7,
               borderRadius: 0.1,
               width: 1,
               height: 1
