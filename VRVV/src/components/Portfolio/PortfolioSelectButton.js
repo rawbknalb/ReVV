@@ -34,7 +34,7 @@ class Portfolio extends React.Component {
               position: "absolute",
               backgroundColor: this.props.color,
               opacity: 0.8,
-              borderRadius: 0.5,
+              borderRadius: 0.1,
               width: 1,
               height: 1
             }}
@@ -46,7 +46,7 @@ class Portfolio extends React.Component {
               fontWeight: "100",
               paddingLeft: 0.2,
               paddingRight: 0.2,
-              color: "black",
+              color: "white",
               textAlign: "center",
               textAlignVertical: "center"
             }}

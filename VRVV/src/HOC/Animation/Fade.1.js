@@ -23,7 +23,7 @@ const FadeHOC = WrappedComponent => {
     render() {
       return (
         <Animated.View style={{ opacity: this.state.opacity }}>
-          <WrappedComponent {...this.props}/>
+          <WrappedComponent />
         </Animated.View>
       );
     }

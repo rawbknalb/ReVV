@@ -4,6 +4,7 @@ import {
   View,
   Text,
   Image,
+  Plane,
   StyleSheet,
   CylindricalPanel,
   VrButton
@@ -56,8 +57,8 @@ class SelectedPortfolio extends React.Component {
                 position: "absolute",
                 backgroundColor: this.props.color,
                 opacity: 0.9,
-                borderRadius: 0.15,
-                width: 3,
+                borderRadius: 0.1,
+                width: 6,
                 height: 4
               }}
             />
@@ -65,24 +66,25 @@ class SelectedPortfolio extends React.Component {
             <View
               style={{
                 flexDirection: "column",
-                justifyContent: "space-between",
+                justifyContent: "space-around",
                 alignItems: "center",
-                width: 3,
+                width: 6,
                 height: 4
               }}
             >
               <Text
                 style={{
-                  fontSize: 0.35,
+                  fontSize: 0.5,
                   fontWeight: "200",
                   paddingLeft: 0.2,
                   paddingRight: 0.2,
-                  textAlign: "center"
+                  textAlign: "center",
+                  color: "tomato"
                 }}
               >
                 {this.props.selectedPortfolio.name}:
               </Text>
-              <Text
+              {/*<Text
                 style={{
                   fontSize: 0.3,
                   fontWeight: "200",
@@ -92,7 +94,7 @@ class SelectedPortfolio extends React.Component {
                 }}
               >
                 ________________
-              </Text>
+              </Text>*/}
               <Text
                 style={{
                   fontSize: 0.3,
@@ -104,20 +106,10 @@ class SelectedPortfolio extends React.Component {
               >
                 {this.props.selectedPortfolio.title}
               </Text>
-              <Text
-                style={{
-                  fontSize: 0.3,
-                  fontWeight: "200",
-                  paddingLeft: 0.2,
-                  paddingRight: 0.2,
-                  textAlign: "center"
-                }}
-              >
-                ____________
-              </Text>
+              <Plane dimWidth={4} dimHeight={0.03} />
               <View
                 style={{
-                  flexDirection: "column",
+                  flexDirection: "column"
                 }}
               >
                 <Text
@@ -125,7 +117,7 @@ class SelectedPortfolio extends React.Component {
                     fontSize: 0.3,
                     fontWeight: "200",
                     textAlign: "center",
-                    textAlignVertical: "center",
+                    textAlignVertical: "center"
                   }}
                 >
                   Asset Allocation

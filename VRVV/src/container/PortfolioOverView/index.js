@@ -40,6 +40,9 @@ class PortfolioOverView extends Component {
         translateZ: new Animated.Value(-1000),
         translateY: new Animated.Value(0),
         scale: new Animated.Value(1)
+      },
+      animateHistoryImage: {
+        opacity: new Animated.Value(0)
       }
     };
   }
@@ -149,6 +152,10 @@ class PortfolioOverView extends Component {
 
   fetchPortfolioHistoryImage(history) {
     this.props.fetchHistoryImage(history);
+    Animated.timing(this.state.animateHistoryImage.opacity, {
+      toValue: 1,
+      duration: 1000
+    }).start();
   }
 
   /**
@@ -190,13 +197,19 @@ class PortfolioOverView extends Component {
             onClick={() => this.selectPortfolio(portfolio.id)}
           >
             <PortfolioSelectButton
-              color="lightsteelblue"
+              color="black"
               index={index}
               margin={0.05}
               portfolio={portfolio}
             />
           </VrButton>
         ));
+    }
+  }
+
+  renderHistoryImage() {
+    if (this.props.historyImage !== null) {
+      return <HistoryImage historyURL={this.props.historyImage} selectedPortfolio={this.props.selectedPortfolio.name}/>;
     }
   }
 
@@ -252,9 +265,9 @@ class PortfolioOverView extends Component {
             </Animated.View>
 
           </View>
-          <View style={{position: "absolute"}}>
-            <HistoryImage historyURL={this.props.historyImage} />
-          </View>
+          <Animated.View style={{ position: "absolute" }}>
+            {this.renderHistoryImage()}
+          </Animated.View>
           <Animated.View style={this.variationStyles()}>
             {this.renderVariationPanels()}
           </Animated.View>
@@ -298,6 +311,11 @@ class PortfolioOverView extends Component {
       { scaleY: this.state.animateSelectedPortfolio.scale }
       //{ scaleX: this.state.animateSelectedPortfolio.scale }
     ]
+  });
+
+  historyyImageStyle = () => ({
+    position: "absolute",
+    opacity: this.state.historyImage.opacity
   });
 }
 

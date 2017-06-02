@@ -28,7 +28,7 @@ const initialState = {
   selectedPortfolioVariation: { variation: "" },
   forecast: {},
   history: [],
-  historyImage: {},
+  historyImage: null,
   historyRange: 36
 };
 
@@ -88,7 +88,7 @@ const simulation_reducer = (state = initialState, action) => {
     case UNSELECT_PORTFOLIO:
       return {
         ...state,
-        historyImage: {},
+        historyImage: null,
         portfolios: {
           ...state.portfolios,
           selected: { portfolioId: null, metaData: [] }
