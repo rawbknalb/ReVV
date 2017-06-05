@@ -49,8 +49,8 @@ class VideoPanel extends React.Component {
         <Video
           style={{ height: 4.5, width: videoWidth }}
           source={[
-            asset("VisualVest_vid.webm", { format: "webm" }),
-            asset("VisualVest_vid.mp4", { format: "mp4" })
+            asset(this.props.videoWebm, { format: "webm" }),
+            asset(this.props.videoMp4, { format: "mp4" })
           ]}
           playerState={this.state.playerState}
           onEnded={() => this.animateAfterEnd()}

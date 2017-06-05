@@ -1,7 +1,8 @@
 import {
   FETCH_FORECAST,
   FETCH_HISTORY,
-  FETCH_HISTORY_IMAGE,
+  FETCH_PORTFOLIO_CHARTS,
+  FETCH_ASSET_ALLOCATION_IMAGE,
   SET_SELECTED_PORTFOLIO,
   UNSELECT_PORTFOLIO,
   SELECT_PORTFOLIO_VARIATION,
@@ -28,7 +29,7 @@ const initialState = {
   selectedPortfolioVariation: { variation: "" },
   forecast: {},
   history: [],
-  historyImage: null,
+  portfolioCharts: null,
   historyRange: 36
 };
 
@@ -88,7 +89,7 @@ const simulation_reducer = (state = initialState, action) => {
     case UNSELECT_PORTFOLIO:
       return {
         ...state,
-        historyImage: null,
+        portfolioCharts: null,
         portfolios: {
           ...state.portfolios,
           selected: { portfolioId: null, metaData: [] }
@@ -110,7 +111,6 @@ const simulation_reducer = (state = initialState, action) => {
 
     case FETCH_FORECAST:
       return { ...state, forecast: action.payload };
-
     /**
      * Returns a new Object with a new history property inside 
      * metaData of the selected Portfolio in store
@@ -137,10 +137,19 @@ const simulation_reducer = (state = initialState, action) => {
       }
       return;
 
-    case FETCH_HISTORY_IMAGE:
+    case FETCH_PORTFOLIO_CHARTS:
       return {
         ...state,
-        historyImage: action.payload
+        portfolioCharts: action.payload
+      };
+
+    case FETCH_ASSET_ALLOCATION_IMAGE:
+      return {
+        ...state,
+        portfolioCharts: {
+          ...state.portfolioCharts,
+          assetAllocation: action.payload
+        }
       };
 
     default:

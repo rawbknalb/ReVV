@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image } from "react-vr";
 
-class PerformanceImage extends React.Component {
+class PortfolioChartImage extends React.Component {
   render() {
     return (
       <View style={{ alignItems: "center", justifyContent: "center" }}>
@@ -25,7 +25,11 @@ class PerformanceImage extends React.Component {
               margin: 50
             }}
           >
-            Wertentwicklung des {this.props.portfolioName}
+            {this.props.chartType === "performance"
+              ? "Wertentwicklung"
+              : "Anlageaufteilung"}
+            {" "}
+            des {this.props.portfolioName}
           </Text>
           <Image
             style={{ width: 1000, height: 600 }}
@@ -38,4 +42,4 @@ class PerformanceImage extends React.Component {
   }
 }
 
-export default PerformanceImage;
+export default PortfolioChartImage;

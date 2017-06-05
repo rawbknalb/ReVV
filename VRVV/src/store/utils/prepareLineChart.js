@@ -95,8 +95,7 @@ const LineChart = (data, type) => {
     options: {
       chart: {
         type: "line",
-        backgroundColor: ""
-        // height: "100%"
+        backgroundColor: "none"
       },
       legend: {
         enabled: false

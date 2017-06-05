@@ -2,7 +2,8 @@ import axios from "axios";
 import {
   FETCH_FORECAST,
   FETCH_HISTORY,
-  FETCH_HISTORY_IMAGE,
+  FETCH_PORTFOLIO_CHARTS,
+  FETCH_ASSET_ALLOCATION_IMAGE,
   SET_SELECTED_PORTFOLIO,
   UNSELECT_PORTFOLIO,
   SELECT_PORTFOLIO_VARIATION,
@@ -12,6 +13,7 @@ import {
 } from "./types";
 
 import prepareLineChart from "../../utils/prepareLineChart";
+import prepareDonutChart from "../../utils/prepareDonutChart";
 
 const FORECAST_API_URL =
   "https://service.visualvest.de/anlageziel-functional-service/simulation";
@@ -64,32 +66,32 @@ export const selectPortfolioVariation = variation => ({
 export const fetchHistoryData = (
   portfolioId,
   months = 36,
-  images
+  images,
+  assetAllocation
 ) => async dispatch => {
   try {
     // First allways fetch History for selected Portfolio
     const selectedPortfolioHistory = await axios.get(
       `${PORTFOLIO_HISTORY_API_URL}/${portfolioId}${months ? `?months=${months}` : ""}`
     );
-    /**
-     * Object contains: 
-     * dateFrom: String, 
-     * dateTo: String,
-     * history: Array
-     */
     const historyData = [selectedPortfolioHistory.data];
     dispatch({ type: FETCH_HISTORY, payload: historyData });
+
     // If images already exist (!= null), fetch historyImages
     if (images !== null) {
       const percentagePerformance = prepareLineChart(historyData, "%");
       const currencyPerformance = prepareLineChart(historyData, "€");
+      const assetAllocationPlotData = prepareDonutChart(assetAllocation);
 
+      // fetch the Performance Image in [%]. Returns resolved Promise
       const percentagePerformanceImage = await axios.get(
         "http://localhost:3090/history",
         {
           params: percentagePerformance
         }
       );
+
+      // fetch the Performance Image in [€]. Returns resolved Promise
       const currencyPerformanceImage = await axios.get(
         "http://localhost:3090/history",
         {
@@ -97,11 +99,20 @@ export const fetchHistoryData = (
         }
       );
 
+      // fetch the assetAllocation Image. Returns resolved Promise
+      const assetAllocationImage = await axios.get(
+        "http://localhost:3090/history",
+        {
+          params: assetAllocationPlotData
+        }
+      );
+
       dispatch({
-        type: FETCH_HISTORY_IMAGE,
+        type: FETCH_PORTFOLIO_CHARTS,
         payload: [
-          percentagePerformanceImage.data,
-          currencyPerformanceImage.data
+          { type: "percentagePerformance", ...percentagePerformanceImage.data },
+          { type: "assetAllocation", ...assetAllocationImage.data },
+          { type: "currentyPerformance", ...currencyPerformanceImage.data }
         ]
       });
     }
@@ -111,17 +122,24 @@ export const fetchHistoryData = (
 };
 
 // get History Image from the Highcharts export server running on localhost
-export const fetchHistoryImages = historyData => async dispatch => {
+export const fetchPortfolioCharts = (
+  historyData,
+  assetAllocation
+) => async dispatch => {
   try {
     const percentagePerformance = prepareLineChart(historyData, "%");
     const currencyPerformance = prepareLineChart(historyData, "€");
+    const assetAllocationPlotData = prepareDonutChart(assetAllocation);
 
+    // fetch the Performance Image in [%]. Returns resolved Promise
     const percentagePerformanceImage = await axios.get(
       "http://localhost:3090/history",
       {
         params: percentagePerformance
       }
     );
+
+    // fetch the Performance Image in [€]. Returns resolved Promise
     const currencyPerformanceImage = await axios.get(
       "http://localhost:3090/history",
       {
@@ -129,9 +147,21 @@ export const fetchHistoryImages = historyData => async dispatch => {
       }
     );
 
+    // fetch the assetAllocation Image. Returns resolved Promise
+    const assetAllocationImage = await axios.get(
+      "http://localhost:3090/history",
+      {
+        params: assetAllocationPlotData
+      }
+    );
+
     dispatch({
-      type: FETCH_HISTORY_IMAGE,
-      payload: [percentagePerformanceImage.data, currencyPerformanceImage.data]
+      type: FETCH_PORTFOLIO_CHARTS,
+      payload: [
+        { type: "performance", ...percentagePerformanceImage.data },
+        { type: "allocation", ...assetAllocationImage.data },
+        { type: "performance", ...currencyPerformanceImage.data }
+      ]
     });
   } catch (err) {
     console.warn(err);
