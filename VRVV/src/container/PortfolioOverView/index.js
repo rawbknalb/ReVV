@@ -5,9 +5,9 @@ import {
   fetchPortfolios,
   selectPortfolioVariation,
   unselectPortfolio,
-  selectPortfolio,
+  setSelectedPortfolio,
   fetchHistoryData,
-  fetchHistoryImage
+  fetchHistoryImages
 } from "../../store/actions/simulation";
 
 import { PortfolioVariationList } from "../../utils";
@@ -17,7 +17,7 @@ import PortfolioSelectButton
   from "../../components/Portfolio/PortfolioSelectButton";
 import SelectedPortfolio from "../../components/Portfolio/SelectedPortfolio";
 import CurvedPanel from "../../components/CurvedPanel";
-import HistoryImage from "../../components/HistoryImage";
+import PerformancePanel from "../../components/PerformancePanel";
 import { PortfolioOverViewHeadlines } from "../../components/Headlines";
 
 class PortfolioOverView extends Component {
@@ -140,18 +140,20 @@ class PortfolioOverView extends Component {
     this.dropDown();
   }
 
+  /**
+   * First selects the clicked Portfolio with the Portfolio Id
+   * Then fetches the HistoryData. 
+   * If historyImages already exist (!= null), the new Portfolio History Images
+   * should get fetched. Therefore the historyImage is passed to the Action Creator
+   */
   selectPortfolio(portfolioId) {
-    this.props.selectPortfolio(portfolioId);
-    this.props.fetchHistoryData(portfolioId);
+    this.props.setSelectedPortfolio(portfolioId);
+    this.props.fetchHistoryData(portfolioId, null, this.props.performanceImages);
     this.AnimateAfterPortfolioSelect();
   }
 
-  fetchPortfolioDetails(portfolioId) {
-    this.props.fetchHistoryData(portfolioId).then;
-  }
-
-  fetchPortfolioHistoryImage(history) {
-    this.props.fetchHistoryImage(history);
+  fetchPortfolioPerformanceImages(history) {
+    this.props.fetchHistoryImages(history);
     Animated.timing(this.state.animateHistoryImage.opacity, {
       toValue: 1,
       duration: 1000
@@ -207,9 +209,14 @@ class PortfolioOverView extends Component {
     }
   }
 
-  renderHistoryImage() {
-    if (this.props.historyImage !== null) {
-      return <HistoryImage historyURL={this.props.historyImage} selectedPortfolio={this.props.selectedPortfolio.name}/>;
+  renderPortfolioPerformance() {
+    if (this.props.performanceImages !== null) {
+      return (
+        <PerformancePanel
+          images={this.props.performanceImages}
+          selectedPortfolio={this.props.selectedPortfolio.name}
+        />
+      );
     }
   }
 
@@ -221,7 +228,7 @@ class PortfolioOverView extends Component {
     return (
       <VrButton
         onClick={() =>
-          this.fetchPortfolioHistoryImage(this.props.selectedPortfolio.history)}
+          this.fetchPortfolioPerformanceImages(this.props.selectedPortfolio.history)}
       >
         <SelectedPortfolio
           selectedPortfolio={this.props.selectedPortfolio}
@@ -266,7 +273,7 @@ class PortfolioOverView extends Component {
 
           </View>
           <Animated.View style={{ position: "absolute" }}>
-            {this.renderHistoryImage()}
+            {this.renderPortfolioPerformance()}
           </Animated.View>
           <Animated.View style={this.variationStyles()}>
             {this.renderVariationPanels()}
@@ -323,14 +330,14 @@ const mapStateToProps = state => ({
   selectedVariation: state.simulation_data.selectedPortfolioVariation,
   portfolios: state.simulation_data.portfolios.byVariation,
   selectedPortfolio: state.simulation_data.portfolios.selected.metaData,
-  historyImage: state.simulation_data.historyImage
+  performanceImages: state.simulation_data.historyImage
 });
 
 export default connect(mapStateToProps, {
   fetchPortfolios,
   selectPortfolioVariation,
   unselectPortfolio,
-  selectPortfolio,
+  setSelectedPortfolio,
   fetchHistoryData,
-  fetchHistoryImage
+  fetchHistoryImages
 })(PortfolioOverView);

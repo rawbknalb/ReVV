@@ -3,7 +3,7 @@ import {
   FETCH_FORECAST,
   FETCH_HISTORY,
   FETCH_HISTORY_IMAGE,
-  SELECT_PORTFOLIO,
+  SET_SELECTED_PORTFOLIO,
   UNSELECT_PORTFOLIO,
   SELECT_PORTFOLIO_VARIATION,
   COMPUTE_PORTFOLIO,
@@ -22,7 +22,7 @@ const PORTFOLIO_METADATA_API_URL =
 const PORTFOLIO_HISTORY_IMG_API_URL = "http://localhost:3090/history";
 
 export const fetchForecast = (
-  portfolioID,
+  portfolioId,
   balance,
   monthlyRate,
   targetAmount,
@@ -30,7 +30,7 @@ export const fetchForecast = (
 ) => async dispatch => {
   const anlageziel = {
     productType: "PORTFOLIO",
-    portfolioId: portfolioID,
+    portfolioId: portfolioId,
     balance: balance || 0,
     monthlyRate: monthlyRate || 25,
     targetAmount: targetAmount || null,
@@ -48,8 +48,8 @@ export const fetchForecast = (
   }
 };
 
-export const selectPortfolio = portfolioId => ({
-  type: SELECT_PORTFOLIO,
+export const setSelectedPortfolio = portfolioId => ({
+  type: SET_SELECTED_PORTFOLIO,
   payload: { portfolioId: portfolioId }
 });
 
@@ -62,13 +62,14 @@ export const selectPortfolioVariation = variation => ({
 
 // Fetch History Data from VV Service
 export const fetchHistoryData = (
-  selectedPortfolio,
-  months = 36
+  portfolioId,
+  months = 36,
+  images
 ) => async dispatch => {
   try {
     // First allways fetch History for selected Portfolio
     const selectedPortfolioHistory = await axios.get(
-      `${PORTFOLIO_HISTORY_API_URL}/${selectedPortfolio}${months ? `?months=${months}` : ""}`
+      `${PORTFOLIO_HISTORY_API_URL}/${portfolioId}${months ? `?months=${months}` : ""}`
     );
     /**
      * Object contains: 
@@ -76,23 +77,61 @@ export const fetchHistoryData = (
      * dateTo: String,
      * history: Array
      */
-    const HistoryData = [selectedPortfolioHistory.data];
-    dispatch({ type: FETCH_HISTORY, payload: HistoryData });
+    const historyData = [selectedPortfolioHistory.data];
+    dispatch({ type: FETCH_HISTORY, payload: historyData });
+    // If images already exist (!= null), fetch historyImages
+    if (images !== null) {
+      const percentagePerformance = prepareLineChart(historyData, "%");
+      const currencyPerformance = prepareLineChart(historyData, "€");
+
+      const percentagePerformanceImage = await axios.get(
+        "http://localhost:3090/history",
+        {
+          params: percentagePerformance
+        }
+      );
+      const currencyPerformanceImage = await axios.get(
+        "http://localhost:3090/history",
+        {
+          params: currencyPerformance
+        }
+      );
+
+      dispatch({
+        type: FETCH_HISTORY_IMAGE,
+        payload: [
+          percentagePerformanceImage.data,
+          currencyPerformanceImage.data
+        ]
+      });
+    }
   } catch (err) {
     console.warn(err);
   }
 };
 
 // get History Image from the Highcharts export server running on localhost
-export const fetchHistoryImage = historyData => async dispatch => {
+export const fetchHistoryImages = historyData => async dispatch => {
   try {
-    const history = prepareLineChart(historyData);
-    const HistoryImage = await axios.get("http://localhost:3090/history", {
-      params: history
-    });
+    const percentagePerformance = prepareLineChart(historyData, "%");
+    const currencyPerformance = prepareLineChart(historyData, "€");
+
+    const percentagePerformanceImage = await axios.get(
+      "http://localhost:3090/history",
+      {
+        params: percentagePerformance
+      }
+    );
+    const currencyPerformanceImage = await axios.get(
+      "http://localhost:3090/history",
+      {
+        params: currencyPerformance
+      }
+    );
+
     dispatch({
       type: FETCH_HISTORY_IMAGE,
-      payload: HistoryImage.data
+      payload: [percentagePerformanceImage.data, currencyPerformanceImage.data]
     });
   } catch (err) {
     console.warn(err);

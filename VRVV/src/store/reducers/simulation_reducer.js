@@ -2,7 +2,7 @@ import {
   FETCH_FORECAST,
   FETCH_HISTORY,
   FETCH_HISTORY_IMAGE,
-  SELECT_PORTFOLIO,
+  SET_SELECTED_PORTFOLIO,
   UNSELECT_PORTFOLIO,
   SELECT_PORTFOLIO_VARIATION,
   COMPUTE_PORTFOLIO,
@@ -65,7 +65,7 @@ const simulation_reducer = (state = initialState, action) => {
     //   };
 
 
-    case SELECT_PORTFOLIO:
+    case SET_SELECTED_PORTFOLIO:
       // after selecting a new portfolio this function filters
       // the selected Portfolio
       return {

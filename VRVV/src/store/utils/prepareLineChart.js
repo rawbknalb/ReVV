@@ -1,4 +1,4 @@
-const LineChart = (data, unit) => {
+const LineChart = (data, type) => {
   /**
    * Converts each date ("YYYY-MM-DD") to (D)D. Months
    * e.g. "1. May", "12. Jun"
@@ -14,29 +14,46 @@ const LineChart = (data, unit) => {
     return convertedDate;
   };
 
-  const convertPercentage = (value, unit) =>
-    value !== 0 ? parseFloat(value.toFixed(2)) : value;
+  const convertPercentage = value => {
+    return value !== 0 ? parseFloat(value.toFixed(2)) : value;
+  };
+
+  const convertCurrency = value => {
+    return value !== 0 ? (1 + parseFloat(value.toFixed(2)) / 100) * 500 : 500;
+  };
+
+  /**
+   * Switch Function gets value and type as arguments.
+   * Depending on the type 
+   */
+  const convertValue = (value, type) => {
+    switch (type) {
+      case "%":
+        return convertPercentage(value);
+      case "€":
+        return convertCurrency(value);
+    }
+  };
 
   /**
    * Takes the whole historyData-Array as an argument.
    * Maps over each element and creates a new Array 
    * [Date, Percentage]. Uses convertDate() and convertPercentage()
    */
-  const convertHistoryData = historyData => {
-    return historyData.map(val => [
-      convertDate(val.date),
-      convertPercentage(val.percentage)
+  const convertHistoryData = (historyData, type) => {
+    return historyData.map(dataPoint => [
+      convertDate(dataPoint.date),
+      convertValue(dataPoint.percentage, type)
     ]);
   };
 
-  const buildSeries = data => {
-    console.log(data[0]);
+  const buildSeries = (data, type) => {
     // if only 1 portfolio-history exists in the store
     // create this portfolio-history object by using
     // convertHistoryData - date and percentage
     const portfolio_1 = {
       ...data[0],
-      history: convertHistoryData(data[0].history)
+      history: convertHistoryData(data[0].history, type)
     };
     // if there are 2 portfolio-histories in the store
     // create the second portfolio-history object
@@ -65,7 +82,6 @@ const LineChart = (data, unit) => {
     // return only 1 portfolio-history object
     return [
       {
-        name: "Portfolio Name",
         type: "line",
         data: portfolio_1.history
         //dataLabels: { enabled: false }
@@ -74,13 +90,16 @@ const LineChart = (data, unit) => {
   };
 
   const options = {
-    scale: 2.5 /*(1800x1200*/,
+    scale: 2 /*(1800x1200*/,
     type: "png",
     options: {
       chart: {
         type: "line",
         backgroundColor: ""
         // height: "100%"
+      },
+      legend: {
+        enabled: false
       },
       title: {
         text: ""
@@ -96,10 +115,14 @@ const LineChart = (data, unit) => {
       },
       yAxis: {
         title: {
-          text: ""
+          text: `Wertentwicklung ${type === "€" ? "(Basis: 500 €)" : "(Prozentual %)"}`,
+          style: {
+            fontSize: "15px",
+            color: "#fff"
+          }
         },
-        floor: -9,
-        ceiling: 30,
+        // floor: -9,
+        // ceiling: 30,
         gridLineDashStyle: "dash",
         gridLineWidth: 1.5,
         gridLineColor: "#fff",
@@ -125,8 +148,8 @@ const LineChart = (data, unit) => {
           lineWidth: 1.5
         }
       },
-      colors: ["#b8e986", "#00afd2"],
-      series: buildSeries(data)
+      colors: [type === "€" ? "#b8e986" : "#ff7f50", "#00afd2"],
+      series: buildSeries(data, type)
     }
   };
 
