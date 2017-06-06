@@ -50,7 +50,7 @@ class NavigationMenu extends Component {
               <Text
                 style={{
                   fontSize: 0.2,
-                  fontWeight: "bold",
+                  fontWeight: "400",
                   //color: "palegreen",
                   color: "white",
                   textAlign: "center"
@@ -64,9 +64,9 @@ class NavigationMenu extends Component {
                 <Text
                   style={{
                     fontSize: 0.2,
-                    fontWeight: "bold",
+                    fontWeight: "400",
                     //color: "palegreen",
-                    color: "black",
+                    color: "white",
                     textAlign: "center"
                   }}
                 >

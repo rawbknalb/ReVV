@@ -135,7 +135,7 @@ export class WelcomeViewHeadlines extends React.Component {
           </Text>
         </View>
         <Image
-          style={{ width: 600, height: 600 }}
+          style={{ width: 700, height: 600, borderRadius: 20 }}
           source={asset("smarte_algorithmen.png")}
         />
       </View>

@@ -30,13 +30,15 @@ class CurvedPanel extends React.Component {
         >
           <View
             style={{
-              flexDirection: this.props.flexDirection ? this.props.flexDirection : "row",
+              flexDirection: this.props.flexDirection !== undefined
+                ? this.props.flexDirection
+                : "row",
               justifyContent: this.props.justifyContent,
               alignItems: "center",
               width: this.props.width,
               height: this.props.height,
               transform: [{ translate: [0, 0, -5] }],
-              //backgroundColor: "blue"
+              backgroundColor: "papayawhip"
             }}
           >
 
