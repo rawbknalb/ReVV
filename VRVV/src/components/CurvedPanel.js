@@ -17,7 +17,7 @@ class CurvedPanel extends React.Component {
               translate: [
                 0,
                 -1.5,
-                this.props.translateZ !== undefined ? this.props.translateZ : -3
+                this.props.translateZ !== undefined ? this.props.translateZ : -2
               ]
             },
             { rotateY: -0 }
