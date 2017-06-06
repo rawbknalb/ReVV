@@ -6,7 +6,7 @@ import CurvedPanel from "../../components/CurvedPanel";
 class VisualVest extends Component {
   render() {
     return (
-      <View style={{ transform: [{ translate: [0, 0, -2] }] }}>
+      <View style={{ transform: [{ translate: [0, 0, -3] }] }}>
         <CurvedPanel
           width={4096}
           height={800}
