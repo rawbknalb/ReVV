@@ -12,6 +12,7 @@
     "body-parser": "^1.16.1",
     "cors": "^2.8.1",
     "express": "^4.14.1",
+    "highcharts-export-server": "^1.0.15",
     "jwt-simple": "^0.5.1",
     "mongoose": "^4.8.2",
     "morgan": "^1.8.1",
