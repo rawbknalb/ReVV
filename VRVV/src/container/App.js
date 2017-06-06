@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import PerformanceView from "./PerformanceView";
 import PortfolioOverView from "./PortfolioOverView";
+import Logo from "../components/Logo";
 
 import NavigationMenu from "./NavigationMenu";
 import Router from "./Router";
@@ -18,7 +19,7 @@ class App extends React.Component {
         />
         <View
           style={{
-            transform: [{ translate: [0, 10.5, -20] }],
+            transform: [{ translate: [0, 7, -20] }],
             layoutOrigin: [0.5, 0.5],
             flexDirection: "column",
             justifyContent: "center",
@@ -28,20 +29,15 @@ class App extends React.Component {
         >
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "flex-start"
+              width: 15,
+              height: 4,
+              borderRadius: 0.1,
+              backgroundColor: "black",
+              opacity: 0.8,
+              position: "absolute"
             }}
-          >
-            <Image
-              source={asset("vr_head_green.png")}
-              style={{ width: 2.5, height: 2.5 }}
-            />
-            <Image
-              source={asset("visualvest-logo-transparent.png")}
-              style={{ width: 4.4, height: 2 }}
-            />
-          </View>
+          />
+          <Logo />
         </View>
         <View style={{ transform: [{ translate: [0, -2.5, -6] }] }}>
           <NavigationMenu />

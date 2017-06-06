@@ -12,7 +12,12 @@ class PortfolioChartPanel extends React.Component {
   render() {
     const { historyURL } = this.props;
     return (
-      <CurvedPanel width={4096} height={800} density={8000}>
+      <CurvedPanel
+        width={4096}
+        height={800}
+        density={8000}
+        justifyContent="space-between"
+      >
         {this.props.images.map((image, index) => (
           <PortfolioChartImage
             key={index}

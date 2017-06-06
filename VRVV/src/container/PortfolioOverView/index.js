@@ -66,7 +66,7 @@ class PortfolioOverView extends Component {
           friction: 6
         }),
         Animated.spring(this.state.animateVariations.translateY, {
-          toValue: 10,
+          toValue: 8,
           friction: 3,
           duration: 1000
         })
