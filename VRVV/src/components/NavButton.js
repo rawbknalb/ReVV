@@ -18,7 +18,7 @@ class NavigationMenu extends Component {
 
   openMenu(position) {
     Animated.spring(this.state.translateX, {
-      toValue: position,
+      toValue: position*1.15,
       spring: 1,
       tenstion: 10
     }).start();
@@ -49,10 +49,10 @@ class NavigationMenu extends Component {
           ? <Animated.View style={this.buttonStyle()}>
               <Text
                 style={{
-                  fontSize: 0.1,
-                  fontWeight: "200",
+                  fontSize: 0.2,
+                  fontWeight: "400",
                   //color: "palegreen",
-                  color: "black",
+                  color: "white",
                   textAlign: "center"
                 }}
               >
@@ -63,10 +63,10 @@ class NavigationMenu extends Component {
               {this.props.button.type === "toggle" &&
                 <Text
                   style={{
-                    fontSize: 0.1,
-                    fontWeight: "200",
+                    fontSize: 0.2,
+                    fontWeight: "400",
                     //color: "palegreen",
-                    color: "black",
+                    color: "white",
                     textAlign: "center"
                   }}
                 >
@@ -80,9 +80,9 @@ class NavigationMenu extends Component {
 
   buttonStyle(index) {
     return {
-      width: 0.5,
+      width: 1,
       height: 0.5,
-      borderRadius: 1,
+      borderRadius: 0.1,
       //layoutOrigin: [0.5, 0.5],
       position: "absolute",
       borderColor: "white",

@@ -14,8 +14,9 @@ class VideoPanel extends React.Component {
     super(props);
     this.state = {
       videoPosition: {
-        translateY: 2,
-        translateZ: new Animated.Value(-10)
+        translateX: 15,
+        translateY: -2,
+        translateZ: new Animated.Value(-15)
       },
       playerState: new MediaPlayerState({ autoPlay: false, muted: false }) // init with muted, autoPlay
     };
@@ -23,16 +24,26 @@ class VideoPanel extends React.Component {
 
   animateAfterEnd() {
     Animated.spring(this.state.videoPosition.translateZ, {
-      toValue: -15,
+      toValue: -20,
       spring: 2
     }).start();
   }
 
   render() {
-    const videoWidth = 8;
-
+    const videoWidth = 10;
+    const videoHeight = videoWidth / (16 / 9);
     return (
       <Animated.View style={this.videoContainerStyle()}>
+        <View
+          style={{
+            width: videoWidth * 1.2,
+            height: videoHeight * 1.3,
+            backgroundColor: "black",
+            position: "absolute",
+            opacity: 0.8,
+            borderRadius: 0.2
+          }}
+        />
         <Text
           style={{
             fontSize: 0.6,
@@ -47,16 +58,16 @@ class VideoPanel extends React.Component {
           Warum VisualVest...
         </Text>
         <Video
-          style={{ height: 4.5, width: videoWidth }}
+          style={{ height: videoHeight, width: videoWidth }}
           source={[
-            asset("VisualVest_vid.webm", { format: "webm" }),
-            asset("VisualVest_vid.mp4", { format: "mp4" })
+            asset(this.props.videoWebm, { format: "webm" }),
+            asset(this.props.videoMp4, { format: "mp4" })
           ]}
           playerState={this.state.playerState}
           onEnded={() => this.animateAfterEnd()}
         />
         <VideoControl
-          style={{ height: 0.3, width: videoWidth }}
+          style={{ height: videoHeight / 8, width: videoWidth }}
           playerState={this.state.playerState}
         />
       </Animated.View>
@@ -67,10 +78,10 @@ class VideoPanel extends React.Component {
     alignItems: "center",
     layoutOrigin: [0.5, 0.5, 0],
     transform: [
-      { translateX: -8 },
+      { translateX: this.state.videoPosition.translateX },
       { translateY: this.state.videoPosition.translateY },
       { translateZ: this.state.videoPosition.translateZ },
-      { rotateY: 30 }
+      { rotateY: -45 }
     ]
   });
 }

@@ -5,9 +5,10 @@ import {
   fetchPortfolios,
   selectPortfolioVariation,
   unselectPortfolio,
-  selectPortfolio,
+  setSelectedPortfolio,
   fetchHistoryData,
-  fetchHistoryImage
+  fetchPortfolioCharts,
+  fetchAssetAllocationImage
 } from "../../store/actions/simulation";
 
 import { PortfolioVariationList } from "../../utils";
@@ -17,7 +18,7 @@ import PortfolioSelectButton
   from "../../components/Portfolio/PortfolioSelectButton";
 import SelectedPortfolio from "../../components/Portfolio/SelectedPortfolio";
 import CurvedPanel from "../../components/CurvedPanel";
-import HistoryImage from "../../components/HistoryImage";
+import PortfolioChartPanel from "../../components/PortfolioChartPanel";
 import { PortfolioOverViewHeadlines } from "../../components/Headlines";
 
 class PortfolioOverView extends Component {
@@ -38,7 +39,7 @@ class PortfolioOverView extends Component {
       },
       animateSelectedPortfolio: {
         translateZ: new Animated.Value(-1000),
-        translateY: new Animated.Value(0),
+        translateY: new Animated.Value(-1),
         scale: new Animated.Value(1)
       },
       animateHistoryImage: {
@@ -65,7 +66,7 @@ class PortfolioOverView extends Component {
           friction: 6
         }),
         Animated.spring(this.state.animateVariations.translateY, {
-          toValue: 10,
+          toValue: 8,
           friction: 3,
           duration: 1000
         })
@@ -115,7 +116,7 @@ class PortfolioOverView extends Component {
       this.state.newMount
       ? Animated.parallel([
           Animated.spring(this.state.animatePortfolios.translateY, {
-            toValue: 2,
+            toValue: 2.5,
             friction: 8
           }),
           Animated.spring(this.state.animateSelectedPortfolio.translateZ, {
@@ -134,24 +135,44 @@ class PortfolioOverView extends Component {
         }).start();
   }
 
+  AnimateAfterSelectedPortfolioClick() {
+    Animated.spring(this.state.animateSelectedPortfolio.translateY, {
+      toValue: 4.5,
+      spring: 5,
+      tension: 2
+    }).start();
+  }
+
   handleVariationClick(variation) {
     this.props.selectPortfolioVariation(variation);
     this.slideToCeiling();
     this.dropDown();
   }
 
-  selectPortfolio(portfolioId) {
-    this.props.selectPortfolio(portfolioId);
-    this.props.fetchHistoryData(portfolioId);
+  /**
+   * First selects the clicked Portfolio with the Portfolio Id
+   * Then fetches the HistoryData. 
+   * If historyImages already exist (!= null), the new Portfolio History Images
+   * should get fetched. Therefore the historyImage is passed to the Action Creator
+   */
+  selectPortfolio(portfolio) {
+    this.props.setSelectedPortfolio(portfolio.id);
+    this.props.fetchHistoryData(
+      portfolio.id,
+      null,
+      this.props.portfolioCharts,
+      portfolio.assetAllocation
+    );
     this.AnimateAfterPortfolioSelect();
   }
 
-  fetchPortfolioDetails(portfolioId) {
-    this.props.fetchHistoryData(portfolioId).then;
+  handleSelectedPortfolioClick(history, assetAllocation) {
+    this.fetchPortfolioCharts(history, assetAllocation);
+    this.AnimateAfterSelectedPortfolioClick();
   }
 
-  fetchPortfolioHistoryImage(history) {
-    this.props.fetchHistoryImage(history);
+  fetchPortfolioCharts(history, assetAllocation) {
+    this.props.fetchPortfolioCharts(history, assetAllocation);
     Animated.timing(this.state.animateHistoryImage.opacity, {
       toValue: 1,
       duration: 1000
@@ -194,7 +215,7 @@ class PortfolioOverView extends Component {
         .map((portfolio, index) => (
           <VrButton
             key={portfolio.name}
-            onClick={() => this.selectPortfolio(portfolio.id)}
+            onClick={() => this.selectPortfolio(portfolio)}
           >
             <PortfolioSelectButton
               color="black"
@@ -207,21 +228,29 @@ class PortfolioOverView extends Component {
     }
   }
 
-  renderHistoryImage() {
-    if (this.props.historyImage !== null) {
-      return <HistoryImage historyURL={this.props.historyImage} selectedPortfolio={this.props.selectedPortfolio.name}/>;
+  renderPortfolioChartPanel() {
+    if (this.props.portfolioCharts !== null) {
+      return (
+        <PortfolioChartPanel
+          images={this.props.portfolioCharts}
+          portfolioName={this.props.selectedPortfolio.name}
+        />
+      );
     }
   }
 
   /**
-   * When clicked on the selected Portfolio, the Portfolio History
+   * When clicked on the selected Portfolio, the Por tfolio History
    * Image should get fetched
    */
   renderSelectedPortfolio() {
     return (
       <VrButton
         onClick={() =>
-          this.fetchPortfolioHistoryImage(this.props.selectedPortfolio.history)}
+          this.handleSelectedPortfolioClick(
+            this.props.selectedPortfolio.history,
+            this.props.selectedPortfolio.assetAllocation
+          )}
       >
         <SelectedPortfolio
           selectedPortfolio={this.props.selectedPortfolio}
@@ -235,7 +264,7 @@ class PortfolioOverView extends Component {
     return (
       <View>
         <View>
-          <PortfolioOverViewHeadlines />
+          {/*<PortfolioOverViewHeadlines />*/}
           <View
             style={{
               flexDirection: "column",
@@ -255,7 +284,6 @@ class PortfolioOverView extends Component {
                 <Text style={{ fontSize: 0.2 }}>Höheres Risiko</Text>
                 <Text style={{ fontSize: 0.2 }}>Höhere Rendite</Text>
               </View>
-
             </Animated.View>
 
             <Animated.View style={this.selectedPortfolioStyles()}>
@@ -266,7 +294,7 @@ class PortfolioOverView extends Component {
 
           </View>
           <Animated.View style={{ position: "absolute" }}>
-            {this.renderHistoryImage()}
+            {this.renderPortfolioChartPanel()}
           </Animated.View>
           <Animated.View style={this.variationStyles()}>
             {this.renderVariationPanels()}
@@ -307,7 +335,7 @@ class PortfolioOverView extends Component {
   selectedPortfolioStyles = () => ({
     transform: [
       { translateZ: this.state.animateSelectedPortfolio.translateZ },
-      { translateY: -1 },
+      { translateY: this.state.animateSelectedPortfolio.translateY },
       { scaleY: this.state.animateSelectedPortfolio.scale }
       //{ scaleX: this.state.animateSelectedPortfolio.scale }
     ]
@@ -323,14 +351,15 @@ const mapStateToProps = state => ({
   selectedVariation: state.simulation_data.selectedPortfolioVariation,
   portfolios: state.simulation_data.portfolios.byVariation,
   selectedPortfolio: state.simulation_data.portfolios.selected.metaData,
-  historyImage: state.simulation_data.historyImage
+  portfolioCharts: state.simulation_data.portfolioCharts
 });
 
 export default connect(mapStateToProps, {
   fetchPortfolios,
   selectPortfolioVariation,
   unselectPortfolio,
-  selectPortfolio,
+  setSelectedPortfolio,
   fetchHistoryData,
-  fetchHistoryImage
+  fetchPortfolioCharts,
+  fetchAssetAllocationImage
 })(PortfolioOverView);

@@ -12,7 +12,16 @@ class CurvedPanel extends React.Component {
           radius: 10
         }}
         style={{
-          transform: [{ translate: [0, -1.5, -2] }, { rotateY: -0}],
+          transform: [
+            {
+              translate: [
+                0,
+                -1.5,
+                this.props.translateZ !== undefined ? this.props.translateZ : -2
+              ]
+            },
+            { rotateY: -0 }
+          ],
           layoutOrigin: [0.5, 0.5]
         }}
       >
@@ -21,13 +30,15 @@ class CurvedPanel extends React.Component {
         >
           <View
             style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
+              flexDirection: this.props.flexDirection !== undefined
+                ? this.props.flexDirection
+                : "row",
+              justifyContent: this.props.justifyContent,
               alignItems: "center",
               width: this.props.width,
               height: this.props.height,
               transform: [{ translate: [0, 0, -5] }],
-              //backgroundColor: "blue"
+              backgroundColor: "papayawhip"
             }}
           >
 

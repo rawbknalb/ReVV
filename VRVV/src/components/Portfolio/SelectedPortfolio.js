@@ -59,7 +59,7 @@ class SelectedPortfolio extends React.Component {
                 opacity: 0.8,
                 borderRadius: 0.1,
                 width: 6,
-                height: 4
+                height: 2
               }}
             />
 
@@ -69,7 +69,7 @@ class SelectedPortfolio extends React.Component {
                 justifyContent: "space-around",
                 alignItems: "center",
                 width: 6,
-                height: 4
+                height: 2
               }}
             >
               <Text
@@ -104,17 +104,6 @@ class SelectedPortfolio extends React.Component {
                   flexDirection: "column"
                 }}
               >
-                <Text
-                  style={{
-                    fontSize: 0.3,
-                    fontWeight: "200",
-                    textAlign: "center",
-                    textAlignVertical: "center"
-                  }}
-                >
-                  Asset Allocation
-                </Text>
-                {this.renderAssetAllocation()}
               </View>
             </View>
           </View>

@@ -1,5 +1,7 @@
 import React from "react";
-import { View, Text, Animated } from "react-vr";
+import { asset, View, Text, Animated, Image } from "react-vr";
+
+import CurvedPanel from "./CurvedPanel";
 
 export class PortfolioOverViewHeadlines extends React.Component {
   state = { opacity: new Animated.Value(0) };
@@ -83,7 +85,7 @@ export class PortfolioOverViewHeadlines extends React.Component {
       transform: [{ translate: [0, 8, -20] }],
       opacity: this.state.opacity,
       flexDirection: "column",
-      alignItems: "center",
+      alignItems: "center"
     };
   }
 }
@@ -91,23 +93,51 @@ export class PortfolioOverViewHeadlines extends React.Component {
 export class WelcomeViewHeadlines extends React.Component {
   render() {
     return (
-      <View>
-        <Text
+      <View style={{ flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+        <View
           style={{
-            fontSize: 1,
-            fontWeight: "200",
-            layoutOrigin: [0.5, 0.5],
-            paddingLeft: 0.2,
-            paddingRight: 0.2,
-            textAlign: "center",
-            textAlignVertical: "center",
-            transform: [{ translate: [0, 5, -12] }]
+            position:"absolute",
+            width: 1950,
+            height: 1000,
+            backgroundColor: "black",
+            opacity: 0.8,
+            borderRadius: 20
           }}
-        >
-          Herzlich Willkommen zu VisualVest
-          {" "}
-          <Text style={{ color: "orangered" }}>VR</Text>
-        </Text>
+        />
+        <View>
+
+          <Text
+            style={{
+              fontSize: 120,
+              fontWeight: "200",
+              paddingLeft: 0.2,
+              paddingRight: 0.2,
+              textAlign: "center",
+              textAlignVertical: "center"
+            }}
+          >
+            Herzlich Willkommen zu VisualVest
+            {" "}
+            <Text style={{ color: "orangered" }}>VR</Text>
+          </Text>
+          <Text
+            style={{
+              fontSize: 120,
+              fontWeight: "200",
+              paddingLeft: 0.2,
+              paddingRight: 0.2,
+              textAlign: "center",
+              textAlignVertical: "center",
+              color: "dodgerblue"
+            }}
+          >
+            Die moderne Geldanlage
+          </Text>
+        </View>
+        <Image
+          style={{ width: 700, height: 600, borderRadius: 20 }}
+          source={asset("smarte_algorithmen.png")}
+        />
       </View>
     );
   }

@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import PortfolioOverView from "../PortfolioOverView";
 import WelcomeView from "../WelcomeView";
 import EnterView from "../EnterView";
-
+import VisualVest from "../VisualVest";
 
 class Router extends Component {
   renderComponent() {
@@ -18,6 +18,8 @@ class Router extends Component {
         return <WelcomeView />;
       case "portfolios":
         return <PortfolioOverView />;
+      case "visualvest":
+        return <VisualVest />;
       default:
         return <WelcomeView />;
     }
