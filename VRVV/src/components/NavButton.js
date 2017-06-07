@@ -18,7 +18,7 @@ class NavigationMenu extends Component {
 
   openMenu(position) {
     Animated.spring(this.state.translateX, {
-      toValue: position*1.15,
+      toValue: position * 1.15,
       spring: 1,
       tenstion: 10
     }).start();
@@ -47,11 +47,22 @@ class NavigationMenu extends Component {
       <View>
         {this.props.open
           ? <Animated.View style={this.buttonStyle()}>
+              <View
+                style={
+                  this.props.open && {
+                    backgroundColor: "black",
+                    position: "absolute",
+                    width: 0.98,
+                    height: 0.48,
+                    borderRadius: 0.1,
+                    opacity: 0.3
+                  }
+                }
+              />
               <Text
                 style={{
                   fontSize: 0.2,
                   fontWeight: "400",
-                  //color: "palegreen",
                   color: "white",
                   textAlign: "center"
                 }}
@@ -60,6 +71,19 @@ class NavigationMenu extends Component {
               </Text>
             </Animated.View>
           : <Animated.View style={this.buttonStyle()}>
+              <View
+                style={
+                  !this.props.open &&
+                  this.props.button.type === "toggle" && {
+                    backgroundColor: "black",
+                    position: "absolute",
+                    width: 0.98,
+                    height: 0.48,
+                    borderRadius: 0.09,
+                    opacity: 0.3
+                  }
+                }
+              />
               {this.props.button.type === "toggle" &&
                 <Text
                   style={{
@@ -83,10 +107,11 @@ class NavigationMenu extends Component {
       width: 1,
       height: 0.5,
       borderRadius: 0.1,
-      //layoutOrigin: [0.5, 0.5],
+      layoutOrigin: [0.5, 0.5],
+      //backgroundColor: "blue",
       position: "absolute",
       borderColor: "white",
-      borderWidth: 0.008,
+      borderWidth: 0.009,
       opacity: 0.9,
       justifyContent: "center",
       transform: [{ translateX: this.state.translateX }]

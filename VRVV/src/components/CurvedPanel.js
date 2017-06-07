@@ -25,28 +25,23 @@ class CurvedPanel extends React.Component {
           layoutOrigin: [0.5, 0.5]
         }}
       >
-        <VrButton
-        //onClick={() => this.props.switchRoute("home")}
+        <View
+          style={{
+            flexDirection: this.props.flexDirection !== undefined
+              ? this.props.flexDirection
+              : "row",
+            justifyContent: this.props.justifyContent,
+            alignItems: "center",
+            width: this.props.width,
+            height: this.props.height,
+            transform: [{ translate: [0, 0, -5] }]
+            //backgroundColor: "papayawhip"
+          }}
         >
-          <View
-            style={{
-              flexDirection: this.props.flexDirection !== undefined
-                ? this.props.flexDirection
-                : "row",
-              justifyContent: this.props.justifyContent,
-              alignItems: "center",
-              width: this.props.width,
-              height: this.props.height,
-              transform: [{ translate: [0, 0, -5] }],
-              backgroundColor: "papayawhip"
-            }}
-          >
 
-            {this.props.children}
+          {this.props.children}
 
-          </View>
-
-        </VrButton>
+        </View>
 
       </CylindricalPanel>
     );

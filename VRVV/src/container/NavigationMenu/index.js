@@ -8,17 +8,17 @@ import NavButton from "../../components/NavButton";
 
 const NAV_BUTTONS = [
   { text: "Menü", route: "", type: "toggle" },
-  { text: "Home", route: "home", type: "nav", position: 1 },
+  // { text: "Home", route: "home", type: "nav", position: 1 },
+  { text: "VisualVest", route: "visualvest", type: "nav", position: 1 },
   { text: "Portfolios", route: "portfolios", type: "nav", position: 2 },
-  { text: "VisualVest", route: "visualvest", type: "nav", position: 3 },
-  { text: "Wissen", route: "wissen", type: "nav", position: 4 }
+  { text: "Wissen", route: "wissen", type: "nav", position: 3 }
 ];
 
 class NavigationMenu extends Component {
   constructor() {
     super();
     this.state = {
-      translateX: new Animated.Value(-0.5),
+      translateX: new Animated.Value(0),
       open: false
     };
   }
@@ -56,7 +56,7 @@ class NavigationMenu extends Component {
    */
   moveMenu() {
     Animated.spring(this.state.translateX, {
-      toValue: this.state.open ? -0.5 : -3,
+      toValue: this.state.open ? 0 : -1.8,
       spring: 1
     }).start();
   }
@@ -83,9 +83,11 @@ class NavigationMenu extends Component {
     flexDirection: "row",
     justifyContent: "flex-start",
     position: "absolute",
-    layoutOrigin: [0.5, 0.5],
+    //layoutOrigin: [0.5, 0.5],
     transform: [{ translateX: this.state.translateX }, { rotateX: -20 }]
   });
 }
 
-export default connect(null, { switchRoute })(NavigationMenu);
+const mapStateToProps = state => ({ introFinished: state.route.introFinished });
+
+export default connect(mapStateToProps, { switchRoute })(NavigationMenu);

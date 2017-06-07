@@ -2,7 +2,6 @@ import React from "react";
 import { asset, Pano, Text, View, Image, CylindricalPanel } from "react-vr";
 import { connect } from "react-redux";
 
-import PerformanceView from "./PerformanceView";
 import PortfolioOverView from "./PortfolioOverView";
 import Logo from "../components/Logo";
 
@@ -39,7 +38,13 @@ class App extends React.Component {
           />
           <Logo />
         </View>
-        <View style={{ transform: [{ translate: [0, -2.5, -6] }] }}>
+        <View
+          style={{
+            layoutOrigin: [0.5, 0.5],
+            position: "absolute",
+            transform: [{ translate: [0, -3, -6] }]
+          }}
+        >
           <NavigationMenu />
         </View>
         <Router />

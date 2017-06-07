@@ -16,7 +16,7 @@ class EnterView extends React.Component {
           layoutOrigin: [0.5, 0.5]
         }}
       >
-        <VrButton onClick={() => this.props.switchRoute("home")}>
+        <VrButton onClick={() => this.props.switchRoute("intro")}>
           <View
             style={{
               //layoutOrigin: [0.5, 0.5],

@@ -8,6 +8,7 @@ import PortfolioOverView from "../PortfolioOverView";
 import WelcomeView from "../WelcomeView";
 import EnterView from "../EnterView";
 import VisualVest from "../VisualVest";
+import IntroView from "../IntroView";
 
 class Router extends Component {
   renderComponent() {
@@ -16,6 +17,8 @@ class Router extends Component {
         return <EnterView />;
       case "home":
         return <WelcomeView />;
+      case "intro":
+        return <IntroView />;
       case "portfolios":
         return <PortfolioOverView />;
       case "visualvest":
@@ -29,6 +32,6 @@ class Router extends Component {
   }
 }
 
-const mapStateToProps = state => ({ route: state.route });
+const mapStateToProps = state => ({ route: state.route.currentRoute });
 
 export default connect(mapStateToProps)(Router);
