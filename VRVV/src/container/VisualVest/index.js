@@ -137,6 +137,60 @@ class VisualVest extends Component {
     );
   }
 
+  renderSubReasonText() {
+    if (this.state.clickedSubReason !== null) {
+      /**
+       * For each parent Reason Element of the REASON Array the inner 
+       * SubReason Array gets searched/find for the right SubReason from the
+       * component state. Each iteration you get an Object or undefined. Only if 
+       * the matchedSubReason is not undefined, assign the new obj to the found Object.
+       */
+      const matchedSubReason = REASON_FOR_VV.reduce((obj, reason) => {
+        const matchedSubReason = reason.sub_reasons.find(
+          subReason => subReason.sub_reason === this.state.clickedSubReason
+        );
+
+        if (matchedSubReason !== undefined) {
+          obj = matchedSubReason;
+        }
+        return obj;
+      }, {});
+
+      const subReasonText = matchedSubReason.text;
+      const subReasonImg = matchedSubReason.img;
+
+      return (
+        <View
+          style={{
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <Image
+            style={{
+              margin: 10,
+              width: 900,
+              height: 500,
+              borderRadius: 30
+            }}
+            source={asset(subReasonImg)}
+          />
+          <Text
+            style={{
+              margin: 50,
+              fontSize: 50,
+              textAlign: "center",
+              textAlignVertical: "center"
+            }}
+          >
+            {subReasonText}
+          </Text>
+        </View>
+      );
+    }
+  }
+
   renderReasons() {
     return REASON_FOR_VV.map(reason => (
       <VrButton onClick={() => this.setState({ clickedReason: reason.reason })}>
@@ -193,60 +247,6 @@ class VisualVest extends Component {
           </Text>
         </VrButton>
       ));
-    }
-  }
-
-  renderSubReasonText() {
-    if (this.state.clickedSubReason !== null) {
-      /**
-       * For each parent Reason Element of the REASON Array the inner 
-       * SubReason Array gets searched/find for the right SubReason from the
-       * component state. Each iteration you get an Object or undefined. Only if 
-       * the matchedSubReason is not undefined, assign the new obj to the found Object.
-       */
-      const matchedSubReason = REASON_FOR_VV.reduce((obj, reason) => {
-        const matchedSubReason = reason.sub_reasons.find(
-          subReason => subReason.sub_reason === this.state.clickedSubReason
-        );
-
-        if (matchedSubReason !== undefined) {
-          obj = matchedSubReason;
-        }
-        return obj;
-      }, {});
-
-      const subReasonText = matchedSubReason.text;
-      const subReasonImg = matchedSubReason.img;
-
-      return (
-        <View
-          style={{
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-        >
-          <Image
-            style={{
-              margin: 10,
-              width: 900,
-              height: 500,
-              borderRadius: 30
-            }}
-            source={asset(subReasonImg)}
-          />
-          <Text
-            style={{
-              margin: 50,
-              fontSize: 50,
-              textAlign: "left",
-              textAlignVertical: "center"
-            }}
-          >
-            {subReasonText}
-          </Text>
-        </View>
-      );
     }
   }
 
