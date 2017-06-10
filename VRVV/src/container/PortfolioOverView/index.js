@@ -29,7 +29,7 @@ class PortfolioOverView extends Component {
       animateVariations: {
         rotationValue: new Animated.Value(0),
         translateY: new Animated.Value(0),
-        translateZ: new Animated.Value(-10),
+        translateZ: new Animated.Value(-5),
         opacity: new Animated.Value(0)
       },
       animatePortfolios: {
@@ -39,7 +39,7 @@ class PortfolioOverView extends Component {
       },
       animateSelectedPortfolio: {
         translateZ: new Animated.Value(-1000),
-        translateY: new Animated.Value(-1),
+        translateY: new Animated.Value(0),
         scale: new Animated.Value(1)
       },
       animateHistoryImage: {
@@ -77,11 +77,11 @@ class PortfolioOverView extends Component {
   animateOnRender() {
     Animated.parallel([
       Animated.spring(this.state.animateVariations.rotationValue, {
-        toValue: 6,
-        friction: 1
+        toValue: 1,
+        friction: 3
       }),
       Animated.timing(this.state.animateVariations.opacity, {
-        toValue: 0.9,
+        toValue: 1,
         duration: 1000
       })
     ]).start();
@@ -137,7 +137,7 @@ class PortfolioOverView extends Component {
 
   AnimateAfterSelectedPortfolioClick() {
     Animated.spring(this.state.animateSelectedPortfolio.translateY, {
-      toValue: 4.5,
+      toValue: 3.8,
       spring: 5,
       tension: 2
     }).start();
@@ -184,19 +184,29 @@ class PortfolioOverView extends Component {
    * (pre-defined) and returns each Variation inside a VrButton Wrapper
    */
   renderVariationPanels() {
-    return PortfolioVariationList.map(variation => (
-      <VrButton
-        key={variation.type}
-        onClick={() => this.handleVariationClick(variation.type)}
+    return (
+      <CurvedPanel
+        width={3500}
+        height={800}
+        density={8000}
+        flexDirection="row"
+        justifyContent="space-between"
       >
-        <PortfolioVariation
-          header={variation.header}
-          text={variation.text}
-          img={variation.img}
-          color="black"
-        />
-      </VrButton>
-    ));
+        {PortfolioVariationList.map(variation => (
+          <VrButton
+            key={variation.type}
+            onClick={() => this.handleVariationClick(variation.type)}
+          >
+            <PortfolioVariation
+              header={variation.header}
+              text={variation.text}
+              img={variation.img}
+              color="black"
+            />
+          </VrButton>
+        ))}
+      </CurvedPanel>
+    );
   }
 
   /**
@@ -245,18 +255,15 @@ class PortfolioOverView extends Component {
    */
   renderSelectedPortfolio() {
     return (
-      <VrButton
-        onClick={() =>
+      <SelectedPortfolio
+        handleSelectedPortfolioClick={() =>
           this.handleSelectedPortfolioClick(
             this.props.selectedPortfolio.history,
             this.props.selectedPortfolio.assetAllocation
           )}
-      >
-        <SelectedPortfolio
-          selectedPortfolio={this.props.selectedPortfolio}
-          color="black"
-        />
-      </VrButton>
+        selectedPortfolio={this.props.selectedPortfolio}
+        color="black"
+      />
     );
   }
 

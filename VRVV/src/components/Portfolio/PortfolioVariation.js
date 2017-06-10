@@ -1,34 +1,33 @@
 import React from "react";
 import { asset, View, Text, Image } from "react-vr";
 
-import FlatPanel from "../FlatPanel";
-
 class PortfolioVariation extends React.Component {
   render() {
-    const styles = {
-      viewStyle: {
-        flexDirection: "column",
-        alignItems: "center",
-        width: 1400,
-        height: 1000
-      }
-    };
-
     return (
-      <FlatPanel color={this.props.color} margin={0.5}>
+      <View>
+        <View
+          style={{
+            width: 1000,
+            height: 800,
+            position: "absolute",
+            backgroundColor: "black",
+            borderRadius: 20,
+            opacity: 0.8
+          }}
+        />
         <View
           style={{
             flexDirection: "column",
             justifyContent: "space-around",
             alignItems: "center",
-            height: 4,
-            width: 3
+            height: 800,
+            width: 1000
           }}
         >
           <Text
             style={{
-              fontSize: 0.2,
-              fontWeight: "100",
+              fontSize: 80,
+              fontWeight: "bold",
               paddingLeft: 0.2,
               paddingRight: 0.2,
               textAlign: "center",
@@ -39,12 +38,12 @@ class PortfolioVariation extends React.Component {
           </Text>
           <Image
             source={asset(this.props.img)}
-            style={{ width: 1.8, height: 1.8 }}
+            style={{ width: 400, height: 400 }}
           />
           <Text
             style={{
-              fontSize: 0.2,
-              fontWeight: "100",
+              fontSize: 50,
+              fontWeight: "400",
               paddingLeft: 0.2,
               paddingRight: 0.2,
               textAlign: "center",
@@ -54,7 +53,7 @@ class PortfolioVariation extends React.Component {
             {this.props.text}
           </Text>
         </View>
-      </FlatPanel>
+      </View>
     );
   }
 }

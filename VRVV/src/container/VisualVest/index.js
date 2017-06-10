@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { asset, Text, View, Image, VrButton, Animated } from "react-vr";
+import { asset, Text, View, Image, Plane, VrButton, Animated } from "react-vr";
 
 import CurvedPanel from "../../components/CurvedPanel";
 
@@ -179,6 +179,7 @@ class VisualVest extends Component {
           <Text
             style={{
               margin: 50,
+              fontWeight: "400",
               fontSize: 50,
               textAlign: "center",
               textAlignVertical: "center"
@@ -197,9 +198,9 @@ class VisualVest extends Component {
         <Text
           key={reason.reason}
           style={{
-            margin: 60,
+            margin: 40,
             fontSize: 80,
-            textAlign: "right",
+            textAlign: "center",
             textAlignVertical: "center",
             color: this.state.clickedReason === reason.reason
               ? "tomato"
@@ -237,9 +238,9 @@ class VisualVest extends Component {
         >
           <Text
             style={{
-              margin: 50,
-              fontSize: 80,
-              textAlign: "left",
+              margin: 40,
+              fontSize: 70,
+              textAlign: "center",
               textAlignVertical: "center"
             }}
           >
@@ -283,12 +284,24 @@ class VisualVest extends Component {
                   opacity: 0.8
                 }}
               />
+              <Text
+                style={{
+                  margin: 10,
+                  fontSize: 80,
+                  textAlign: "right",
+                  textAlignVertical: "center",
+                  color: "white"
+                }}
+              >
+                Gute Gründe für VisualVest
+              </Text>
+              <Plane dimWidth={1000} dimHeight={5} />
               <View
                 style={{
                   flexDirection: "row",
                   width: 1500,
                   justifyContent: "center",
-                  alignItems: "flex-start"
+                  alignItems: "center"
                 }}
               >
                 {this.renderReasons()}

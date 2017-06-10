@@ -18,7 +18,7 @@ class App extends React.Component {
         />
         <View
           style={{
-            transform: [{ translate: [0, 7, -20] }],
+            transform: [{ translate: [0, 11, -20] }],
             layoutOrigin: [0.5, 0.5],
             flexDirection: "column",
             justifyContent: "center",
