@@ -40,23 +40,6 @@ class IntroView extends Component {
     };
   }
 
-  /**
-   * Toggles State and calls moveMenu()
-   */
-  toggleMenu() {
-    this.setState({ open: !this.state.open });
-    this.moveMenu();
-  }
-
-  /**
-   * Moves Menu Toggle Button
-   */
-  moveMenu() {
-    Animated.spring(this.state.translateX, {
-      toValue: this.state.open ? -0.2 : -2,
-      spring: 1
-    }).start();
-  }
 
   renderIntroText() {
     return INTRO_PANEL_TEXT.map(
@@ -84,7 +67,7 @@ class IntroView extends Component {
   render() {
     console.log(this.state.textOrder);
     return (
-      <View style={{ transform: [{ translate: [0, 0, -10] }] }}>
+      <View style={{ transform: [{ translate: [0, 0, -15] }] }}>
         <CurvedPanel
           width={2000}
           height={1000}
@@ -130,7 +113,7 @@ class IntroView extends Component {
                     height: 140,
                     borderRadius: 30,
                     opacity: 0.1,
-                    backgroundColor: "lightskyblue"
+                    backgroundColor: "white"
                   }}
                 />
                 <Text
