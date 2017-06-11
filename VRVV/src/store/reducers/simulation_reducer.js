@@ -1,6 +1,7 @@
 import {
   FETCH_FORECAST,
   FETCH_HISTORY,
+  CHART_REQUESTING,
   FETCH_PORTFOLIO_CHARTS,
   FETCH_ASSET_ALLOCATION_IMAGE,
   SET_SELECTED_PORTFOLIO,
@@ -29,7 +30,7 @@ const initialState = {
   selectedPortfolioVariation: { variation: "" },
   forecast: {},
   history: [],
-  portfolioCharts: null,
+  portfolioCharts: [],
   historyRange: 36
 };
 
@@ -59,12 +60,6 @@ const simulation_reducer = (state = initialState, action) => {
           }
         }
       };
-    // case COMPUTE_PORTFOLIO:
-    //   return {
-    //     ...state,
-    //     portfolios: { ...state.portfolios, computed: action.payload }
-    //   };
-
 
     case SET_SELECTED_PORTFOLIO:
       // after selecting a new portfolio this function filters
@@ -136,6 +131,24 @@ const simulation_reducer = (state = initialState, action) => {
         return { ...state, historyRange: action.payload };
       }
       return;
+
+      
+    /**
+     * Each time a Chart is requested the portfolioCharts Array gets a new element
+     * with the status "requesting". If a new Chart is requested but the portfolioCharts
+     * Array has already some charts (no "requesting" element found), the function 
+     * catches this case and creates a new Array with one "requesting " element.
+     * The following calls will copy the Array and add a new "requesting element". 
+     */
+    case CHART_REQUESTING:
+      return {
+        ...state,
+        portfolioCharts: state.portfolioCharts.filter(
+          img => img === "requesting"
+        ).length === 0
+          ? ["requesting"]
+          : [...state.portfolioCharts, "requesting"]
+      };
 
     case FETCH_PORTFOLIO_CHARTS:
       return {

@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   FETCH_FORECAST,
   FETCH_HISTORY,
+  CHART_REQUESTING,
   FETCH_PORTFOLIO_CHARTS,
   FETCH_ASSET_ALLOCATION_IMAGE,
   SET_SELECTED_PORTFOLIO,
@@ -62,6 +63,8 @@ export const selectPortfolioVariation = variation => ({
   payload: variation
 });
 
+const portfolioChartsLoading = () => ({ type: CHART_REQUESTING });
+
 // Fetch History Data from VV Service
 export const fetchHistoryData = (
   portfolioId,
@@ -77,11 +80,13 @@ export const fetchHistoryData = (
     const historyData = [selectedPortfolioHistory.data];
     dispatch({ type: FETCH_HISTORY, payload: historyData });
 
-    // If images already exist (!= null), fetch historyImages
-    if (images !== null) {
+    // If images already exist (no entries with "requesting"), fetch historyImages
+    if (images.length !== 0) {
       const percentagePerformance = prepareLineChart(historyData, "%");
       const currencyPerformance = prepareLineChart(historyData, "€");
       const assetAllocationPlotData = prepareDonutChart(assetAllocation);
+
+      dispatch(portfolioChartsLoading());
 
       // fetch the Performance Image in [%]. Returns resolved Promise
       const percentagePerformanceImage = await axios.get(
@@ -91,6 +96,7 @@ export const fetchHistoryData = (
         }
       );
 
+      dispatch(portfolioChartsLoading());
       // fetch the Performance Image in [€]. Returns resolved Promise
       const currencyPerformanceImage = await axios.get(
         "http://localhost:3090/history",
@@ -99,6 +105,7 @@ export const fetchHistoryData = (
         }
       );
 
+      dispatch(portfolioChartsLoading());
       // fetch the assetAllocation Image. Returns resolved Promise
       const assetAllocationImage = await axios.get(
         "http://localhost:3090/history",
@@ -131,6 +138,8 @@ export const fetchPortfolioCharts = (
     const currencyPerformance = prepareLineChart(historyData, "€");
     const assetAllocationPlotData = prepareDonutChart(assetAllocation);
 
+    dispatch(portfolioChartsLoading());
+
     // fetch the Performance Image in [%]. Returns resolved Promise
     const percentagePerformanceImage = await axios.get(
       "http://localhost:3090/history",
@@ -139,6 +148,8 @@ export const fetchPortfolioCharts = (
       }
     );
 
+    dispatch(portfolioChartsLoading());
+
     // fetch the Performance Image in [€]. Returns resolved Promise
     const currencyPerformanceImage = await axios.get(
       "http://localhost:3090/history",
@@ -146,6 +157,8 @@ export const fetchPortfolioCharts = (
         params: currencyPerformance
       }
     );
+
+    dispatch(portfolioChartsLoading());
 
     // fetch the assetAllocation Image. Returns resolved Promise
     const assetAllocationImage = await axios.get(
@@ -167,11 +180,6 @@ export const fetchPortfolioCharts = (
     console.warn(err);
   }
 };
-
-export const computePortfolio = portfolioId => ({
-  type: COMPUTE_PORTFOLIO,
-  payload: { portfolioId: portfolioId }
-});
 
 export const setHistoryRange = months => ({
   type: SET_HISTORY_RANGE,

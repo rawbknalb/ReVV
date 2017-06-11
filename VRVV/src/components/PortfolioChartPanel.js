@@ -3,7 +3,7 @@ import { asset, View, Text, Image } from "react-vr";
 
 import CurvedPanel from "./CurvedPanel";
 import PortfolioChartImage from "./PortfolioChartImage";
-import Fade from "../HOC/Animation/Fade";
+import PortfolioChartLoading from "./PortfolioChartLoading";
 
 /**
  * Each History Image is wrapped inside a <CurvedPanel />
