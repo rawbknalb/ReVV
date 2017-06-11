@@ -18,7 +18,7 @@ class NavigationMenu extends Component {
 
   openMenu(position) {
     Animated.spring(this.state.translateX, {
-      toValue: position * 1.15,
+      toValue: position * 1.3,
       spring: 1,
       tenstion: 10
     }).start();
@@ -52,17 +52,17 @@ class NavigationMenu extends Component {
                   this.props.open && {
                     backgroundColor: "black",
                     position: "absolute",
-                    width: 0.98,
-                    height: 0.48,
+                    width: 1.18,
+                    height: 0.68,
                     borderRadius: 0.1,
-                    opacity: 0.3
+                    opacity: 0.5
                   }
                 }
               />
               <Text
                 style={{
                   fontSize: 0.2,
-                  fontWeight: "400",
+                  fontWeight: "bold",
                   color: "white",
                   textAlign: "center"
                 }}
@@ -77,10 +77,10 @@ class NavigationMenu extends Component {
                   this.props.button.type === "toggle" && {
                     backgroundColor: "black",
                     position: "absolute",
-                    width: 0.98,
-                    height: 0.48,
+                    width: 1.18,
+                    height: 0.68,
                     borderRadius: 0.09,
-                    opacity: 0.3
+                    opacity: 0.5
                   }
                 }
               />
@@ -88,7 +88,7 @@ class NavigationMenu extends Component {
                 <Text
                   style={{
                     fontSize: 0.2,
-                    fontWeight: "400",
+                    fontWeight: "bold",
                     //color: "palegreen",
                     color: "white",
                     textAlign: "center"
@@ -104,8 +104,8 @@ class NavigationMenu extends Component {
 
   buttonStyle(index) {
     return {
-      width: 1,
-      height: 0.5,
+      width: 1.2,
+      height: 0.7,
       borderRadius: 0.1,
       layoutOrigin: [0.5, 0.5],
       //backgroundColor: "blue",

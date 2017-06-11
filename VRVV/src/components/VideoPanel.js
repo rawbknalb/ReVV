@@ -14,9 +14,9 @@ class VideoPanel extends React.Component {
     super(props);
     this.state = {
       videoPosition: {
-        translateX: 15,
+        translateX: 20,
         translateY: -2,
-        translateZ: new Animated.Value(-15)
+        translateZ: new Animated.Value(-20)
       },
       playerState: new MediaPlayerState({ autoPlay: false, muted: false }) // init with muted, autoPlay
     };
@@ -30,7 +30,7 @@ class VideoPanel extends React.Component {
   }
 
   render() {
-    const videoWidth = 10;
+    const videoWidth = 15;
     const videoHeight = videoWidth / (16 / 9);
     return (
       <Animated.View style={this.videoContainerStyle()}>

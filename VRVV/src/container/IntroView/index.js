@@ -49,7 +49,7 @@ class IntroView extends Component {
           key={text.order}
           style={{
             margin: 60,
-            fontSize: 80,
+            fontSize: 90,
             textAlign: "center",
             textAlignVertical: "center"
           }}
@@ -67,7 +67,7 @@ class IntroView extends Component {
   render() {
     console.log(this.state.textOrder);
     return (
-      <View style={{ transform: [{ translate: [0, 0, -15] }] }}>
+      <View style={{ transform: [{ translate: [0, 0, -20] }] }}>
         <CurvedPanel
           width={2000}
           height={1000}

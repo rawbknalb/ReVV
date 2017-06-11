@@ -87,8 +87,8 @@ class SelectedPortfolio extends React.Component {
               >
                 <Text
                   style={{
-                    fontSize: 0.2,
-                    fontWeight: "400",
+                    fontSize: 0.4,
+                    fontWeight: "bold",
                     paddingLeft: 0.2,
                     paddingRight: 0.2,
                     textAlign: "center",
@@ -109,8 +109,6 @@ class SelectedPortfolio extends React.Component {
                 >
                   {this.props.selectedPortfolio.title}
                 </Text>
-
-                <Plane dimWidth={4} dimHeight={0.03} />
               </View>
             </View>
 

@@ -70,7 +70,7 @@ class Logo extends React.Component {
         }}
       >
         <Animated.Image
-          source={asset("vr_head_green.png")}
+          source={asset("vr_head_red.png")}
           style={this.vrHeadStyle()}
         />
         <Image source={asset("logo.png")} style={{ width: 10, height: 3 }} />

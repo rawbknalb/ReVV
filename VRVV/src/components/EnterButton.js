@@ -19,7 +19,7 @@ class EnterButton extends React.Component {
             height: 500,
             backgroundColor: "black",
             borderRadius: 10,
-            opacity: 0.9
+            opacity: 0.85
           }}
         />
         <Image
@@ -30,6 +30,7 @@ class EnterButton extends React.Component {
           style={{
             margin: 1,
             fontSize: 100,
+            fontWeight: "bold",
             textAlign: "center"
           }}
         >
@@ -39,6 +40,7 @@ class EnterButton extends React.Component {
           style={{
             margin: 1,
             fontSize: 100,
+            fontWeight: "bold",
             textAlign: "center",
             color: "tomato"
           }}

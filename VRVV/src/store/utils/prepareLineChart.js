@@ -67,13 +67,13 @@ const LineChart = (data, type) => {
       return [
         {
           name: "Portfolio Name",
-          type: "line",
+          type: "spline",
           data: portfolio_1.history
           //dataLabels: { enabled: false }
         },
         {
           name: "Portfolio Name",
-          type: "line",
+          type: "spline",
           data: portfolio_2.history
           //dataLabels: { enabled: false }
         }
@@ -82,7 +82,7 @@ const LineChart = (data, type) => {
     // return only 1 portfolio-history object
     return [
       {
-        type: "line",
+        type: "spline",
         data: portfolio_1.history
         //dataLabels: { enabled: false }
       }
@@ -94,7 +94,7 @@ const LineChart = (data, type) => {
     type: "png",
     options: {
       chart: {
-        type: "line",
+        type: "spline",
         backgroundColor: "none"
       },
       legend: {
@@ -144,7 +144,7 @@ const LineChart = (data, type) => {
       },
       plotOptions: {
         series: {
-          lineWidth: 1.5
+          lineWidth: 3
         }
       },
       colors: [type === "€" ? "#b8e986" : "#ff7f50", "#00afd2"],

@@ -42,7 +42,7 @@ class App extends React.Component {
           style={{
             layoutOrigin: [0.5, 0.5],
             position: "absolute",
-            transform: [{ translate: [0, -3, -6] }]
+            transform: [{ translate: [0, -4, -9.2] }]
           }}
         >
           <NavigationMenu />

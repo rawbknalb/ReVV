@@ -29,7 +29,7 @@ class PortfolioOverView extends Component {
       animateVariations: {
         rotationValue: new Animated.Value(0),
         translateY: new Animated.Value(0),
-        translateZ: new Animated.Value(-5),
+        translateZ: new Animated.Value(-9),
         opacity: new Animated.Value(0)
       },
       animatePortfolios: {
@@ -62,11 +62,11 @@ class PortfolioOverView extends Component {
     Animated.sequence([
       Animated.parallel([
         Animated.spring(this.state.animateVariations.rotationValue, {
-          toValue: 45,
+          toValue: -45,
           friction: 6
         }),
         Animated.spring(this.state.animateVariations.translateY, {
-          toValue: 8,
+          toValue: -4,
           friction: 3,
           duration: 1000
         })
@@ -188,7 +188,7 @@ class PortfolioOverView extends Component {
       <CurvedPanel
         width={3500}
         height={800}
-        density={8000}
+        density={9000}
         flexDirection="row"
         justifyContent="space-between"
       >
@@ -198,6 +198,8 @@ class PortfolioOverView extends Component {
             onClick={() => this.handleVariationClick(variation.type)}
           >
             <PortfolioVariation
+              selectedVariation={this.props.selectedVariation.variation}
+              type={variation.type}
               header={variation.header}
               text={variation.text}
               img={variation.img}
@@ -283,13 +285,13 @@ class PortfolioOverView extends Component {
           >
             <Animated.View style={this.portfolioStyles()}>
               <View>
-                <Text style={{ fontSize: 0.2 }}>Geringeres Risiko</Text>
-                <Text style={{ fontSize: 0.2 }}>Geringere Rendite</Text>
+                <Text style={{ fontSize: 0.2, color: "black" }}>Geringeres Risiko</Text>
+                <Text style={{ fontSize: 0.2, color: "black" }}>Geringere Rendite</Text>
               </View>
               {this.renderPortfolioPanels()}
               <View>
-                <Text style={{ fontSize: 0.2 }}>Höheres Risiko</Text>
-                <Text style={{ fontSize: 0.2 }}>Höhere Rendite</Text>
+                <Text style={{ fontSize: 0.2, color: "black" }}>Höheres Risiko</Text>
+                <Text style={{ fontSize: 0.2, color: "black" }}>Höhere Rendite</Text>
               </View>
             </Animated.View>
 

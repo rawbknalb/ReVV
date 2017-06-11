@@ -84,7 +84,7 @@ class NavigationMenu extends Component {
     justifyContent: "flex-start",
     position: "absolute",
     //layoutOrigin: [0.5, 0.5],
-    transform: [{ translateX: this.state.translateX }, { rotateX: -20 }]
+    transform: [{ translateX: this.state.translateX }, { rotateX: -30 }]
   });
 }
 

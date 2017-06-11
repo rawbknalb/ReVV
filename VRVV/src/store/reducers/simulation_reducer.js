@@ -85,6 +85,7 @@ const simulation_reducer = (state = initialState, action) => {
       return {
         ...state,
         portfolioCharts: null,
+        selectedPortfolioVariation: { variation: "" },
         portfolios: {
           ...state.portfolios,
           selected: { portfolioId: null, metaData: [] }

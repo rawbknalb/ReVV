@@ -12,7 +12,7 @@ class EnterView extends React.Component {
       <CylindricalPanel
         layer={{ width: 2000, height: 500, radius: 4 }}
         style={{
-          transform: [{ translate: [0, 0, -5] }],
+          transform: [{ translate: [0, 0, -7] }],
           layoutOrigin: [0.5, 0.5]
         }}
       >

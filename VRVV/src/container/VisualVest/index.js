@@ -159,7 +159,7 @@ class VisualVest extends Component {
             borderColor: this.state.clickedSubReason === subReason.sub_reason
               ? "tomato"
               : "white",
-            borderWidth: 3,
+            borderWidth: 5,
             borderRadius: 10,
             margin: 10
           }}
@@ -168,6 +168,7 @@ class VisualVest extends Component {
             style={{
               margin: 40,
               fontSize: 70,
+              fontWeight: "bold",
               textAlign: "center",
               textAlignVertical: "center"
             }}
@@ -184,7 +185,7 @@ class VisualVest extends Component {
       <View
         style={{
           flexDirection: "row",
-          transform: [{ translate: [0, 0, -3] }]
+          transform: [{ translate: [0, 0, -10] }]
         }}
       >
         <View style={{ transform: [{ rotateY: 0 }, { translate: [0, 0, 0] }] }}>
