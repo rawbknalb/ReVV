@@ -14,8 +14,8 @@ class VideoPanel extends React.Component {
     super(props);
     this.state = {
       videoPosition: {
-        translateX: 20,
-        translateY: -2,
+        translateX: this.props.x ? this.props.x : 0 ,
+        translateY: this.props.y ? this.props.y : 0,
         translateZ: new Animated.Value(-20)
       },
       playerState: new MediaPlayerState({ autoPlay: false, muted: false }) // init with muted, autoPlay
@@ -46,8 +46,8 @@ class VideoPanel extends React.Component {
         />
         <Text
           style={{
-            fontSize: 0.6,
-            fontWeight: "200",
+            fontSize: 1,
+            fontWeight: "bold",
             paddingLeft: 0.2,
             paddingRight: 0.2,
             textAlign: "center",
@@ -55,7 +55,7 @@ class VideoPanel extends React.Component {
             //transform: [{ translate: [0, 5, -12] }]
           }}
         >
-          Warum VisualVest...
+          {this.props.title}
         </Text>
         <Video
           style={{ height: videoHeight, width: videoWidth }}
@@ -81,7 +81,7 @@ class VideoPanel extends React.Component {
       { translateX: this.state.videoPosition.translateX },
       { translateY: this.state.videoPosition.translateY },
       { translateZ: this.state.videoPosition.translateZ },
-      { rotateY: -45 }
+      { rotateY: this.props.rotateY ? this.props.rotateY : 0 }
     ]
   });
 }

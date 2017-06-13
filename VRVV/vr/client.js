@@ -4,7 +4,7 @@
 
 // Auto-generated content.
 import { VRInstance } from "react-vr-web";
-//import SixDOFRayCaster from 'react-vr-6dof-raycaster';
+import SixDOFRayCaster from 'react-vr-6dof-raycaster';
 import * as SimpleRaycaster from "simple-raycaster";
 import * as THREE from 'three';
 

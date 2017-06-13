@@ -50,6 +50,10 @@ class WelcomeView extends React.Component {
           </CurvedPanel>
         </View>
         <VideoPanel
+          title="Warum VisualVest..."
+          x={20}
+          y={-2}
+          rotateY={-45}
           videoWebm="Warum_VisualVest_vid.Webm"
           videoMp4="Warum_VisualVest_vid.mp4"
         />

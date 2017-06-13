@@ -3300,6 +3300,10 @@ react-transform-hmr@^1.0.4:
     global "^4.3.0"
     react-proxy "^1.1.7"
 
+react-vr-6dof-raycaster@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/react-vr-6dof-raycaster/-/react-vr-6dof-raycaster-0.0.1.tgz#1f5214ed670d9bd8384244edba4420fff9795c4e"
+
 react-vr-web@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-vr-web/-/react-vr-web-1.1.0.tgz#5defc454979959a8a2662ebe11de830b2dc77c65"
