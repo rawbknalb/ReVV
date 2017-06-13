@@ -20,41 +20,41 @@ class Logo extends React.Component {
       Animated.parallel([
         Animated.timing(this.state.rotateY, {
           toValue: -0.05,
-          duration: 5000
+          duration: 4000
         }),
         Animated.timing(this.state.rotateZ, {
           toValue: 0.02,
-          duration: 5000
+          duration: 4000
         })
       ]),
       Animated.parallel([
         Animated.timing(this.state.rotateY, {
           toValue: 0,
-          duration: 5000
+          duration: 4000
         }),
         Animated.timing(this.state.rotateZ, {
           toValue: 0,
-          duration: 5000
+          duration: 4000
         })
       ]),
       Animated.parallel([
         Animated.timing(this.state.rotateY, {
           toValue: 0.05,
-          duration: 5000
+          duration: 4000
         }),
         Animated.timing(this.state.rotateZ, {
           toValue: 0,
-          duration: 5000
+          duration: 4000
         })
       ]),
       Animated.parallel([
         Animated.timing(this.state.rotateY, {
           toValue: 0,
-          duration: 5000
+          duration: 4000
         }),
         Animated.timing(this.state.rotateZ, {
           toValue: 0,
-          duration: 5000
+          duration: 4000
         })
       ])
     ]).start(() => this.animateHead());

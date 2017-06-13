@@ -283,17 +283,26 @@ class PortfolioOverView extends Component {
               position: "absolute"
             }}
           >
-            <Animated.View style={this.portfolioStyles()}>
-              <View>
-                <Text style={{ fontSize: 0.2, color: "black" }}>Geringeres Risiko</Text>
-                <Text style={{ fontSize: 0.2, color: "black" }}>Geringere Rendite</Text>
-              </View>
-              {this.renderPortfolioPanels()}
-              <View>
-                <Text style={{ fontSize: 0.2, color: "black" }}>Höheres Risiko</Text>
-                <Text style={{ fontSize: 0.2, color: "black" }}>Höhere Rendite</Text>
-              </View>
-            </Animated.View>
+            {this.props.portfolios &&
+              <Animated.View style={this.portfolioStyles()}>
+                <View>
+                  <Text style={{ fontSize: 0.2, color: "black" }}>
+                    Geringeres Risiko
+                  </Text>
+                  <Text style={{ fontSize: 0.2, color: "black" }}>
+                    Geringere Rendite
+                  </Text>
+                </View>
+                {this.renderPortfolioPanels()}
+                <View>
+                  <Text style={{ fontSize: 0.2, color: "black" }}>
+                    Höheres Risiko
+                  </Text>
+                  <Text style={{ fontSize: 0.2, color: "black" }}>
+                    Höhere Rendite
+                  </Text>
+                </View>
+              </Animated.View>}
 
             <Animated.View style={this.selectedPortfolioStyles()}>
               <View style={{ transform: [{ translate: [0, 0, -10] }] }}>

@@ -193,7 +193,9 @@ class VisualVest extends Component {
             width={3200}
             height={1000}
             density={8000}
-            justifyContent="space-around"
+            justifyContent={
+              this.state.clickedSubReason ? "space-around" : "center"
+            }
           >
             <View
               style={{

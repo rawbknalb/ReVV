@@ -3,8 +3,7 @@ import { asset, View, Text, Image } from "react-vr";
 
 class PortfolioVariation extends React.Component {
   render() {
-    console.log(this.props.selectedVariation)
-    console.log(this.props.type)
+  
     return (
       <View>
         <View

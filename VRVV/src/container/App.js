@@ -14,7 +14,7 @@ class App extends React.Component {
       <View>
         <Pano
           style={{ transform: [{ rotateY: 180 }] }}
-          source={asset("render_3.jpg")}
+          source={asset("render_3_dark.jpg")}
         />
         <View
           style={{
