@@ -18,7 +18,7 @@ import PortfolioSelectButton
   from "../../components/Portfolio/PortfolioSelectButton";
 import SelectedPortfolio from "../../components/Portfolio/SelectedPortfolio";
 import CurvedPanel from "../../components/CurvedPanel";
-import VideoPanel from "../../components/VideoPanel"
+import VideoPanel from "../../components/VideoPanel";
 import PortfolioChartPanel from "../../components/PortfolioChartPanel";
 import { PortfolioOverViewHeadlines } from "../../components/Headlines";
 
@@ -287,19 +287,43 @@ class PortfolioOverView extends Component {
             {this.props.portfolios &&
               <Animated.View style={this.portfolioStyles()}>
                 <View style={{}}>
-                  <Text style={{ fontSize: 0.25, fontWeight: "bold", color: "darkgrey" }}>
+                  <Text
+                    style={{
+                      fontSize: 0.25,
+                      fontWeight: "bold",
+                      color: "darkgrey"
+                    }}
+                  >
                     Geringeres Risiko
                   </Text>
-                  <Text style={{ fontSize: 0.25, fontWeight: "bold", color: "darkgrey" }}>
+                  <Text
+                    style={{
+                      fontSize: 0.25,
+                      fontWeight: "bold",
+                      color: "darkgrey"
+                    }}
+                  >
                     Geringere Rendite
                   </Text>
                 </View>
                 {this.renderPortfolioPanels()}
                 <View>
-                  <Text style={{ fontSize: 0.25, fontWeight: "bold", color: "darkgrey" }}>
+                  <Text
+                    style={{
+                      fontSize: 0.25,
+                      fontWeight: "bold",
+                      color: "darkgrey"
+                    }}
+                  >
                     Höheres Risiko
                   </Text>
-                  <Text style={{ fontSize: 0.25, fontWeight: "bold", color: "darkgrey" }}>
+                  <Text
+                    style={{
+                      fontSize: 0.25,
+                      fontWeight: "bold",
+                      color: "darkgrey"
+                    }}
+                  >
                     Höhere Rendite
                   </Text>
                 </View>
@@ -318,17 +342,20 @@ class PortfolioOverView extends Component {
           <Animated.View style={this.variationStyles()}>
             {this.renderVariationPanels()}
           </Animated.View>
-          <View style={{
-    transform: [
-      { translate: [-15, 6, -20] },
-      { rotateY: 60 },
-      { rotateX: 20}
-    ]
-  }}>
-            <VideoPanel  videoWebm="VisualVest_VestFolios.Webm"
-          videoMp4="Warum_VisualVest_vid.mp4"
-          title="Unsere VestFolios"
-          ></VideoPanel>
+          <View
+            style={{
+              transform: [
+                { translate: [-15, 6, -20] },
+                { rotateY: 60 },
+                { rotateX: 20 }
+              ]
+            }}
+          >
+            <VideoPanel
+              videoWebm="VisualVest_VestFolios.Webm"
+              videoMp4="Warum_VisualVest_vid.mp4"
+              title="Unsere VestFolios"
+            />
           </View>
         </View>
       </View>
@@ -376,7 +403,6 @@ class PortfolioOverView extends Component {
     position: "absolute",
     opacity: this.state.historyImage.opacity
   });
-
 }
 
 const mapStateToProps = state => ({

@@ -3,7 +3,6 @@ import { asset, View, Text, Image } from "react-vr";
 
 class PortfolioVariation extends React.Component {
   render() {
-  
     return (
       <View>
         <View
@@ -14,7 +13,9 @@ class PortfolioVariation extends React.Component {
             backgroundColor: "black",
             borderRadius: 20,
             borderColor: "white",
-            borderWidth: this.props.selectedVariation === this.props.type ? 10 : 0,
+            borderWidth: this.props.selectedVariation === this.props.type
+              ? 10
+              : 0,
             opacity: 0.8
           }}
         />

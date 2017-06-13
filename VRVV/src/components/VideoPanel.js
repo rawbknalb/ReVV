@@ -14,7 +14,7 @@ class VideoPanel extends React.Component {
     super(props);
     this.state = {
       videoPosition: {
-        translateX: this.props.x ? this.props.x : 0 ,
+        translateX: this.props.x ? this.props.x : 0,
         translateY: this.props.y ? this.props.y : 0,
         translateZ: new Animated.Value(-20)
       },

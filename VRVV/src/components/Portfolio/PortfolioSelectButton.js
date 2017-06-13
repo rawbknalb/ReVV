@@ -20,7 +20,10 @@ class Portfolio extends React.Component {
 
   render() {
     return (
-      <HoverPanel portfolioId={this.props.portfolio.id} index={this.props.index}>
+      <HoverPanel
+        portfolioId={this.props.portfolio.id}
+        index={this.props.index}
+      >
         <View
           style={{
             flexDirection: "column",

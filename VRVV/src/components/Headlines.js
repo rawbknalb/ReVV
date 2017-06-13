@@ -93,10 +93,16 @@ export class PortfolioOverViewHeadlines extends React.Component {
 export class WelcomeViewHeadlines extends React.Component {
   render() {
     return (
-      <View style={{ flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+      <View
+        style={{
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
         <View
           style={{
-            position:"absolute",
+            position: "absolute",
             width: 1950,
             height: 1000,
             backgroundColor: "black",

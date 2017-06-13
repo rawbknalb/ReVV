@@ -40,7 +40,6 @@ class IntroView extends Component {
     };
   }
 
-
   renderIntroText() {
     return INTRO_PANEL_TEXT.map(
       text =>
@@ -68,11 +67,7 @@ class IntroView extends Component {
     console.log(this.state.textOrder);
     return (
       <View style={{ transform: [{ translate: [0, 0, -20] }] }}>
-        <CurvedPanel
-          width={2000}
-          height={1000}
-          density={6000}
-        >
+        <CurvedPanel width={2000} height={1000} density={6000}>
           <View
             style={{
               flexDirection: "column",
