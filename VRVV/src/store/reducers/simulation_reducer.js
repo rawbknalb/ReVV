@@ -84,7 +84,7 @@ const simulation_reducer = (state = initialState, action) => {
     case UNSELECT_PORTFOLIO:
       return {
         ...state,
-        portfolioCharts: null,
+        portfolioCharts: [],
         selectedPortfolioVariation: { variation: "" },
         portfolios: {
           ...state.portfolios,

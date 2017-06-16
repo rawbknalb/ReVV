@@ -22,7 +22,8 @@ const PORTFOLIO_HISTORY_API_URL =
   "https://service.visualvest.de/portfolio-functional-service/history/portfolio";
 const PORTFOLIO_METADATA_API_URL =
   "https://service.visualvest.de/portfolio-functional-service/portfolios";
-const PORTFOLIO_HISTORY_IMG_API_URL = "http://localhost:3090/history";
+//const PORTFOLIO_HISTORY_IMG_API_URL = "http://192.168.2.45:3090/history";
+const PORTFOLIO_HISTORY_IMG_API_URL = "https://visualvest-highcharts.herokuapp.com/history";
 
 export const fetchForecast = (
   portfolioId,
@@ -90,7 +91,7 @@ export const fetchHistoryData = (
 
       // fetch the Performance Image in [%]. Returns resolved Promise
       const percentagePerformanceImage = await axios.get(
-        "http://localhost:3090/history",
+        PORTFOLIO_HISTORY_IMG_API_URL,
         {
           params: percentagePerformance
         }
@@ -99,7 +100,7 @@ export const fetchHistoryData = (
       dispatch(portfolioChartsLoading());
       // fetch the Performance Image in [€]. Returns resolved Promise
       const currencyPerformanceImage = await axios.get(
-        "http://localhost:3090/history",
+        PORTFOLIO_HISTORY_IMG_API_URL,
         {
           params: currencyPerformance
         }
@@ -108,7 +109,7 @@ export const fetchHistoryData = (
       dispatch(portfolioChartsLoading());
       // fetch the assetAllocation Image. Returns resolved Promise
       const assetAllocationImage = await axios.get(
-        "http://localhost:3090/history",
+        PORTFOLIO_HISTORY_IMG_API_URL,
         {
           params: assetAllocationPlotData
         }
@@ -142,7 +143,7 @@ export const fetchPortfolioCharts = (
 
     // fetch the Performance Image in [%]. Returns resolved Promise
     const percentagePerformanceImage = await axios.get(
-      "http://localhost:3090/history",
+      PORTFOLIO_HISTORY_IMG_API_URL,
       {
         params: percentagePerformance
       }
@@ -152,7 +153,7 @@ export const fetchPortfolioCharts = (
 
     // fetch the Performance Image in [€]. Returns resolved Promise
     const currencyPerformanceImage = await axios.get(
-      "http://localhost:3090/history",
+      PORTFOLIO_HISTORY_IMG_API_URL,
       {
         params: currencyPerformance
       }
@@ -162,7 +163,7 @@ export const fetchPortfolioCharts = (
 
     // fetch the assetAllocation Image. Returns resolved Promise
     const assetAllocationImage = await axios.get(
-      "http://localhost:3090/history",
+      PORTFOLIO_HISTORY_IMG_API_URL,
       {
         params: assetAllocationPlotData
       }

@@ -3,7 +3,6 @@ import { asset, View, Text, Image } from "react-vr";
 
 import CurvedPanel from "./CurvedPanel";
 import PortfolioChartImage from "./PortfolioChartImage";
-import PortfolioChartLoading from "./PortfolioChartLoading";
 
 /**
  * Each History Image is wrapped inside a <CurvedPanel />
@@ -18,14 +17,15 @@ class PortfolioChartPanel extends React.Component {
         density={8000}
         justifyContent="space-between"
       >
-        {this.props.images.map((image, index) => (
-          <PortfolioChartImage
-            key={index}
-            portfolioName={this.props.portfolioName}
-            image={image.img}
-            chartType={image.type}
-          />
-        ))}
+        {this.props.images.length > 0 &&
+          this.props.images.map((image, index) => (
+            <PortfolioChartImage
+              key={index}
+              portfolioName={this.props.portfolioName}
+              image={image.img}
+              chartType={image.type}
+            />
+          ))}
       </CurvedPanel>
     );
   }

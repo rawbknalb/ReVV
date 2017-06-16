@@ -352,8 +352,8 @@ class PortfolioOverView extends Component {
             }}
           >
             <VideoPanel
-              videoWebm="VisualVest_VestFolios.Webm"
-              videoMp4="Warum_VisualVest_vid.mp4"
+              videoWebm="VisualVest_VestFolios.webm"
+              videoMp4="VisualVest_VestFolios.mp4"
               title="Unsere VestFolios"
             />
           </View>
