@@ -15,20 +15,20 @@ class EnterButton extends React.Component {
         <View
           style={{
             position: "absolute",
-            width: 700,
-            height: 500,
+            width: 1300,
+            height: 1000,
             backgroundColor: "black",
             borderRadius: 10,
             opacity: 0.85
           }}
         />
         <Image
-          style={{ width: 200, height: 200 }}
-          source={asset("ar-glasses.png")}
+          style={{ width: 700, height: 700 }}
+          source={asset("virtual-512.png")}
         />
         <Text
           style={{
-            margin: 1,
+            margin: 0,
             fontSize: 100,
             fontWeight: "bold",
             textAlign: "center"
@@ -38,7 +38,7 @@ class EnterButton extends React.Component {
         </Text>
         <Text
           style={{
-            margin: 1,
+            margin: 0,
             fontSize: 100,
             fontWeight: "bold",
             textAlign: "center",

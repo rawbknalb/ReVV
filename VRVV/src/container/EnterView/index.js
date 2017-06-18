@@ -10,7 +10,7 @@ class EnterView extends React.Component {
   render() {
     return (
       <CylindricalPanel
-        layer={{ width: 2000, height: 500, radius: 4 }}
+        layer={{ width: 2000, height: 1000, radius: 4 }}
         style={{
           transform: [{ translate: [0, 0, -7] }],
           layoutOrigin: [0.5, 0.5]
@@ -25,7 +25,7 @@ class EnterView extends React.Component {
               justifyContent: "space-around",
               alignItems: "center",
               width: 2000,
-              height: 500,
+              height: 1000,
               transform: [{ translate: [0, 0, -5] }]
             }}
           >
