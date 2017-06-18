@@ -14,8 +14,8 @@ import {
 import { PortfolioVariationList } from "../../utils";
 
 import PortfolioVariation from "../../components/Portfolio/PortfolioVariation";
-import PortfolioSelectButton
-  from "../../components/Portfolio/PortfolioSelectButton";
+import PortfolioSelectionButton
+  from "../../components/Portfolio/PortfolioSelectionButton";
 import SelectedPortfolio from "../../components/Portfolio/SelectedPortfolio";
 import CurvedPanel from "../../components/CurvedPanel";
 import VideoPanel from "../../components/VideoPanel";
@@ -230,7 +230,7 @@ class PortfolioOverView extends Component {
             key={portfolio.name}
             onClick={() => this.selectPortfolio(portfolio)}
           >
-            <PortfolioSelectButton
+            <PortfolioSelectionButton
               color="black"
               index={index}
               margin={0.05}
@@ -284,9 +284,9 @@ class PortfolioOverView extends Component {
               position: "absolute"
             }}
           >
-            {this.props.portfolios &&
+            {this.props.portfolios.length !== 0 &&
               <Animated.View style={this.portfolioStyles()}>
-                <View style={{}}>
+                <View>
                   <Text
                     style={{
                       fontSize: 0.25,

@@ -10,13 +10,7 @@ import {
 } from "react-vr";
 
 import HoverPanel from "../HoverPanel";
-class Portfolio extends React.Component {
-  /**
-   * Renders the Text for each Asset Allocation, passed via props 
-   * from parent. First formats the assetAllocation Object in to an
-   * Array of it's keys. Then return for each element a new Object
-   * inside the new Array with the formatted percentage amount
-   */
+class PortfolioSelectionButton extends React.Component {
 
   render() {
     return (
@@ -60,14 +54,6 @@ class Portfolio extends React.Component {
       </HoverPanel>
     );
   }
-
-  styles = StyleSheet.create({
-    assetAllocation: {
-      fontSize: 0.2,
-      fontWeight: "200"
-      //margin: 0.05
-    }
-  });
 }
 
-export default Portfolio;
+export default PortfolioSelectionButton;
