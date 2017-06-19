@@ -43,7 +43,7 @@ class SelectedPortfolio extends React.Component {
           portfolioId={this.props.selectedPortfolio.id}
           index={this.props.index}
         >
-
+          
           <View
             style={{
               position: "absolute",
@@ -81,13 +81,13 @@ class SelectedPortfolio extends React.Component {
                   flexDirection: "column",
                   justifyContent: "space-around",
                   alignItems: "center",
-                  width: 4,
+                  width: 4.5,
                   height: 1
                 }}
               >
                 <Text
                   style={{
-                    fontSize: 0.4,
+                    fontSize: 0.3,
                     fontWeight: "bold",
                     paddingLeft: 0.2,
                     paddingRight: 0.2,
@@ -102,8 +102,8 @@ class SelectedPortfolio extends React.Component {
                   style={{
                     fontSize: 0.2,
                     fontWeight: "400",
-                    paddingLeft: 0.2,
-                    paddingRight: 0.2,
+                    paddingLeft: 0,
+                    paddingRight: 0,
                     textAlign: "center"
                   }}
                 >
@@ -145,7 +145,7 @@ class SelectedPortfolio extends React.Component {
                     textAlign: "center"
                   }}
                 >
-                  Details
+                  Mehr Details
                 </Text>
               </View>
             </VrButton>

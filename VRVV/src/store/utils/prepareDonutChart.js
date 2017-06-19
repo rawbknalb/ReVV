@@ -7,7 +7,6 @@ const DonutChart = assetAllocation => {
   };
 
   const allocation = Object.keys(assetAllocation).map(assetClass => {
-    console.log(Math.round(assetAllocation[assetClass] * 100) / 100)
     return {
       name: assetClass,
       y: Math.round(assetAllocation[assetClass] * 100) / 100,

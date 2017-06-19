@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { asset, Text, View, Image, Plane, VrButton, Animated } from "react-vr";
 
 import CurvedPanel from "../../components/CurvedPanel";
+import VideoPanel from "../../components/VideoPanel";
 import { REASON_FOR_VV } from "../../utils";
 
 class VisualVest extends Component {
@@ -182,76 +183,87 @@ class VisualVest extends Component {
 
   render() {
     return (
-      <View
-        style={{
-          flexDirection: "row",
-          transform: [{ translate: [0, 0, -10] }]
-        }}
-      >
-        <View style={{ transform: [{ rotateY: 0 }, { translate: [0, 0, 0] }] }}>
-          <CurvedPanel
-            width={3200}
-            height={1000}
-            density={8000}
-            justifyContent={
-              this.state.clickedSubReason ? "space-around" : "center"
-            }
+      <View>
+        <View
+          style={{
+            flexDirection: "row",
+            transform: [{ translate: [0, 0, -10] }]
+          }}
+        >
+          <View
+            style={{ transform: [{ rotateY: 0 }, { translate: [0, 0, 0] }] }}
           >
-            <View
-              style={{
-                flexDirection: "column",
-                alignItems: "center",
-                width: 1500,
-                height: 1000
-              }}
+            <CurvedPanel
+              width={3200}
+              height={1000}
+              density={8000}
+              justifyContent={
+                this.state.clickedSubReason ? "space-around" : "center"
+              }
             >
               <View
                 style={{
-                  position: "absolute",
-                  borderRadius: 30,
-                  width: 1500,
-                  height: 1000,
-                  backgroundColor: "black",
-                  opacity: 0.8
-                }}
-              />
-              <Text
-                style={{
-                  margin: 10,
-                  fontSize: 80,
-                  textAlign: "right",
-                  textAlignVertical: "center",
-                  color: "white"
-                }}
-              >
-                Gute Gründe für VisualVest
-              </Text>
-              <Plane dimWidth={1000} dimHeight={5} />
-              <View
-                style={{
-                  flexDirection: "row",
-                  width: 1500,
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}
-              >
-                {this.renderReasons()}
-              </View>
-              <View
-                style={{
-                  width: 1000,
                   flexDirection: "column",
-                  justifyContent: "center"
+                  alignItems: "center",
+                  width: 1500,
+                  height: 1000
                 }}
               >
+                <View
+                  style={{
+                    position: "absolute",
+                    borderRadius: 30,
+                    width: 1500,
+                    height: 1000,
+                    backgroundColor: "black",
+                    opacity: 0.8
+                  }}
+                />
+                <Text
+                  style={{
+                    margin: 10,
+                    fontSize: 80,
+                    textAlign: "right",
+                    textAlignVertical: "center",
+                    color: "white"
+                  }}
+                >
+                  Gute Gründe für VisualVest
+                </Text>
+                <Plane dimWidth={1000} dimHeight={5} />
+                <View
+                  style={{
+                    flexDirection: "row",
+                    width: 1500,
+                    justifyContent: "center",
+                    alignItems: "center"
+                  }}
+                >
+                  {this.renderReasons()}
+                </View>
+                <View
+                  style={{
+                    width: 1000,
+                    flexDirection: "column",
+                    justifyContent: "center"
+                  }}
+                >
 
-                {this.renderSubReasons()}
+                  {this.renderSubReasons()}
+                </View>
               </View>
-            </View>
-            {this.renderReasonDetail()}
+              {this.renderReasonDetail()}
 
-          </CurvedPanel>
+            </CurvedPanel>
+          </View>
         </View>
+        <VideoPanel
+          title="Warum VisualVest..."
+          y={11}
+          rotateX={25}
+          videoWebm="Warum_VisualVest_vid.Webm"
+          videoMp4="Warum_VisualVest_vid.mp4"
+        />
       </View>
     );
   }

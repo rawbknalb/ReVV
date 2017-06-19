@@ -16,7 +16,7 @@ class VideoPanel extends React.Component {
       videoPosition: {
         translateX: this.props.x ? this.props.x : 0,
         translateY: this.props.y ? this.props.y : 0,
-        translateZ: new Animated.Value(-20)
+        translateZ: new Animated.Value(-40)
       },
       playerState: new MediaPlayerState({ autoPlay: false, muted: false }) // init with muted, autoPlay
     };
@@ -76,12 +76,15 @@ class VideoPanel extends React.Component {
 
   videoContainerStyle = () => ({
     alignItems: "center",
+    position: "absolute",
     layoutOrigin: [0.5, 0.5, 0],
     transform: [
       { translateX: this.state.videoPosition.translateX },
       { translateY: this.state.videoPosition.translateY },
       { translateZ: this.state.videoPosition.translateZ },
-      { rotateY: this.props.rotateY ? this.props.rotateY : 0 }
+      { rotateX: this.props.rotateX ? this.props.rotateX : 0 },
+      { rotateY: this.props.rotateY ? this.props.rotateY : 0 },
+      { rotateZ: this.props.rotateZ ? this.props.rotateZ : 0 }
     ]
   });
 }

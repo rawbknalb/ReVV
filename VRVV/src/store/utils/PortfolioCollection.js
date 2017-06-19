@@ -14,27 +14,49 @@ const SubAssetClassNames = {
   ROHSTOFFE: "Rohstoffe"
 };
 
+// const PortfolioTitle = {
+//   // ETF
+//   1: "Unser defensives Musterportfolio",
+//   2: "Unser Musterportfolio mit Substanz",
+//   3: "Unser ertragreiches Musterportfolio",
+//   4: "Das ausgewogene Musterportfolio",
+//   5: "Das gewinnorientierte Musterportfolio",
+//   6: "Das dynamische Musterportfolio",
+//   7: "Das chancenorientierte Musterportfolio",
+//   // Aktiv
+//   11: "Unser defensives Musterportfolio",
+//   12: "Unser Musterportfolio mit Substanz",
+//   13: "Unser ertragreiches Musterportfolio",
+//   14: "Das ausgewogene Musterportfolio",
+//   15: "Das gewinnorientierte Musterportfolio",
+//   16: "Das dynamische Musterportfolio",
+//   17: "Das chancenorientierte Musterportfolio",
+//   // GreenFolio
+//   21: "Unser ertragreiches Musterportfolio",
+//   22: "Das ausgewogene Musterportfolio",
+//   23: "Das chancenorientierte Musterportfolio"
+// };
+
 const PortfolioTitle = {
-  // ETF
-  1: "Unser defensives Musterportfolio",
-  2: "Unser Musterportfolio mit Substanz",
-  3: "Unser ertragreiches Musterportfolio",
-  4: "Das ausgewogene Musterportfolio",
-  5: "Das gewinnorientierte Musterportfolio",
-  6: "Das dynamische Musterportfolio",
-  7: "Das chancenorientierte Musterportfolio",
-  // Aktiv
-  11: "Unser defensives Musterportfolio",
-  12: "Unser Musterportfolio mit Substanz",
-  13: "Unser ertragreiches Musterportfolio",
-  14: "Das ausgewogene Musterportfolio",
-  15: "Das gewinnorientierte Musterportfolio",
-  16: "Das dynamische Musterportfolio",
-  17: "Das chancenorientierte Musterportfolio",
-  // GreenFolio
-  21: "Unser ertragreiches Musterportfolio",
-  22: "Das ausgewogene Musterportfolio",
-  23: "Das chancenorientierte Musterportfolio"
+  1: "Unser defensives ETF-VestFolio mit höchstem Anteil an Geldmarkt- und Anleihenfonds",
+  2: "Unser ETF-VestFolio mit bis zu 80% Anteil in risikoärmere Anlageklassen",
+  3: "Das ETF-VestFolio zur Erzielung von Erträgen aus globalen Anleihen und erhöhtem Aktien- und Rohstoffanteil",
+  4: "Unser ETF-VestFolio mit ausgewogener Verteilung der Gelder in Anleihen sowie Aktien und Rohstoffe",
+  5: "Unser gewinnorientiertes ETF-VestFolio mit erhöhtem Aktienanteil in globalen Märkten",
+  6: "Das dynamische ETF-VestFolio mit Chancen in Aktien- und Rohstoffmärkten zu erhöhtem Risiko",
+  7: "Unser ETF-VestFolio mit bis zu 75% Aktienanteil bietet hohe Chancen zu höchstem Risiko",
+
+  11: "Unser defensives VestFolio mit höchstem Anteil an Geldmarkt- und Anleihenfonds",
+  12: "Unser VestFolio mit bis zu 80% Anteil in risikoärmere Anlageklassen",
+  13: "Das VestFolio zur Erzielung von Erträgen aus globalen Anleihen und erhöhtem Aktien- und Rohstoffanteil",
+  14: "Unser VestFolio mit ausgewogener Verteilung der Gelder in Anleihen sowie Aktien und Rohstoffe",
+  15: "Unser gewinnorientiertes VestFolio mit erhöhtem Aktienanteil in globalen Märkten",
+  16: "Das dynamische VestFolio mit Chancen in Aktien- und Rohstoffmärkten zu erhöhtem Risiko",
+  17: "Unser VestFolio mit bis zu 75% Aktienanteil bietet hohe Chancen zu höchstem Risiko",
+
+  21: "Unser GreenFolio zur Ertragserzielung mit mehr als 75% Anteil in Anleihen",
+  22: "Unser ausgewogenes GreenFolio mit gleichmäßiger Verteilung der Gelder in Anleihen und Aktien",
+  23: "Das chancenorientierte GreenFolio mit hohem Aktienanteil bietet hohe Chancen zu höchstem Risiko"
 };
 
 export const addPortfolioTitle = portfolio => {
