@@ -260,6 +260,7 @@ class VisualVest extends Component {
         <VideoPanel
           title="Warum VisualVest..."
           y={11}
+          z={-40}
           rotateX={25}
           videoWebm="Warum_VisualVest_vid.Webm"
           videoMp4="Warum_VisualVest_vid.mp4"
