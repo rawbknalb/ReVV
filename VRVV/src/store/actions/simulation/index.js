@@ -18,8 +18,8 @@ import prepareDonutChart from "../../utils/prepareDonutChart";
 
 const FORECAST_API_URL =
   "https://service.visualvest.de/anlageziel-functional-service/simulation";
-const PORTFOLIO_HISTORY_API_URL =
-  "https://service.visualvest.de/portfolio-functional-service/history/portfolio";
+const PORTFOLIO_HISTORY_API_URL = "https://service-qs.tech.visualvest.de/api/portfolio-functional-service/history/portfolio/"
+// PROD "https://service.visualvest.de/portfolio-functional-service/history/portfolio";
 const PORTFOLIO_METADATA_API_URL =
   "https://service.visualvest.de/portfolio-functional-service/portfolios";
 //const PORTFOLIO_HISTORY_IMG_API_URL = "http://192.168.2.45:3090/history";
